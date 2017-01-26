@@ -34,6 +34,5 @@ cdec_big_retrieval <- function(station_id, sensor_num,
   }
 
   return(resp_df)
-
 }
 
