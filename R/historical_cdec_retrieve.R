@@ -47,7 +47,7 @@ retrieve_historical <- function(station_id, sensor_num,
     html_text() %>%
     strsplit("\\n")
 
-  raw_data <- unlist(raw_data)[-1]
+  raw_data <- unlist(raw_data)[-c(1,2,3)]
   raw_data <- stringr::str_replace(raw_data, "\\r", "")
 
   raw_matrix <- matrix(unlist(strsplit(raw_data, ",")), ncol=3, byrow=TRUE)
@@ -61,5 +61,6 @@ retrieve_historical <- function(station_id, sensor_num,
   resp_df$param_cd <- sensor_num
   resp_df$location_id <- station_id
   resp_df$agency_cd <- "CDEC"
-  resp_df[,c(7,6,4,5,3)]
+  resp_df$param_att <- "river stage"
+  resp_df[,c(7,6,4,5,8,3)]
 }
