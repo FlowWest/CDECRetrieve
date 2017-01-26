@@ -107,3 +107,45 @@ for (i in seq_along(date_range)) {
 
 }
 write.csv(bnd_20_2010_2017, "data/bnd_20_E_2010-01-01_2017-01-01.csv", row.names = FALSE)
+
+
+# enough of this lets write a damn function!!!!!!!!!!!
+# function will take a date range sequence
+cdec_big_query <- function(station_id, sens_no, dur_code, date_seq) {
+  resp_df <- data.frame()
+  for (i in seq_along(date_seq)) {
+    if (i == length(date_seq)) {
+      break
+    }
+    cat("retrieving range: ", date_seq[i], " : ", date_seq[i+1], "\n")
+    temp_df <- retrieve_historical(station_id, sens_no, dur_code,
+                                   date_seq[i], date_seq[i+1])
+    resp_df <- rbind(resp_df, temp_df)
+
+  }
+
+  return(resp_df)
+}
+
+fre_test <- cdec_big_query("FRE", "01", "E", date_range)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
