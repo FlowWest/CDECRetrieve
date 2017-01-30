@@ -47,7 +47,7 @@ retrieve_historical <- function(station_id, sensor_num,
     html_text() %>%
     strsplit("\\n")
 
-  raw_data <- unlist(raw_data)[-1]
+  raw_data <- unlist(raw_data)[-c(1,2,3)]
   raw_data <- stringr::str_replace(raw_data, "\\r", "")
 
   raw_matrix <- matrix(unlist(strsplit(raw_data, ",")), ncol=3, byrow=TRUE)
@@ -61,5 +61,26 @@ retrieve_historical <- function(station_id, sensor_num,
   resp_df$param_cd <- sensor_num
   resp_df$location_id <- station_id
   resp_df$agency_cd <- "CDEC"
-  resp_df[,c(7,6,4,5,3)]
+  resp_df$param_att <- "river stage"
+  resp_df[,c(7,6,4,5,8,3)]
+}
+
+#' @param station_id three letter identification for CDEC location
+#' @param sensor_num sensor number for the measure of interest
+#' @param dur_code duration code for measure interval, "E", "H", "D"
+#' @param date_seq a sequence of dates that appropriately split the large date range
+cdec_big_query <- function(station_id, sens_no, dur_code, date_seq) {
+  resp_df <- data.frame()
+  for (i in seq_along(date_seq)) {
+    if (i == length(date_seq)) {
+      break
+    }
+    cat("retrieving range: ", date_seq[i], " : ", date_seq[i+1], " -- ",i/length(date_range) * 100,"%\n")
+    temp_df <- retrieve_historical(station_id, sens_no, dur_code,
+                                   date_seq[i], date_seq[i+1])
+    resp_df <- rbind(resp_df, temp_df)
+
+  }
+
+  return(resp_df)
 }
