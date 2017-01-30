@@ -4,14 +4,15 @@
 # Description: create a table with metadata for the stations of interest
 # ----------------------
 
-source("parse_location_file.R")
-
+#' @param stations a vector of stations codes to build metadata table for
+#' @return a data.frame with rows of stations and columns of meta attributes
+#' @export
 build_stations_metadata <- function(stations) {
-  tryCatch(metadata_df <- 
-             do.call(rbind, CDECarchiveR::get_station_metadata(cdec_stations)), 
+  tryCatch(metadata_df <-
+             do.call(rbind, CDECarchiveR::get_station_metadata(cdec_stations)),
            error = function(e){
              stop("Error creating metadata data frame")
            })
-  
+
   return(metadata_df)
 }

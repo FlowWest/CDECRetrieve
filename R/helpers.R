@@ -16,11 +16,9 @@ get_locations_list <- function(filename) {
 }
 
 
-source("parse_location_file.R")
-
 build_stations_metadata <- function(stations) {
   tryCatch(metadata_df <-
-             do.call(rbind, CDECarchiveR::get_station_metadata(cdec_stations)),
+             do.call(rbind, CDECarchiveR::get_station_metadata(stations)),
            error = function(e){
              stop("Error creating metadata data frame")
            })

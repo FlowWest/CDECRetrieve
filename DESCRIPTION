@@ -1,11 +1,11 @@
 Package: CDECRetrieve
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Package to retrieve historical and live data from CDEC
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Emanuel Rodriguez
+Maintainer: <erodriguez@flowwest.com>
+Description: CDEC maintains a set of web services at http://cdec.water.ca.gov/queryTools.html
+      In order to better interact and analyze the data this R packages allows
+      users to quickly and easily retrieve data.
 Encoding: UTF-8
 LazyData: true
