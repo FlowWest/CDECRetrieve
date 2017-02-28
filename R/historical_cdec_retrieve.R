@@ -61,8 +61,7 @@ retrieve_historical <- function(station_id, sensor_num,
   resp_df$param_cd <- sensor_num
   resp_df$location_id <- station_id
   resp_df$agency_cd <- "CDEC"
-  resp_df$param_att <- "river stage"
-  resp_df[,c(7,6,4,5,8,3)]
+  resp_df[,c(7,6,4,5,3)]
 }
 
 #' @param station_id three letter identification for CDEC location
