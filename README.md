@@ -45,4 +45,24 @@ kwk
 ```
 
 Note that queries beyond the scope of available data does not break the code! It 
-simply resturns the subset of available data. 
+simply returns the subset of available data. 
+
+# Details 
+
+The CDEC web services are a mess! Queries do not always respond and the service 
+that fulfills a query is not always the same. The most reliable queries are those
+from the SHEF download service. This returns a SHEF file, for which the `fehs` 
+package is used to convert into a tidy dataframe. 
+
+# Upcoming features
+
+* A shiny interface 
+* Dates can be left empty, package knows what to query 
+* and more....
+
+
+
+
+
+
+
