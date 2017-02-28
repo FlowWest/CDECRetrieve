@@ -12,7 +12,7 @@ devtools::install_github("CDECRetrieve", username="flowwest")
 ```
 
 *Note* This package currently lives in a private repository an auth token is required
-to download and install. Email ![](erodriguez@flowwest.com) for key. 
+to download and install. Email erodriguez@flowwest.com for key. 
 
 # Usage 
 
