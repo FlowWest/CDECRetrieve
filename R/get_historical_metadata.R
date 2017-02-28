@@ -1,4 +1,3 @@
-#' @include global_funcs.R
 #' @import rvest
 #' @import magrittr
 #' @import xml2

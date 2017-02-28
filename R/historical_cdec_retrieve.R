@@ -38,9 +38,12 @@ make_cdec_url <- function(station_id, sensor_num,
 retrieve_station_data <- function(station_id, sensor_num,
                                 dur_code, start_date, end_date,
                                 base_url = "shef") {
-  fehs::fehs(make_cdec_url(station_id, sensor_num,
-                           dur_code, start_date, end_date,
-                           base_url = "shef"))
+  message("Retrieving file...")
+  raw_file <- download.file(make_cdec_url(station_id, sensor_num,
+                                          dur_code, start_date, end_date,
+                                          base_url = "shef"), destfile = "tempdl.txt")
+  on.exit(file.remove("tempdl.txt"))
+  fehs::fehs("tempdl.txt")
 }
 
 # @TODO:emanuel needs implementation
