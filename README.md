@@ -47,6 +47,20 @@ kwk
 Note that queries beyond the scope of available data does not break the code! It 
 simply returns the subset of available data. 
 
+Tidy means we can do it all! 
+
+```r 
+library(dplyr)
+library(ggplot2)
+
+kwk_flow %>% 
+  filter(parameter_value >= 0) %>% 
+  ggplot(aes(datetime, parameter_value)) + 
+  geom_line()
+```
+
+![kwk](images/kwk_flow_ts.png)
+
 # Details 
 
 The CDEC web services are a mess! Queries do not always respond and the service 
