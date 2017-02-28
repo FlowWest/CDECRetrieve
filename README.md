@@ -61,6 +61,45 @@ kwk_flow %>%
 
 ![kwk](images/kwk_flow_ts.png)
 
+The function does one thing, obtain data from a given station. There are powerful 
+tools in R to retrieve multiple stations. Here we use the `purrr` package to map 
+across a set of desired CDEC stations. 
+
+```r
+library(purrr)
+# define the stations of interest
+station_list <- c("BND", "KWK", "FRE", "CCR")
+
+# use map to retrieve all possible data
+resp <- map(station_list, safely(function(x) {
+  retrieve_station_data(x, "25", "H", "2000-01-01", "2017-02-28")
+}))
+
+# transpose and extract succesfull returns 
+query_res <- transpose(resp)$results %>% bind_rows()
+```
+
+The query returns 
+
+```r
+query_res
+
+# A tibble: 165,554 × 4
+              datetime location_id parameter_cd parameter_value
+                <dttm>       <chr>        <chr>           <dbl>
+1  1999-12-31 23:00:00         KWK           25            52.1
+2  2000-01-01 00:00:00         KWK           25            52.1
+3  2000-01-01 01:00:00         KWK           25            52.0
+4  2000-01-01 02:00:00         KWK           25            52.1
+5  2000-01-01 03:00:00         KWK           25            52.0
+6  2000-01-01 04:00:00         KWK           25            52.0
+7  2000-01-01 05:00:00         KWK           25            52.0
+8  2000-01-01 06:00:00         KWK           25            52.0
+9  2000-01-01 07:00:00         KWK           25            52.0
+10 2000-01-01 08:00:00         KWK           25            52.0
+# ... with 165,544 more rows
+```
+
 # Details 
 
 The CDEC web services are a mess! Queries do not always respond and the service 
