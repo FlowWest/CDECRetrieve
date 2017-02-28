@@ -25,7 +25,7 @@ kwk_flow <- retrieve_station_data("KWK", "20", "E", "2000-01-01", "2002-01-01")
 The returned data complies with both tidy data and the structure on the open 
 water database 
 
-```
+```r
 kwk 
 
 # A tibble: 48,202 × 4
