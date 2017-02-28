@@ -111,6 +111,7 @@ query_from_station_list <- function(station_list, sensor_num, dur_code,
   
   transpose(resp)$result %>% bind_rows()
 }
+```
 
 # Details 
 
