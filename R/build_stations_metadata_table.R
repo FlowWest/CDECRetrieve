@@ -7,6 +7,8 @@
 #' @param stations a vector of stations codes to build metadata table for
 #' @return a data.frame with rows of stations and columns of meta attributes
 #' @export
+#'
+# (TODO @emanuel) some metadata has commas as entries, psql hates this, fix it!
 build_stations_metadata <- function(stations) {
   tryCatch(metadata_df <-
              do.call(rbind, CDECarchiveR::get_station_metadata(cdec_stations)),

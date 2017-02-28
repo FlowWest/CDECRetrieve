@@ -2,7 +2,8 @@
 # Author: Emanuel Rodriguez
 # Date: Wed Jan 25 14:50:50 2017
 # Description: A more robust implementation of cdec retrieve that makes use
-#             of the cdec csv downloader. Script also complies to new database design
+#             of the cdec SHEF downloader. Script also complies to new database design
+#             Note the use of the fehs package that converts SHEF to tidy
 # ----------------------
 
 
@@ -14,73 +15,41 @@
 #' @param dur_code duration code for measure interval, "E", "H", "D"
 #' @param start_date date to start the query on
 #' @param end_date a non-inclusive date to end the query on
-#'
+#' @return string url
 make_cdec_url <- function(station_id, sensor_num,
                      dur_code, start_date, end_date,
-                     base_url = "http://cdec.water.ca.gov/cgi-progs/queryCSV?") {
-  paste0(
-    base_url,
-    "station_id=", station_id, "&",
-    "sensor_num=", sensor_num, "&",
-    "dur_code=", dur_code, "&",
-    "start_date=", start_date, "&",
-    "end_date=", end_date, "&",
-    "data_wish=View+CSV+Data"
-  )
+                     base_url = "shef") {
+  cdec_urls$download_shef %>%
+    stringr::str_replace("STATION", station_id) %>%
+    stringr::str_replace("SENSOR", sensor_num) %>%
+    stringr::str_replace("DURCODE", dur_code) %>%
+    stringr::str_replace("STARTDATE", start_date) %>%
+    stringr::str_replace("ENDDATE", end_date)
+
 }
 
-#' Function to retrieve database complying CDEC data.
+#' Function queries the CDEC services to obtain desired station data
 #' @param station_id three letter identification for CDEC location
 #' @param sensor_num sensor number for the measure of interest
 #' @param dur_code duration code for measure interval, "E", "H", "D"
 #' @param start_date date to start the query on
 #' @param end_date a non-inclusive date to end the query on
-#'
-retrieve_historical <- function(station_id, sensor_num,
-                                dur_code, start_date, end_date) {
-
-
-  url_req <- make_cdec_url(station_id, sensor_num, dur_code, start_date, end_date)
-
-  raw_data <- xml2::read_html(url_req) %>%
-    html_nodes("body") %>%
-    html_text() %>%
-    strsplit("\\n")
-
-  raw_data <- unlist(raw_data)[-c(1,2,3)]
-  raw_data <- stringr::str_replace(raw_data, "\\r", "")
-
-  raw_matrix <- matrix(unlist(strsplit(raw_data, ",")), ncol=3, byrow=TRUE)
-  colnames_tobe <- c("date", "time", "value")
-  resp_df <- data.frame(raw_matrix)
-  colnames(resp_df) <- colnames_tobe
-  resp_df <- resp_df[-1,]
-
-  # format types
-  resp_df$datetime <- lubridate::ymd_hm(paste0(resp_df$date, resp_df$time))
-  resp_df$param_cd <- sensor_num
-  resp_df$location_id <- station_id
-  resp_df$agency_cd <- "CDEC"
-  resp_df$param_att <- "river stage"
-  resp_df[,c(7,6,4,5,8,3)]
+#' @return tidy dataframe
+retrieve_station_data <- function(station_id, sensor_num,
+                                dur_code, start_date, end_date,
+                                base_url = "shef") {
+  message("Retrieving file...")
+  raw_file <- download.file(make_cdec_url(station_id, sensor_num,
+                                          dur_code, start_date, end_date,
+                                          base_url = "shef"), destfile = "tempdl.txt")
+  on.exit(file.remove("tempdl.txt"))
+  fehs::fehs("tempdl.txt")
 }
 
-#' @param station_id three letter identification for CDEC location
-#' @param sensor_num sensor number for the measure of interest
-#' @param dur_code duration code for measure interval, "E", "H", "D"
-#' @param date_seq a sequence of dates that appropriately split the large date range
-cdec_big_query <- function(station_id, sens_no, dur_code, date_seq) {
-  resp_df <- data.frame()
-  for (i in seq_along(date_seq)) {
-    if (i == length(date_seq)) {
-      break
-    }
-    cat("retrieving range: ", date_seq[i], " : ", date_seq[i+1], " -- ",i/length(date_range) * 100,"%\n")
-    temp_df <- retrieve_historical(station_id, sens_no, dur_code,
-                                   date_seq[i], date_seq[i+1])
-    resp_df <- rbind(resp_df, temp_df)
+# @TODO:emanuel needs implementation
+query_station_data <- function(stations, sensor_num,
+                               dur_code, start_date, end_date,
+                               base_url = "shef") {
 
-  }
-
-  return(resp_df)
 }
+
