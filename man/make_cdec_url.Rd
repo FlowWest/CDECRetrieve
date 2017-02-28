@@ -4,8 +4,8 @@
 \alias{make_cdec_url}
 \title{Function builds CDEC Url to request data}
 \usage{
-make_cdec_url(station_id, sensor_num, dur_code, start_date, end_date,
-  base_url = "shef")
+make_cdec_url(station_id, sensor_num, dur_code, start_date,
+  end_date = Sys.date(), base_url = "shef")
 }
 \arguments{
 \item{station_id}{three letter identification for CDEC location}

@@ -1,6 +1,6 @@
 # CDECRetrieve
 
-CDECRetrieve uses the web services provded by the California Data Exchange Center
+CDECRetrieve uses the web services provided by the California Data Exchange Center
 as a backend to allow users to download data with a single function call. 
 
 # Installation 
@@ -11,6 +11,8 @@ Install using `devtools::install_github`
 devtools::install_github("CDECRetrieve", username="flowwest")
 ```
 
+*Note* This package currently lives in a private repository an auth token is required
+to download and install. Email erodriguez@flowwest.com for key. 
 
 # Usage 
 
@@ -44,7 +46,7 @@ kwk
 # ... with 48,192 more rows
 ```
 
-Note that queries beyond the scope of available data does not break the code! It 
+Note that queries beyond the scope of available data do not break the code! It 
 simply returns the subset of available data. 
 
 Tidy means we can do it all! 
@@ -63,7 +65,8 @@ kwk_flow %>%
 
 The function does one thing, obtain data from a given station. There are powerful 
 tools in R to retrieve multiple stations. Here we use the `purrr` package to map 
-across a set of desired CDEC stations. 
+across a set of desired CDEC stations. (Adding these as base package functions is
+under consideration).
 
 ```r
 library(purrr)
@@ -98,6 +101,19 @@ query_res
 9  2000-01-01 07:00:00         KWK           25            52.0
 10 2000-01-01 08:00:00         KWK           25            52.0
 # ... with 165,544 more rows
+```
+
+This can be placed in a function as follows: 
+
+```r 
+query_from_station_list <- function(station_list, sensor_num, dur_code, 
+                                    start_date, end_date) {
+  resp <- map(station_list, safely(function(x) {
+    retrieve_station_data(x, sensor_num, dur_code, start_date, end_date)
+  }))
+  
+  transpose(resp)$result %>% bind_rows()
+}
 ```
 
 # Details 
