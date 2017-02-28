@@ -100,6 +100,18 @@ query_res
 # ... with 165,544 more rows
 ```
 
+This can be placed in a function as follows: 
+
+```r 
+query_from_station_list <- function(station_list, sensor_num, dur_code, 
+                                    start_date, end_date) {
+  resp <- map(station_list, safely(function(x) {
+    retrieve_station_data(x, sensor_num, dur_code, start_date, end_date)
+  }))
+  
+  transpose(resp)$result %>% bind_rows()
+}
+
 # Details 
 
 The CDEC web services are a mess! Queries do not always respond and the service 
