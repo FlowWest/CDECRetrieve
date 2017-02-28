@@ -16,6 +16,8 @@ to download and install. Email erodriguez@flowwest.com for key.
 
 # Usage 
 
+## Basic Usage 
+
 CDECRetrieve exposes several useful functions to query services from CDEC. 
 The main function in the package is `retrieve_station_data`, 
 
@@ -62,6 +64,8 @@ kwk_flow %>%
 ```
 
 ![kwk](images/kwk_flow_ts.png)
+
+## Using with purrr
 
 The function does one thing, obtain data from a given station. There are powerful 
 tools in R to retrieve multiple stations. Here we use the `purrr` package to map 
@@ -114,6 +118,27 @@ query_from_station_list <- function(station_list, sensor_num, dur_code,
   
   transpose(resp)$result %>% bind_rows()
 }
+```
+
+## Advanced Usage 
+
+There is no "advanced" way to use CDECRetrieve, rather combining it with `purrr`
+allows for great felixbilty. 
+
+**Retrieve Desired Codes** 
+
+Suppose you are interested in water quality attributes for a given station. Much like
+we mapped through the station_list we can map through desired codes. 
+
+```r
+# water qual codes 
+water_qual_codes <- c("04", "14", "25", "27", "61")
+
+kwk_wq <- map(water_qual_codes, safely(function(x) {
+  retrieve_station_data("kwk", x, "H", "2000-01-01")
+}))
+
+kwk_wq <- transpose(kwk_wq)$result %>% bind_rows()
 ```
 
 # Details 
