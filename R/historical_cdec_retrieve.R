@@ -43,7 +43,9 @@ retrieve_station_data <- function(station_id, sensor_num,
                                           dur_code, start_date, end_date,
                                           base_url = "shef"), destfile = "tempdl.txt")
   on.exit(file.remove("tempdl.txt"))
-  fehs::fehs("tempdl.txt")
+  resp <- fehs::fehs("tempdl.txt")
+  resp$agency_cd <- "CDEC"
+  resp[,c(5, 2, 1, 3, 4)]
 }
 
 # @TODO:emanuel needs implementation

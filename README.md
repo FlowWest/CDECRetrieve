@@ -154,6 +154,13 @@ package is used to convert into a tidy dataframe.
 * Dates can be left empty, package knows what to query 
 * and more....
 
+# TODO 
+
+* Better error handling, currently relies on `safely` but error outputs should be 
+much more informative 
+
+
+
 
 
 
