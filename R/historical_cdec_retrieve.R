@@ -36,7 +36,7 @@ make_cdec_url <- function(station_id, sensor_num,
 #' @param end_date a non-inclusive date to end the query on
 #' @return tidy dataframe
 retrieve_station_data <- function(station_id, sensor_num,
-                                dur_code, start_date, end_date=Sys.Date(),
+                                dur_code, start_date, end_date=as.character(Sys.Date()),
                                 base_url = "shef") {
   message("Retrieving file...")
   raw_file <- download.file(make_cdec_url(station_id, sensor_num,
