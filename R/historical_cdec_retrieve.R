@@ -6,7 +6,7 @@
 #             Note the use of the fehs package that converts SHEF to tidy
 # ----------------------
 
-
+source("R/consts.R")
 
 
 #' Function builds CDEC Url to request data
@@ -17,7 +17,7 @@
 #' @param end_date a non-inclusive date to end the query on
 #' @return string url
 make_cdec_url <- function(station_id, sensor_num,
-                     dur_code, start_date, end_date=Sys.date(),
+                     dur_code, start_date, end_date=as.character(Sys.Date()),
                      base_url = "shef") {
   cdec_urls$download_shef %>%
     stringr::str_replace("STATION", station_id) %>%
