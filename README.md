@@ -3,7 +3,12 @@
 **Version 0.1.0**
 
 CDECRetrieve uses the web services provided by the California Data Exchange Center
-as a backend to allow users to download data with a single function call. 
+[here](http://cdec.water.ca.gov/) as a backend to allow users to download 
+data with a single function call. CDECRetrieve specifically uses the SHEF download
+service due to the fact that it is the most robust of the services. You can learn 
+more about the SHEF format [here](http://www.nws.noaa.gov/om/water/resources/SHEF_CodeManual_5July2012.pdf).
+
+This first version of CDECRetrieve is still under heavy developement, and production ready.
 
 # Installation 
 
