@@ -1,5 +1,7 @@
 # CDECRetrieve
 
+**Version 0.1.0**
+
 CDECRetrieve uses the web services provided by the California Data Exchange Center
 as a backend to allow users to download data with a single function call. 
 
