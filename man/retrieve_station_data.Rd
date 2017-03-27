@@ -5,7 +5,7 @@
 \title{Function queries the CDEC services to obtain desired station data}
 \usage{
 retrieve_station_data(station_id, sensor_num, dur_code, start_date,
-  end_date = Sys.Date(), base_url = "shef")
+  end_date = as.character(Sys.Date()), base_url = "shef")
 }
 \arguments{
 \item{station_id}{three letter identification for CDEC location}
