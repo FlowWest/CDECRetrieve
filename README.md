@@ -3,12 +3,12 @@
 **Version 0.1.0**
 
 CDECRetrieve uses the web services provided by the California Data Exchange Center
-[here](http://cdec.water.ca.gov/) as a backend to allow users to download 
+[here](http://cdec.water.ca.gov/) as a backend and allows users to download 
 data with a single function call. CDECRetrieve specifically uses the SHEF download
-service due to the fact that it is the most robust of the services. You can learn 
+service due to the fact that it is the most robust of the services provided. You can learn 
 more about the SHEF format [here](http://www.nws.noaa.gov/om/water/resources/SHEF_CodeManual_5July2012.pdf).
 
-This first version of CDECRetrieve is still under heavy developement, and production ready.
+This first version of CDECRetrieve is still under heavy developement, and is not production ready.
 
 # Installation 
 
@@ -19,7 +19,7 @@ devtools::install_github("CDECRetrieve", username="flowwest")
 ```
 
 *Note* This package currently lives in a private repository an auth token is required
-to download and install. Email erodriguez@flowwest.com for key. 
+to download and install. Email erodriguez@flowwest.com for more information. 
 
 # Usage 
 
