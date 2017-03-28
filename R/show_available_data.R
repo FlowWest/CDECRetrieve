@@ -1,4 +1,3 @@
-#' @importFrom
 #' A catch all for failed queries, helper function to below
 #'
 #' @param resp a response from httr
@@ -14,6 +13,9 @@ failed_query <- function(resp) {
 
 
 #' Function returns a dataframe of the available data
+#' @param station_id a three letter cdec station if
+#' @return dataframe of available data for station
+#' @export
 show_available_data <- function(station_id) {
   # form the request for the url
   query <- list(station_id=station_id,
@@ -40,6 +42,8 @@ show_available_data <- function(station_id) {
 
   meta_attr$end_date <- ifelse(meta_attr$end_date == "present.",
                                "present", meta_attr$end_date)
+
+  meta_attr$measure_type <- stringr::str_replace_all(meta_attr$measure_type, "(\\(|\\))+", "")
 
   return(meta_attr)
 }

@@ -35,13 +35,20 @@ make_cdec_url <- function(station_id, sensor_num,
 #' @param start_date date to start the query on
 #' @param end_date a non-inclusive date to end the query on
 #' @return tidy dataframe
+#' @export
 retrieve_station_data <- function(station_id, sensor_num,
                                 dur_code, start_date, end_date=as.character(Sys.Date()),
                                 base_url = "shef") {
   message("Retrieving file...")
   raw_file <- download.file(make_cdec_url(station_id, sensor_num,
                                           dur_code, start_date, end_date,
-                                          base_url = "shef"), destfile = "tempdl.txt")
+                                          base_url = "shef"), destfile = "tempdl.txt",
+                            quiet = TRUE)
+
+  # catch the case when cdec is down
+  if (file.info("tempdl.txt")$size == 0) {
+    stop("query did not produce a result, possible cdec is down?")
+  }
   on.exit(file.remove("tempdl.txt"))
   resp <- fehs::fehs("tempdl.txt")
   resp$agency_cd <- "CDEC"

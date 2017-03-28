@@ -24,7 +24,7 @@ parse_attr_to_df <- function(resp) {
 #' @export
 get_station_metadata <- function(stations) {
 
-  map(stations, function(station) {
+  resp <- map(stations, function(station) {
     httr::GET(cdec_urls$station_metadata,
               query = list(station_id=station)) %>%
       xml2::read_html() %>%
@@ -34,4 +34,5 @@ get_station_metadata <- function(stations) {
     map(parse_attr_to_df) %>%
     dplyr::bind_rows()
 
+  return(resp)
 }

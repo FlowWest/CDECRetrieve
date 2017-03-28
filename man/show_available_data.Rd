@@ -6,6 +6,12 @@
 \usage{
 show_available_data(station_id)
 }
+\arguments{
+\item{station_id}{a three letter cdec station if}
+}
+\value{
+dataframe of available data for station
+}
 \description{
 Function returns a dataframe of the available data
 }
