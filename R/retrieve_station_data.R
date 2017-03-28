@@ -48,10 +48,3 @@ retrieve_station_data <- function(station_id, sensor_num,
   resp[,c(5, 2, 1, 3, 4)]
 }
 
-# @TODO:emanuel needs implementation
-query_station_data <- function(stations, sensor_num,
-                               dur_code, start_date, end_date,
-                               base_url = "shef") {
-
-}
-

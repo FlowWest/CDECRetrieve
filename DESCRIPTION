@@ -9,12 +9,4 @@ Description: CDEC maintains a set of web services at http://cdec.water.ca.gov/qu
       users to quickly and easily retrieve data.
 Encoding: UTF-8
 LazyData: true
-Collate: 
-    'build_stations_metadata_table.R'
-    'cdec_archive.R'
-    'consts.R'
-    'get_historical_metadata.R'
-    'get_station_metadata.R'
-    'helpers.R'
-    'historical_cdec_retrieve.R'
 RoxygenNote: 6.0.1
