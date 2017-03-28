@@ -40,6 +40,7 @@ show_available_data <- function(station_id) {
     dplyr::select(sens_no, sens_name, measure_type, start_date, end_date)
 
 
+  # minor cleaning of the data
   meta_attr$end_date <- ifelse(meta_attr$end_date == "present.",
                                "present", meta_attr$end_date)
 
