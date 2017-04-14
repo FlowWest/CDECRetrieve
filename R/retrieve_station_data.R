@@ -37,7 +37,7 @@ make_cdec_url <- function(station_id, sensor_num,
 #' @return tidy dataframe
 #' @export
 retrieve_station_data <- function(station_id, sensor_num,
-                                dur_code, start_date, end_date=as.character(Sys.Date()),
+                                dur_code, start_date, end_date="",
                                 base_url = "shef") {
   message("Retrieving file...")
   raw_file <- download.file(make_cdec_url(station_id, sensor_num,
