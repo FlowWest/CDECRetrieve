@@ -28,6 +28,20 @@ make_cdec_url <- function(station_id, sensor_num,
 
 }
 
+# @TODO: refactor --- refactor to make more functional
+shef_to_tidy <- function(file) {
+  raw <- readr::read_delim(file, skip = 9, col_names = FALSE, delim = " ")
+  raw <- raw[, c(2, 3, 5, 6, 7)]  # keep relevant cols
+  raw <- raw %>% tidyr::unite(datetime, X3, X5, sep ="")
+  raw$datetime <- lubridate::ymd_hm(raw$datetime)
+
+  shef_code <- raw$X6[1]
+  raw$X6 <- rep(shef_code_lookup[[shef_code]], nrow(raw))
+  colnames(raw) <- c("location_id", "datetime", "parameter_cd", "parameter_value")
+
+  return(raw[, c(2, 1, 3, 4)])
+}
+
 #' Function queries the CDEC services to obtain desired station data
 #' @param station_id three letter identification for CDEC location
 #' @param sensor_num sensor number for the measure of interest
@@ -50,8 +64,8 @@ retrieve_station_data <- function(station_id, sensor_num,
     stop("query did not produce a result, possible cdec is down?")
   }
   on.exit(file.remove("tempdl.txt"))
-  resp <- fehs::fehs("tempdl.txt")
+  resp <- shef_to_tidy("tempdl.txt")
   resp$agency_cd <- "CDEC"
-  resp[,c(5, 2, 1, 3, 4)]
+  resp[,c(5, 1:4)]
 }
 
