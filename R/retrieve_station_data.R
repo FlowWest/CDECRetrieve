@@ -28,9 +28,13 @@ make_cdec_url <- function(station_id, sensor_num,
 
 }
 
-# @TODO: refactor --- refactor to make more functional
+#@TODO:refactor --- refactor to make more functional
 shef_to_tidy <- function(file) {
   raw <- readr::read_delim(file, skip = 9, col_names = FALSE, delim = " ")
+  # d <- raw %>%
+  #   dplyr::select_(2, 3, 5, 6, 7) %>%
+  #   tidyr::unite_(col = "datetime", from = c("X3", "X5"), sep = "")
+
   raw <- raw[, c(2, 3, 5, 6, 7)]  # keep relevant cols
   raw <- raw %>% tidyr::unite(datetime, X3, X5, sep ="")
   raw$datetime <- lubridate::ymd_hm(raw$datetime)
