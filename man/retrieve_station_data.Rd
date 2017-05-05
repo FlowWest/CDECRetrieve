@@ -8,19 +8,23 @@ retrieve_station_data(station_id, sensor_num, dur_code, start_date,
   end_date = "", base_url = "shef")
 }
 \arguments{
-\item{station_id}{three letter identification for CDEC location}
+\item{station_id}{three letter identification for CDEC location.}
 
-\item{sensor_num}{sensor number for the measure of interest}
+\item{sensor_num}{sensor number for the measure of interest.}
 
-\item{dur_code}{duration code for measure interval, "E", "H", "D"}
+\item{dur_code}{duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.}
 
-\item{start_date}{date to start the query on}
+\item{start_date}{date to start the query on.}
 
-\item{end_date}{a non-inclusive date to end the query on}
+\item{end_date}{a date to end query on, defaults to current date.}
 }
 \value{
 tidy dataframe
 }
 \description{
 Function queries the CDEC services to obtain desired station data
+}
+\examples{
+kwk_hourly_temp <- retrieve_station_data("KWK", "20", "H", "2017-01-01")
+
 }

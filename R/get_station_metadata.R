@@ -1,4 +1,4 @@
-source("R/consts.R")
+#source("R/consts.R")
 
 #' Function helper to get_station_metadata below
 parse_attr_to_df <- function(resp) {

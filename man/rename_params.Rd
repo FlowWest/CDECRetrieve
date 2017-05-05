@@ -2,15 +2,20 @@
 % Please edit documentation in R/rename_params.R
 \name{rename_params}
 \alias{rename_params}
-\title{Function takes in a dataframe retrieved from CDECRetrieve::retrieve_station_data
-and renames columns to be more readable}
+\title{Function takes in a dataframe retrieved from CDECRetrieve::retrieve_station_data and renames columns to be more readable}
 \usage{
 rename_params(.d)
 }
 \arguments{
 \item{.d}{dataframe obtained from calling CDECRetrieve::retrieve_station_data}
 }
+\value{
+a new data frame with renamed human readable columns
+}
 \description{
-Function takes in a dataframe retrieved from CDECRetrieve::retrieve_station_data
-and renames columns to be more readable
+Function takes in a dataframe retrieved from CDECRetrieve::retrieve_station_data and renames columns to be more readable
+}
+\examples{
+retrieve_station_data("kwk", "20", "H", "2017-01-01") \%>\% rename_params()
+
 }

@@ -4,6 +4,7 @@
 # Description: A location to place all global and constant values
 # ----------------------
 
+#' Constant urls for data retrieval
 cdec_urls <- list(
 
   download_shef = "http://cdec.water.ca.gov/cgi-progs/querySHEF?station_id=STATION&sensor_num=SENSOR&dur_code=DURCODE&start_date=STARTDATE&end_date=ENDDATE&data_wish=Download+SHEF+Data+Now",
@@ -13,7 +14,8 @@ cdec_urls <- list(
 
 )
 
-# @TODO: question --- is there a better way to perform this logic?
+
+#' Look up table to go from SHEF Code ---> CDEC Param Code
 shef_code_lookup <- list(
   "/HGH" = "01H",
   "/HGE" = "01E",

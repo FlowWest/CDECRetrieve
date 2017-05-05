@@ -1,5 +1,4 @@
 #' A catch all for failed queries, helper function to below
-#'
 #' @param resp a response from httr
 #' @return logical whether or not the response resulted in datasets
 failed_query <- function(resp) {

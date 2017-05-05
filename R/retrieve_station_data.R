@@ -1,13 +1,6 @@
-# Title: Historical CDEC Retriever
-# Author: Emanuel Rodriguez
-# Date: Wed Jan 25 14:50:50 2017
-# Description: A more robust implementation of cdec retrieve that makes use
-#             of the cdec SHEF downloader. Script also complies to new database design
-#             Note the use of the fehs package that converts SHEF to tidy
-# ----------------------
+#source("R/consts.R")
 
-source("R/consts.R")
-
+#cdec_urls
 
 #' Function builds CDEC Url to request data
 #' @param station_id three letter identification for CDEC location
@@ -47,17 +40,21 @@ shef_to_tidy <- function(file) {
 }
 
 #' Function queries the CDEC services to obtain desired station data
-#' @param station_id three letter identification for CDEC location
-#' @param sensor_num sensor number for the measure of interest
-#' @param dur_code duration code for measure interval, "E", "H", "D"
-#' @param start_date date to start the query on
-#' @param end_date a non-inclusive date to end the query on
+#' @param station_id three letter identification for CDEC location.
+#' @param sensor_num sensor number for the measure of interest.
+#' @param dur_code duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.
+#' @param start_date date to start the query on.
+#' @param end_date a date to end query on, defaults to current date.
 #' @return tidy dataframe
+#' @examples
+#' kwk_hourly_temp <- retrieve_station_data("KWK", "20", "H", "2017-01-01")
+#'
 #' @export
 retrieve_station_data <- function(station_id, sensor_num,
                                 dur_code, start_date, end_date="",
                                 base_url = "shef") {
-  message("Retrieving file...")
+
+  # a real ugly side effect here, but its reliability is great
   raw_file <- download.file(make_cdec_url(station_id, sensor_num,
                                           dur_code, start_date, end_date,
                                           base_url = "shef"), destfile = "tempdl.txt",
@@ -72,4 +69,3 @@ retrieve_station_data <- function(station_id, sensor_num,
   resp$agency_cd <- "CDEC"
   resp[,c(5, 1:4)]
 }
-
