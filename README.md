@@ -166,8 +166,10 @@ does.
 
 The CDEC web services are a mess! Queries do not always respond and the service 
 that fulfills a query is not always the same. The most reliable queries are those
-from the SHEF download service. This returns a SHEF file, for which the `fehs` 
-package is used to convert into a tidy dataframe. 
+from the SHEF download service. The approach taken here is one with an ugly side effect, 
+namely a SHEF file is downloaded temporarily to the working environment, this however 
+is a huge boost in robustness. Having interacted with other services from CDEC 
+none come close the reliability showcased by the SHEF download service. 
 
 # Upcoming features
 
