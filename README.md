@@ -175,7 +175,8 @@ can pull up to 7 years of data with consistent responses.
 In order to go from SHEF --> Tidy, there exist a mapping from SHEF parameter codes 
 to those provided through CDEC. At the moment the list of mappings is one that 
 satisfies the work we do internally, however these are exposed as a simple list in 
-`consts.R` and can be updated to one's needs. 
+`consts.R` and can be updated to one's needs. Ideally and if needed this can be a 
+a static file that gets parsed and brought in through the environment for use. 
 
 # Upcoming features
 
