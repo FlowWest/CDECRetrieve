@@ -17,12 +17,12 @@ cdec_urls <- list(
 
 #' Look up table to go from SHEF Code ---> CDEC Param Code
 shef_code_lookup <- list(
-  "/HGH" = "01H",
-  "/HGE" = "01E",
-  "/QRH" = "20H",
-  "/QRE" = "20E",
-  "/TWH" = "25H",
-  "/TWE" = "25E",
+  "/HGH" = "01H", #stage
+  "/HGE" = "01E", #stage
+  "/QRH" = "20H", #flow
+  "/QRE" = "20E", #flow
+  "/TWH" = "25H", #water temp
+  "/TWE" = "25E", #water temp
   "/WTH" = "27H",
   "/WTE" = "27E",
   "/WPH" = "62H",
