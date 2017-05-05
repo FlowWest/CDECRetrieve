@@ -169,7 +169,8 @@ that fulfills a query is not always the same. The most reliable queries are thos
 from the SHEF download service. The approach taken here is one with an ugly side effect, 
 namely a SHEF file is downloaded temporarily to the working environment, this however 
 is a huge boost in robustness. Having interacted with other services from CDEC 
-none come close the reliability showcased by the SHEF download service. 
+none come close the reliability showcased by the SHEF download service. Currently one 
+can pull up to 7 years of data with consistent responses. 
 
 # Upcoming features
 
