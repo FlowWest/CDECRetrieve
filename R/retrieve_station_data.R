@@ -39,6 +39,9 @@ shef_to_tidy <- function(file) {
   raw$X6 <- rep(shef_code_lookup[[shef_code]], nrow(raw))
   colnames(raw) <- c("location_id", "datetime", "parameter_cd", "parameter_value")
 
+  # parse to correct type
+  raw$parameter_value <- as.numeric(raw$parameter_value)
+
   return(raw[, c(2, 1, 3, 4)])
 }
 
