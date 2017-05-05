@@ -28,7 +28,7 @@ shef_to_tidy <- function(file) {
   #   dplyr::select_(2, 3, 5, 6, 7) %>%
   #   tidyr::unite_(col = "datetime", from = c("X3", "X5"), sep = "")
 
-  if (ncol(raw) != 5) stop("A faulty query was requested, please check query,
+  if (ncol(raw) < 5) stop("A faulty query was requested, please check query,
                            does this station have this duration and sensor combination?")
 
   raw <- raw[, c(2, 3, 5, 6, 7)]  # keep relevant cols
