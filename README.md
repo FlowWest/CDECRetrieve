@@ -149,6 +149,11 @@ multiple_station_temp_query <- purrr::partial(
   start_date = "2015-01-01", 
   end_date = "2017-01-01"
 )
+
+# now we can call this function ONLY with stations we are interested in 
+multiple_station_temp_query("KWK")
+multiple_station_temp_query("CCR")
+multiple_station_temp_query("BND")
 ```
 
 ## Advanced Usage 
