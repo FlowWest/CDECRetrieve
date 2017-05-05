@@ -166,8 +166,17 @@ does.
 
 The CDEC web services are a mess! Queries do not always respond and the service 
 that fulfills a query is not always the same. The most reliable queries are those
-from the SHEF download service. This returns a SHEF file, for which the `fehs` 
-package is used to convert into a tidy dataframe. 
+from the SHEF download service. The approach taken here is one with an ugly side effect, 
+namely a SHEF file is downloaded temporarily to the working environment, this however 
+is a huge boost in robustness. Having interacted with other services from CDEC 
+none come close the reliability showcased by the SHEF download service. Currently one 
+can pull up to 7 years of data with consistent responses. 
+
+In order to go from SHEF --> Tidy, there exist a mapping from SHEF parameter codes 
+to those provided through CDEC. At the moment the list of mappings is one that 
+satisfies the work we do internally, however these are exposed as a simple list in 
+`consts.R` and can be updated to one's needs. Ideally and if needed this can be a 
+a static file that gets parsed and brought in to the environment for use. 
 
 # Upcoming features
 
