@@ -156,67 +156,11 @@ multiple_station_temp_query("CCR")
 multiple_station_temp_query("BND")
 ```
 
-## Advanced Usage 
+# Alternatives 
 
-There is no "advanced" way to use CDECRetrieve, rather combining it with `purrr`
-allows for great felixbilty. 
-
-**Retrieve Desired Codes** 
-
-Suppose you are interested in water quality attributes for a given station. Much like
-we mapped through the station_list we can map through desired codes. 
-
-```r
-# water qual codes 
-water_qual_codes <- c("04", "14", "25", "27", "61")
-
-kwk_wq <- map(water_qual_codes, safely(function(x) {
-  retrieve_station_data("kwk", x, "H", "2000-01-01")
-}))
-
-kwk_wq <- transpose(kwk_wq)$result %>% bind_rows()
-```
-
-**Retrieve a combination of stations and codes**
-
-Once again we will take advantage of the purrr package to accomplish this.
-Like we did before we create vectors of both the stations and sensor numbers
-we wish to obtain data for.
-
-```r
-# stations codes
-station_codes <- c("FRE", "KWK", "BND")
-
-# sensor numbers
-wq_codes <- c("25", "66", "61")
-```
-
-There is a built in function called `get_locations_list` that can retrieve
-such a vector from a file
-
-```r
-station_codes <- get_locations_list("data/station_list.txt")
-```
-
-We now create a dataframe that expands the above two into rows of all
-possible combinations
-
-```r
-inputs_to_retrieve <- expand.grid(stations_codes, wq_codes)
-```
-
-Lastly we map this dataframe with `retrieve_station_data` function.
-
-```r
-resp <- map(inputs_to_retrieve, safely(function(x) {
-     retrieve_station_data(x[1,1], x[1,2], "H", "2016-01-01")
-}))
-
-# get returned queries
-# note this needs a lot improvement since the actual data is burried
-results <- transpose(resp$.out)$result
-```
-
+Apart from going straight to CDEC for data, there is another R package called
+`sharpshootR` that allows for data retrieval in a similar way that `CDECRetrieve` 
+does.
 
 # Details 
 
