@@ -92,7 +92,7 @@ resp <- transpose(resp)$results %>% bind_rows()
 
 The query returns 
 
-```r
+```
 resp
 
 # A tibble: 56,808 × 5
