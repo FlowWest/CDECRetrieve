@@ -156,6 +156,12 @@ multiple_station_temp_query("CCR")
 multiple_station_temp_query("BND")
 ```
 
+### Renaming Columns 
+
+One of the goals of the package is to return data in a consistent structured way
+so that functionality can be built on top. If needed one can invoke `rename_params` 
+on a dataset to add additional columns that specify attributes of the `parameter_cd`.
+
 # Alternatives 
 
 Apart from going straight to CDEC for data, there is another R package called
