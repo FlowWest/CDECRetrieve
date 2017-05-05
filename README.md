@@ -172,6 +172,11 @@ is a huge boost in robustness. Having interacted with other services from CDEC
 none come close the reliability showcased by the SHEF download service. Currently one 
 can pull up to 7 years of data with consistent responses. 
 
+In order to go from SHEF --> Tidy, there exist a mapping from SHEF parameter codes 
+to those provided through CDEC. At the moment the list of mappings is one that 
+satisfies the work we do internally, however these are exposed as a simple list in 
+`consts.R` and can be updated to one's needs. 
+
 # Upcoming features
 
 * A shiny interface 
