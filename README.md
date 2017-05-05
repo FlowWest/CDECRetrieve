@@ -35,7 +35,7 @@ kwk_flow <- retrieve_station_data("KWK", "20", "E", "2000-01-01", "2002-01-01")
 The returned data complies with both tidy data and third normal form, to 
 facilitate both statistical analysia and visualization.
 
-```r
+```
 # A tibble: 17,544 × 5
    agency_cd            datetime location_id parameter_cd parameter_value
        <chr>              <dttm>       <chr>        <chr>           <chr>
