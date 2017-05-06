@@ -36,7 +36,9 @@ shef_to_tidy <- function(file) {
   raw$datetime <- lubridate::ymd_hm(raw$datetime)
 
   shef_code <- raw$X6[1]
-  raw$X6 <- rep(shef_code_lookup[[shef_code]], nrow(raw))
+  cdec_code <- ifelse(is.null(shef_code_lookup[[shef_code]]),
+                      NA, shef_code_lookup[[shef_code]])
+  raw$X6 <- rep(cdec_code, nrow(raw))
   colnames(raw) <- c("location_id", "datetime", "parameter_cd", "parameter_value")
 
   # parse to correct type
