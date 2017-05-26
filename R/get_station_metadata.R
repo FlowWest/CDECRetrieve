@@ -35,6 +35,7 @@ get_station_metadata <- function(stations) {
       purrr::flatten()
   }
 
+
   purrr::map(stations, ~call_cdec(.)) %>%
     dplyr::bind_rows() %>%
     dplyr::mutate(agency = "cdec", state = 'ca',
