@@ -15,6 +15,8 @@ Imports: dplyr,
     magrittr,
     purrr,
     readr,
-    roxygen2
+    roxygen2,
+    rvest,
+    xml2
 Suggests: testthat
 License: file LICENSE
