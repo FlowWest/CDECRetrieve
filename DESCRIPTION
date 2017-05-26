@@ -16,3 +16,4 @@ Imports: dplyr,
     purrr,
     readr
 Suggests: testthat
+License: file LICENSE
