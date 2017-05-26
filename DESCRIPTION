@@ -19,6 +19,8 @@ Imports: dplyr,
     rvest,
     xml2,
     stringr,
-    tibble
+    tibble,
+    lubridate,
+    httr
 Suggests: testthat
 License: file LICENSE
