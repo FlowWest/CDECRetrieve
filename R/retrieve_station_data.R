@@ -55,7 +55,7 @@ shef_to_tidy <- function(file) {
 #' @param end_date a date to end query on, defaults to current date.
 #' @return tidy dataframe
 #' @examples
-#' kwk_hourly_temp <- retrieve_station_data("KWK", "20", "H", "2017-01-01")
+#' kwk_hourly_temp <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")
 #'
 #' @export
 retrieve_station_data <- function(station_id, sensor_num,

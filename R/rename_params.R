@@ -2,7 +2,8 @@
 #' @param .d dataframe obtained from calling CDECRetrieve::retrieve_station_data
 #' @return a new data frame with renamed human readable columns
 #' @examples
-#' rename_params(retrieve_station_data("kwk", "20", "H", "2017-01-01"))
+#' library(magrittr)
+#' retrieve_station_data("kwk", "20", "H", "2017-01-01") %>% rename_params()
 #'
 #' @export
 rename_params <- function(.d) {
