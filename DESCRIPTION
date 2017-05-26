@@ -17,6 +17,8 @@ Imports: dplyr,
     readr,
     roxygen2,
     rvest,
-    xml2
+    xml2,
+    stringr,
+    tibble
 Suggests: testthat
 License: file LICENSE
