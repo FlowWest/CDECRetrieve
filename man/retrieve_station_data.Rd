@@ -25,6 +25,6 @@ tidy dataframe
 Function queries the CDEC services to obtain desired station data
 }
 \examples{
-kwk_hourly_temp <- retrieve_station_data("KWK", "20", "H", "2017-01-01")
+kwk_hourly_temp <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")
 
 }

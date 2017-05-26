@@ -1,5 +1,5 @@
 #' CDECRetrieve
 #'
 #' @name CDECRetrieve
-#' @importFrom magrittr `%>%`
+#' @importFrom magrittr %>%
 NULL
