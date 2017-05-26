@@ -2,7 +2,7 @@
 #' @param .d dataframe obtained from calling CDECRetrieve::retrieve_station_data
 #' @return a new data frame with renamed human readable columns
 #' @examples
-#' retrieve_station_data("kwk", "20", "H", "2017-01-01") %>% rename_params()
+#' rename_params(retrieve_station_data("kwk", "20", "H", "2017-01-01"))
 #'
 #' @export
 rename_params <- function(.d) {
