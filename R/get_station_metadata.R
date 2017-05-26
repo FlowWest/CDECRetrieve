@@ -27,13 +27,15 @@ get_station_table <- function(station) {
 #' @export
 get_station_metadata <- function(stations) {
 
-  purrr::map(stations, function(station) {
-      cdec_urls$station_metadata %>%
+  call_cdec <- function(station) {
+    cdec_urls$station_metadata %>%
       stringr::str_replace("STATION", station) %>%
       xml2::read_html() %>%
       rvest::html_table() %>%
       purrr::flatten()
-  }) %>%
+  }
+
+  purrr::map(stations, ~call_cdec(.)) %>%
     dplyr::bind_rows() %>%
     dplyr::mutate(agency = "cdec", state = 'ca',
                   hydro_area = tolower(get_hydro_area(ID)),
