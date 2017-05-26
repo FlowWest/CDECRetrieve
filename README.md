@@ -156,6 +156,33 @@ multiple_station_temp_query("CCR")
 multiple_station_temp_query("BND")
 ```
 
+### Renaming Columns 
+
+One of the goals of the package is to return data in a consistent structured way
+so that functionality can be built on top. If needed one can invoke `rename_params` 
+on a dataset to add additional columns that specify attributes of the `parameter_cd`.
+
+```r 
+kwk %>% rename_params()
+```
+
+```
+      agency_cd            datetime location_id parameter_cd parameter_value param_name param_units
+1          CDEC 2000-01-01 00:00:00         KWK          20H            5401       flow         cfs
+2          CDEC 2000-01-01 01:00:00         KWK          20H            4937       flow         cfs
+3          CDEC 2000-01-01 02:00:00         KWK          20H            5234       flow         cfs
+4          CDEC 2000-01-01 03:00:00         KWK          20H            5234       flow         cfs
+5          CDEC 2000-01-01 04:00:00         KWK          20H            5273       flow         cfs
+6          CDEC 2000-01-01 05:00:00         KWK          20H            5282       flow         cfs
+7          CDEC 2000-01-01 06:00:00         KWK          20H            5090       flow         cfs
+8          CDEC 2000-01-01 07:00:00         KWK          20H            5023       flow         cfs
+9          CDEC 2000-01-01 08:00:00         KWK          20H            5014       flow         cfs
+10         CDEC 2000-01-01 09:00:00         KWK          20H            5023       flow         cfs
+```
+
+All the function does is parse the parameter code and add two additional columns for a
+human readable name as well as units. **This functionality is still being developed**
+
 # Alternatives 
 
 Apart from going straight to CDEC for data, there is another R package called

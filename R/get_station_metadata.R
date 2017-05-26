@@ -1,20 +1,23 @@
-#source("R/consts.R")
 
-#' Function helper to get_station_metadata below
-parse_attr_to_df <- function(resp) {
-  parsed_resp <- data.frame(station_id=resp[1,2],
-                            elevation=readr::parse_number(resp[1,4]),
-                            river_basin=tolower(resp[2,2]),
-                            county=resp[2,4],
-                            hydrologic_area=tolower(resp[3,2]),
-                            nearby_city=tolower(resp[3,4]),
-                            latitude=readr::parse_number(resp[4,2]),
-                            longitude=readr::parse_number(resp[4,4]),
-                            operator=tolower(resp[5,2]),
-                            data_collection=tolower(resp[5,4]),
-                            stringsAsFactors = FALSE)
+#' Get Hydro Area from CDEC Station
+#' @export
+get_hydro_area <- function(station) {
 
-  return(parsed_resp)
+  cdec_urls$station_hydro_area %>%
+    stringr::str_replace("STATION", station) %>%
+    xml2::read_html() %>%
+    rvest::html_table() %>%
+    .[[1]] %>%
+    .[3, 2]
+
+}
+
+get_station_table <- function(station) {
+  cdec_urls$station_metadata %>%
+    stringr::str_replace("STATION", station) %>%
+    xml2::read_html() %>%
+    rvest::html_table() %>%
+    purrr::flatten()
 }
 
 #' Use three letter code to retieve associated attributes
@@ -24,15 +27,80 @@ parse_attr_to_df <- function(resp) {
 #' @export
 get_station_metadata <- function(stations) {
 
-  resp <- map(stations, function(station) {
-    httr::GET(cdec_urls$station_metadata,
-              query = list(station_id=station)) %>%
+  call_cdec <- function(station) {
+    cdec_urls$station_metadata %>%
+      stringr::str_replace("STATION", station) %>%
       xml2::read_html() %>%
-      rvest::html_node("table") %>%
-      rvest::html_table()
-  }) %>%
-    map(parse_attr_to_df) %>%
-    dplyr::bind_rows()
+      rvest::html_table() %>%
+      purrr::flatten()
+  }
 
-  return(resp)
+  purrr::map(stations, ~call_cdec(.)) %>%
+    dplyr::bind_rows() %>%
+    dplyr::mutate(agency = "cdec", state = 'ca',
+                  hydro_area = tolower(get_hydro_area(ID)),
+                  location_id = tolower(ID),
+                  location_name = tolower(`Station Name`),
+                  county = tolower(County)) %>%
+    dplyr::select(agency, location_id, location_name,
+                  county, hydro_area, lat = Latitude,
+                  long = Longitude, state)
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
