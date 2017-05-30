@@ -10,8 +10,7 @@
 #' @param end_date a non-inclusive date to end the query on
 #' @return string url
 make_cdec_url <- function(station_id, sensor_num,
-                     dur_code, start_date, end_date=as.character(Sys.Date()),
-                     base_url = "shef") {
+                     dur_code, start_date, end_date=as.character(Sys.Date())) {
   cdec_urls$download_shef %>%
     stringr::str_replace("STATION", station_id) %>%
     stringr::str_replace("SENSOR", sensor_num) %>%
@@ -59,13 +58,12 @@ shef_to_tidy <- function(file) {
 #'
 #' @export
 retrieve_station_data <- function(station_id, sensor_num,
-                                dur_code, start_date, end_date="",
-                                base_url = "shef") {
+                                dur_code, start_date, end_date="") {
 
   # a real ugly side effect here, but its reliability is great
-  raw_file <- download.file(make_cdec_url(station_id, sensor_num,
-                                          dur_code, start_date, end_date,
-                                          base_url = "shef"), destfile = "tempdl.txt",
+  raw_file <- utils::download.file(make_cdec_url(station_id, sensor_num,
+                                          dur_code, start_date, end_date),
+                            destfile = "tempdl.txt",
                             quiet = TRUE)
 
   # catch the case when cdec is down
