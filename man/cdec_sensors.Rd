@@ -4,15 +4,11 @@
 \name{cdec_sensors}
 \alias{cdec_sensors}
 \title{The set of CDEC Codes as reported by CDEC}
-\format{An object of class \code{data.frame} with 251 rows and 5 columns.}
 \source{
 \url{http://cdec.com}
-}
-\usage{
-cdec_sensors
 }
 \description{
 A dataset containing all of the cdec codes, along with
 other useful iformation including the units of measure for each
 }
-\keyword{datasets}
+\keyword{data}

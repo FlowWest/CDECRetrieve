@@ -1,7 +1,3 @@
-#source("R/consts.R")
-
-#cdec_urls
-
 #' Function builds CDEC Url to request data
 #' @param station_id three letter identification for CDEC location
 #' @param sensor_num sensor number for the measure of interest
@@ -31,7 +27,8 @@ shef_to_tidy <- function(file) {
                            does this station have this duration and sensor combination?")
 
   raw <- raw[, c(2, 3, 5, 6, 7)]  # keep relevant cols
-  raw <- raw %>% tidyr::unite(datetime, X3, X5, sep ="")
+  raw <- raw %>% tidyr::unite_(col = "datetime",
+                               from = c("X3", "X5"), sep ="", remove = TRUE)
   raw$datetime <- lubridate::ymd_hm(raw$datetime)
 
   shef_code <- raw$X6[1]
