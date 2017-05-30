@@ -3,5 +3,8 @@
 #' A dataset containing all of the cdec codes, along with
 #' other useful iformation including the units of measure for each
 #'
+#' @name cdec_sensors
+#' @docType data
 #' @source \url{http://cdec.com}
-"cdec_sensors"
+#' @keywords data
+NULL
