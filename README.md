@@ -11,7 +11,7 @@ Information System (RWIS). The program is still in pilot stage, and its function
 although not complete is worth keeping an eye on. Its development can greatly 
 aid efforts lile CDECRetrieve, and other packages developed at FlowWest.
 
-## What is CDECRetrieve?
+# What is CDECRetrieve?
 
 CDECRetrieve uses the web services provided by the California Data Exchange Center
 [here](http://cdec.water.ca.gov/) as a backend to allow users to download 
