@@ -2,10 +2,13 @@
 % Please edit documentation in R/get_station_metadata.R
 \name{get_hydro_area}
 \alias{get_hydro_area}
-\title{Get Hydro Area from CDEC Station}
+\title{Function takes a station and returns the corresponding hydro area}
 \usage{
 get_hydro_area(station)
 }
+\arguments{
+\item{station}{a three letter code for station to find hydro_area for}
+}
 \description{
-Get Hydro Area from CDEC Station
+Function takes a station and returns the corresponding hydro area
 }
