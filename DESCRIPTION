@@ -21,6 +21,7 @@ Imports: dplyr,
     stringr,
     tibble,
     lubridate,
-    httr
+    httr,
+    lazyeval
 Suggests: testthat
 License: file LICENSE
