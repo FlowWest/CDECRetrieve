@@ -4,6 +4,15 @@
 
 **Version 0.1.0**
 
+### News 
+
+USBR has recently announced a new information query system, Reclemation Water 
+Information System (RWIS). The program is still in pilot stage, and its functionality, 
+although not complete is worth keeping an eye on. Its development can greatly 
+aid efforts lile CDECRetrieve, and other packages developed at FlowWest.
+
+## What is CDECRetrieve?
+
 CDECRetrieve uses the web services provided by the California Data Exchange Center
 [here](http://cdec.water.ca.gov/) as a backend to allow users to download 
 data with a single function call. CDECRetrieve specifically uses the SHEF download
