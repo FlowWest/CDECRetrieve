@@ -1,16 +1,3 @@
-#' Function takes a station and returns the corresponding hydro area
-#' @param station a three letter code for station to find hydro_area for
-get_hydro_area <- function(station) {
-
-  cdec_urls$station_hydro_area %>%
-    stringr::str_replace("STATION", station) %>%
-    xml2::read_html() %>%
-    rvest::html_table() %>%
-    .[[1]] %>%
-    .[3, 2]
-
-}
-
 #' function makes call to and returns appropriate table from CDEC service
 #' @param station three letter code for station to query for
 call_cdec_meta_service <- function(station) {
