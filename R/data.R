@@ -24,5 +24,5 @@ NULL
 #' @return data frame with filtered search results
 #' @export
 search_sensors <- function(term) {
-    sensors[stringr::str_detect(sensors$description, term), ]
+    CDECRetrieve::sensors[stringr::str_detect(CDECRetrieve::sensors$description, term), ]
 }
