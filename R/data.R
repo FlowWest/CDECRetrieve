@@ -24,6 +24,5 @@ NULL
 #' @return data frame with filtered search results
 #' @export
 search_sensors <- function(term) {
-  sensors %>%
-    filter(stringr::str_detect(description, term))
+    sensors[stringr::str_detect(sensors$description, term), ]
 }
