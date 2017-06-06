@@ -14,6 +14,9 @@
 \source{
 \url{http://cdec.com}
 }
+\usage{
+sensors
+}
 \description{
 A dataset containing all of the cdec codes, along with
 other useful iformation including the units of measure for each
