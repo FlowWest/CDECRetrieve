@@ -2,6 +2,5 @@
 
 export(get_station_metadata)
 export(retrieve_station_data)
-export(search_sensors)
 export(show_available_data)
 importFrom(magrittr,"%>%")
