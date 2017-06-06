@@ -35,8 +35,8 @@ show_available_data <- function(station_id) {
   colnames(meta_attr) <- c("sens_no", "sens_name", "measure_type", "date_range")
 
   meta_attr <- meta_attr %>%
-    tidyr::separate(date_range, into = c("from", "start_date", "to", "end_date"), sep = " ") %>%
-    dplyr::select(sens_no, sens_name, measure_type, start_date, end_date)
+    tidyr::separate_("date_range", into = c("from", "start_date", "to", "end_date"), sep = " ") %>%
+    dplyr::select_("sens_no", "sens_name", "measure_type", "start_date", "end_date")
 
 
   # minor cleaning of the data

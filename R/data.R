@@ -14,15 +14,5 @@
 #'     \item{unit}{the unit of measurement used for the sensor}
 #' }
 #' @keywords data
-NULL
+"sensors"
 
-#' Function does a simple search for terms in description
-#' @param term a search term to query for
-#' @examples
-#' temperature_sensors <- search_sensors("temperature")
-#'
-#' @return data frame with filtered search results
-#' @export
-search_sensors <- function(term) {
-    sensors[stringr::str_detect(sensors$description, term), ]
-}
