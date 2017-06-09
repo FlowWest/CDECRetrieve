@@ -4,7 +4,13 @@
 \alias{parse_avail_resp}
 \title{Function parses a response from CDEC avaialable data service}
 \usage{
-parse_avail_resp(resp)
+parse_avail_resp(.d_raw)
+}
+\arguments{
+\item{.d}{a response table from cdec via the function call_cdec_avail_service}
+}
+\value{
+parsed version of table returned from cdec
 }
 \description{
 Function parses a response from CDEC avaialable data service

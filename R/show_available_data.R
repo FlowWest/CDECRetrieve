@@ -15,37 +15,45 @@ call_cdec_avail_service <- function(station) {
   query <- list(station_id=station,
                 sensor_num=NULL)
 
-  httr::GET(cdec_urls$show_historical, query=query)
-
-}
-
-#' Function parses a response from CDEC avaialable data service
-parse_avail_resp <- function(resp) {
-  meta_attr <- xml2::read_html(resp) %>%
+  httr::GET(cdec_urls$show_historical, query=query) %>%
+    xml2::read_html() %>%
     rvest::html_nodes("div#main_content table") %>%
     rvest::html_table() %>%
     .[[1]]
 
-  colnames(meta_attr) <- c("sens_no", "sens_name", "measure_type", "date_range")
+}
 
-  meta_attr <- meta_attr %>%
+#' Function parses a response from CDEC avaialable data service
+#' @param .d a response table from cdec via the function call_cdec_avail_service
+#' @return parsed version of table returned from cdec
+parse_avail_resp <- function(.d_raw) {
+
+  colnames(.d_raw) <- c("sens_no", "sens_name",
+                             "measure_type", "date_range")
+
+  .d <- .d_raw %>%
     tidyr::separate_("date_range",
                      into = c("from", "start_date", "to", "end_date"), sep = " ") %>%
     dplyr::select_("sens_no", "sens_name",
                    "measure_type", "start_date", "end_date")
 
-  meta_attr$end_date <- ifelse(meta_attr$end_date == "present.",
-                               "present", meta_attr$end_date)
+  .d$end_date <- ifelse(.d$end_date == "present.",
+                        "present", .d$end_date)
 
-  meta_attr$measure_type <- stringr::str_replace_all(meta_attr$measure_type, "(\\(|\\))+", "")
+  .d$measure_type <- stringr::str_replace_all(.d$measure_type, "(\\(|\\))+", "")
 
-  meta_attr <- meta_attr %>%
+  # (todo: seperate sens_name into a name and the units used to measure)
+  # (todo: make columns all of the correct class)
+  # (todo: make the end date be an actual date when 'present' and convert to class date)
+  # (feature: allow user to take any one of these rows and pipe into retrieve_station_data)
+
+  .d <- .d %>%
     map_df(function(x) {
       if (is.character(x)) tolower(x)
       else x
     })
 
-  return(meta_attr)
+  return(.d)
 
 }
 
@@ -57,9 +65,6 @@ show_available_data <- function(station) {
 
   resp <- call_cdec_avail_service(station)
 
-  if(failed_query(resp)) {
-    stop("Query did not return any results")
-  }
   # minor cleaning of the data
   meta_attr <- parse_avail_resp(resp)
   return(meta_attr)
