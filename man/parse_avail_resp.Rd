@@ -7,7 +7,7 @@
 parse_avail_resp(.d_raw)
 }
 \arguments{
-\item{.d}{a response table from cdec via the function call_cdec_avail_service}
+\item{.d_raw}{a response table from cdec via the function call_cdec_avail_service}
 }
 \value{
 parsed version of table returned from cdec

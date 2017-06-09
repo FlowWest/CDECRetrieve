@@ -10,6 +10,9 @@ failed_query <- function(resp) {
   return(grepl(default_error_msg, x = res_message))
 }
 
+#' Function forms url and fetches the raw table from cdec avail service
+#' @param station station to retrieve available data for
+#' @return a raw table turned to dataframe from cdec service
 call_cdec_avail_service <- function(station) {
   # form the request for the url
   query <- list(station_id=station,
@@ -24,7 +27,7 @@ call_cdec_avail_service <- function(station) {
 }
 
 #' Function parses a response from CDEC avaialable data service
-#' @param .d a response table from cdec via the function call_cdec_avail_service
+#' @param .d_raw a response table from cdec via the function call_cdec_avail_service
 #' @return parsed version of table returned from cdec
 parse_avail_resp <- function(.d_raw) {
 
@@ -48,7 +51,7 @@ parse_avail_resp <- function(.d_raw) {
   # (feature: allow user to take any one of these rows and pipe into retrieve_station_data)
 
   .d <- .d %>%
-    map_df(function(x) {
+    purrr::map_df(function(x) {
       if (is.character(x)) tolower(x)
       else x
     })
