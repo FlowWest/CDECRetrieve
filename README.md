@@ -11,6 +11,27 @@ Information System (RWIS). The program is still in pilot stage, and its function
 although not complete is worth keeping an eye on. Its development can greatly 
 aid efforts lile CDECRetrieve, and other packages developed at FlowWest.
 
+## Feature  
+
+One feature that can really help integrate functions in this package would be for composing 
+calls to search and retrieve to be implemnented. Although being able to get data from a function call 
+rather than visiting a site is a big improvement, being able to bridge the gap between search and 
+retrieve would be even better. 
+
+**examples** 
+
+```r
+# we can get available data for a given station as follows
+avail_data <- show_available_data("KWK") 
+
+# but the use of this function call ends as soon as we print its content and read it 
+# it would be much better if we can then use the returned content and input to retrieve data 
+# a simple way would be 
+avail_data[1] %>% retrieve_station_data()
+
+# the avail data would here populate all the required arguments to retrieve_station_data
+```
+
 # What is CDECRetrieve?
 
 CDECRetrieve uses the web services provided by the California Data Exchange Center
@@ -215,16 +236,7 @@ satisfies the work we do internally, however these are exposed as a simple list 
 `consts.R` and can be updated to one's needs. Ideally and if needed this can be a 
 a static file that gets parsed and brought in to the environment for use. 
 
-# Upcoming features
 
-* A shiny interface 
-* Dates can be left empty, package knows what to query 
-* and more....
-
-# TODO 
-
-* Better error handling, currently relies on `safely` but error outputs should be 
-much more informative 
 
 
 
