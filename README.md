@@ -6,6 +6,8 @@
 
 ### News 
 
+**CDEC Web Services are currently down, and thus this package has nowhere to pull data from**
+
 USBR has recently announced a new information query system, Reclemation Water 
 Information System (RWIS). The program is still in pilot stage, and its functionality, 
 although not complete is worth keeping an eye on. Its development can greatly 
