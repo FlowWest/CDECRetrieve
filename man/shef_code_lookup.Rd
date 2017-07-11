@@ -4,7 +4,7 @@
 \name{shef_code_lookup}
 \alias{shef_code_lookup}
 \title{Look up table to go from SHEF Code ---> CDEC Param Code}
-\format{An object of class \code{list} of length 33.}
+\format{An object of class \code{list} of length 36.}
 \usage{
 shef_code_lookup
 }
