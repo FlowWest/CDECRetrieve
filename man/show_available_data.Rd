@@ -4,10 +4,10 @@
 \alias{show_available_data}
 \title{Function returns a dataframe of the available data}
 \usage{
-show_available_data(station_id)
+show_available_data(station)
 }
 \arguments{
-\item{station_id}{a three letter cdec station if}
+\item{station}{a three letter cdec station if}
 }
 \value{
 dataframe of available data for station

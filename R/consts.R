@@ -50,5 +50,9 @@ shef_code_lookup <- list(
   "/QID" = "76D",
   "/QIH" = "76H",
   "/LRD" = "94D",
-  "/LRH" = "94H"
+  "/LRH" = "94H",
+  "/TAD" = "30D",
+  "/TAH" = "04H",
+  "/QMD" = "08D"
+
 )
