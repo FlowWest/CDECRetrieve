@@ -11,7 +11,7 @@
 USBR has recently announced a new information query system, Reclemation Water 
 Information System (RWIS). The program is still in pilot stage, and its functionality, 
 although not complete is worth keeping an eye on. Its development can greatly 
-aid efforts lile CDECRetrieve, and other packages developed at FlowWest.
+aid efforts like CDECRetrieve, and other packages developed at FlowWest.
 
 # What is CDECRetrieve?
 
@@ -26,11 +26,8 @@ more about the SHEF format [here](http://www.nws.noaa.gov/om/water/resources/SHE
 Install using `devtools::install_github` 
 
 ```r 
-devtools::install_github("CDECRetrieve", username="flowwest")
+devtools::install_github("flowwest/CDECRetrieve", username="")
 ```
-
-*Note* This package currently lives in a private repository an auth token is required
-to download and install. Email erodriguez@flowwest.com for more information. 
 
 # Usage 
 
