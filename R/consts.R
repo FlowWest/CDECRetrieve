@@ -24,6 +24,7 @@ shef_code_lookup <- list(
   "/QRE" = "20", #flow
   "/TWH" = "25", #water temp
   "/TWE" = "25", #water temp
+  "/TWD" = "25",
   "/WTH" = "27",
   "/WTE" = "27",
   "/WPH" = "62",
