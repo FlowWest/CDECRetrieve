@@ -6,7 +6,7 @@
 #' @export
 get_station_metadata <- function(stations) {
 
-  .Deprecated("query_metadata", package = "CDECRetrieve",
+  .Deprecated("cdec_metadata", package = "CDECRetrieve",
               msg = "function deprecated, use 'query_metadata()'")
 
   query_metadata(stations)
@@ -18,7 +18,7 @@ get_station_metadata <- function(stations) {
 #' @param stations a vector of three letter station codes.
 #' @return a dataframe with rows as stations submitted to the query
 #' @export
-query_metadata <- function(stations) {
+cdec_metadata <- function(stations) {
   resp <- purrr::map_dfr(stations, ~call_cdec_meta_service(.))
   parse_meta_response(resp)
 }

@@ -12,7 +12,7 @@
 retrieve_station_data <- function(stations, sensor_num,
                                   dur_code, start_date, end_date="") {
 
-  .Deprecated("query", package = "CDECRetrieve",
+  .Deprecated("cdec_query", package = "CDECRetrieve",
               msg = "function has been deprecated use 'query()'")
 
   query(stations, sensor_num,
@@ -31,7 +31,7 @@ retrieve_station_data <- function(stations, sensor_num,
 #' kwk_hourly_temp <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")
 #'
 #' @export
-query <- function(stations, sensor_num,
+cdec_query <- function(stations, sensor_num,
                   dur_code, start_date, end_date="") {
 
   do_query <- function(station) {
@@ -47,7 +47,7 @@ query <- function(stations, sensor_num,
     }
 
     on.exit(file.remove("tempdl.txt"))
-    resp <- shef_to_tidy("tempdl.txt")
+    resp <- suppressWarnings(shef_to_tidy("tempdl.txt"))
     resp$agency_cd <- "CDEC"
     resp[,c(5, 1:4)]
   }
@@ -70,9 +70,6 @@ make_cdec_url <- function(station_id, sensor_num,
 
 }
 
-#' Function converts shef downloaded data into one of a tidy format
-#' @param file shef filename obtained from CDEC
-#' @return data frame in tidy form
 shef_to_tidy <- function(file) {
   raw <- readr::read_delim(file, skip = 9, col_names = FALSE, delim = " ")
 
