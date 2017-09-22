@@ -7,9 +7,9 @@
 get_station_metadata <- function(stations) {
 
   .Deprecated("cdec_metadata", package = "CDECRetrieve",
-              msg = "function deprecated, use 'query_metadata()'")
+              msg = "function deprecated, use 'cdec_metadata()'")
 
-  query_metadata(stations)
+  cdec_metadata(stations)
 
 }
 
