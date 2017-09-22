@@ -1,5 +1,5 @@
 #' Function queries the CDEC services to obtain desired station data
-#' @param station_id three letter identification for CDEC location.
+#' @param stations three letter identification for CDEC location.
 #' @param sensor_num sensor number for the measure of interest.
 #' @param dur_code duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.
 #' @param start_date date to start the query on.
@@ -9,19 +9,19 @@
 #' kwk_hourly_temp <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")
 #'
 #' @export
-retrieve_station_data <- function(station_id, sensor_num,
-                                dur_code, start_date, end_date="") {
+retrieve_station_data <- function(stations, sensor_num,
+                                  dur_code, start_date, end_date="") {
 
   .Deprecated("query", package = "CDECRetrieve",
               msg = "function has been deprecated use 'query()'")
 
-  query(station_id, sensor_num,
+  query(stations, sensor_num,
         dur_code, start_date, end_date="")
 }
 
 
 #' Function queries the CDEC services to obtain desired station data
-#' @param station_id three letter identification for CDEC location.
+#' @param stations three letter identification for CDEC location.
 #' @param sensor_num sensor number for the measure of interest.
 #' @param dur_code duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.
 #' @param start_date date to start the query on.
@@ -31,23 +31,29 @@ retrieve_station_data <- function(station_id, sensor_num,
 #' kwk_hourly_temp <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")
 #'
 #' @export
-query <- function(station_id, sensor_num,
+query <- function(stations, sensor_num,
                   dur_code, start_date, end_date="") {
-  # a real ugly side effect here, but its reliability is great
-  raw_file <- utils::download.file(make_cdec_url(station_id, sensor_num,
-                                                 dur_code, start_date, end_date),
-                                   destfile = "tempdl.txt",
-                                   quiet = TRUE)
 
-  # catch the case when cdec is down
-  if (file.info("tempdl.txt")$size == 0) {
-    stop("query did not produce a result, possible cdec is down?")
+  do_query <- function(station) {
+
+    # a real ugly side effect here, but otherwise large queries would not be possible
+    raw_file <- utils::download.file(make_cdec_url(station, sensor_num,
+                                                   dur_code, start_date, end_date),
+                                     destfile = "tempdl.txt",
+                                     quiet = TRUE)
+    # catch the case when cdec is down
+    if (file.info("tempdl.txt")$size == 0) {
+      stop("query did not produce a result, possible cdec is down?")
+    }
+
+    on.exit(file.remove("tempdl.txt"))
+    resp <- shef_to_tidy("tempdl.txt")
+    resp$agency_cd <- "CDEC"
+    resp[,c(5, 1:4)]
   }
 
-  on.exit(file.remove("tempdl.txt"))
-  resp <- shef_to_tidy("tempdl.txt")
-  resp$agency_cd <- "CDEC"
-  resp[,c(5, 1:4)]
+  purrr::map_dfr(stations, ~do_query(.))
+
 }
 
 

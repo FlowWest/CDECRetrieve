@@ -4,10 +4,10 @@
 \alias{query}
 \title{Function queries the CDEC services to obtain desired station data}
 \usage{
-query(station_id, sensor_num, dur_code, start_date, end_date = "")
+query(stations, sensor_num, dur_code, start_date, end_date = "")
 }
 \arguments{
-\item{station_id}{three letter identification for CDEC location.}
+\item{stations}{three letter identification for CDEC location.}
 
 \item{sensor_num}{sensor number for the measure of interest.}
 
