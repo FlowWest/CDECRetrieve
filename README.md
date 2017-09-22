@@ -2,16 +2,6 @@
 
 ![travis_mater_status](https://travis-ci.org/FlowWest/CDECRetrieve.svg?branch=master)
 
-**Version 0.1.0**
-
-### News 
-
-**CDEC Web Services are currently down, and thus this package has nowhere to pull data from**
-
-USBR has recently announced a new information query system, Reclemation Water 
-Information System (RWIS). The program is still in pilot stage, and its functionality, 
-although not complete is worth keeping an eye on. Its development can greatly 
-aid efforts like CDECRetrieve, and other packages developed at FlowWest.
 
 # What is CDECRetrieve?
 
@@ -20,6 +10,8 @@ CDECRetrieve uses the web services provided by the California Data Exchange Cent
 data with a single function call. CDECRetrieve specifically uses the SHEF download
 service due to the fact that it is the most robust of the services. You can learn 
 more about the SHEF format [here](http://www.nws.noaa.gov/om/water/resources/SHEF_CodeManual_5July2012.pdf).
+CDECRetrieve came to be after trying to download large amounts of data from CDEC 
+for multiple stations. 
 
 # Installation 
 
