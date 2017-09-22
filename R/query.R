@@ -81,7 +81,7 @@ shef_to_tidy <- function(file) {
   raw <- raw[, c(2, 3, 5, 6, 7)]  # keep relevant cols
   raw <- raw %>% tidyr::unite_(col = "datetime",
                                from = c("X3", "X5"), sep ="", remove = TRUE)
-  raw$datetime <- lubridate::ymd_hm(raw$datetime)
+  raw$datetime <- lubridate::ymd_hm(raw$datetime, tz="America/Los_Angeles")
 
   shef_code <- raw$X6[1]
   cdec_code <- ifelse(is.null(shef_code_lookup[[shef_code]]),
