@@ -4,8 +4,7 @@
 \alias{cdec_query}
 \title{Function queries the CDEC services to obtain desired station data.}
 \usage{
-cdec_query(stations, sensor_num, dur_code, start_date, end_date = "",
-  service = NULL)
+cdec_query(stations, sensor_num, dur_code, start_date, end_date = "")
 }
 \arguments{
 \item{stations}{three letter identification for CDEC location (example "KWK", "SAC", "CCR")}

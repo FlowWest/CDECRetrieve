@@ -35,7 +35,7 @@ retrieve_station_data <- function(stations, sensor_num,
 #'
 #' @export
 cdec_query <- function(stations, sensor_num,
-                  dur_code, start_date, end_date="", service=NULL) {
+                  dur_code, start_date, end_date="") {
 
   do_query <- function(station) {
 
