@@ -20,9 +20,12 @@ retrieve_station_data <- function(stations, sensor_num,
 }
 
 
-#' Function queries the CDEC services to obtain desired station data
-#' @param stations three letter identification for CDEC location.
-#' @param sensor_num sensor number for the measure of interest.
+#' Function queries the CDEC services to obtain desired station data.
+#' @description User must know beforehand if a given location uses the desired
+#' sensor number as well as duration value. Use show_avaialable_data() to view
+#' an update list of a stations data.
+#' @param stations three letter identification for CDEC location (example "KWK", "SAC", "CCR")
+#' @param sensor_num sensor number for the measure of interest. (example "20", "01", "25")
 #' @param dur_code duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.
 #' @param start_date date to start the query on.
 #' @param end_date a date to end query on, defaults to current date.
@@ -32,15 +35,19 @@ retrieve_station_data <- function(stations, sensor_num,
 #'
 #' @export
 cdec_query <- function(stations, sensor_num,
-                  dur_code, start_date, end_date="") {
+                  dur_code, start_date, end_date="", service=NULL) {
 
   do_query <- function(station) {
 
     # a real ugly side effect here, but otherwise large queries would not be possible
-    raw_file <- utils::download.file(make_cdec_url(station, sensor_num,
+    download_success <- utils::download.file(make_cdec_url(station, sensor_num,
                                                    dur_code, start_date, end_date),
                                      destfile = "tempdl.txt",
                                      quiet = TRUE)
+    # TODO (emanuel) make sure this is doing the right thing.
+    # if(!download_success)
+    #   stop("could not read cdec services, maybe they are down?")
+
     # catch the case when cdec is down
     if (file.info("tempdl.txt")$size == 0) {
       stop("query did not produce a result, possible cdec is down?")

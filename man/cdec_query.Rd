@@ -2,14 +2,15 @@
 % Please edit documentation in R/query.R
 \name{cdec_query}
 \alias{cdec_query}
-\title{Function queries the CDEC services to obtain desired station data}
+\title{Function queries the CDEC services to obtain desired station data.}
 \usage{
-cdec_query(stations, sensor_num, dur_code, start_date, end_date = "")
+cdec_query(stations, sensor_num, dur_code, start_date, end_date = "",
+  service = NULL)
 }
 \arguments{
-\item{stations}{three letter identification for CDEC location.}
+\item{stations}{three letter identification for CDEC location (example "KWK", "SAC", "CCR")}
 
-\item{sensor_num}{sensor number for the measure of interest.}
+\item{sensor_num}{sensor number for the measure of interest. (example "20", "01", "25")}
 
 \item{dur_code}{duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.}
 
@@ -21,7 +22,9 @@ cdec_query(stations, sensor_num, dur_code, start_date, end_date = "")
 tidy dataframe
 }
 \description{
-Function queries the CDEC services to obtain desired station data
+User must know beforehand if a given location uses the desired
+sensor number as well as duration value. Use show_avaialable_data() to view
+an update list of a stations data.
 }
 \examples{
 kwk_hourly_temp <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")

@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^\images
+^docs$
+^_pkgdown\.yml$
