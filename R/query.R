@@ -37,24 +37,26 @@ retrieve_station_data <- function(stations, sensor_num,
 cdec_query <- function(stations, sensor_num,
                   dur_code, start_date, end_date="") {
 
+  temp_file <- tempfile(pattern = "cdecQuery", tmpdir = tempdir())
   do_query <- function(station) {
 
-    # a real ugly side effect here, but otherwise large queries would not be possible
-    download_success <- utils::download.file(make_cdec_url(station, sensor_num,
+    # a real ugly side effect here, download the file to temp location and
+    # and read from it. Doing it this way allows us to query large amounts of data
+    download_failed <- utils::download.file(make_cdec_url(station, sensor_num,
                                                    dur_code, start_date, end_date),
-                                     destfile = "tempdl.txt",
+                                     destfile = temp_file,
                                      quiet = TRUE)
-    # TODO (emanuel) make sure this is doing the right thing.
-    # if(!download_success)
-    #   stop("could not read cdec services, maybe they are down?")
+
+    if(download_failed)
+      stop("could not read cdec services, maybe they are down?")
 
     # catch the case when cdec is down
-    if (file.info("tempdl.txt")$size == 0) {
+    if (file.info(temp_file)$size == 0) {
       stop("query did not produce a result, possible cdec is down?")
     }
 
-    on.exit(file.remove("tempdl.txt"))
-    resp <- suppressWarnings(shef_to_tidy("tempdl.txt"))
+    on.exit(file.remove(temp_file))
+    resp <- suppressWarnings(shef_to_tidy(temp_file))
     resp$agency_cd <- "CDEC"
     resp[,c(5, 1:4)]
   }

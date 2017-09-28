@@ -1,8 +1,4 @@
-# Title: Conts.R
-# Author: Emanuel Rodriguez
-# Date:
-# Description: A location to place all global and constant values
-# ----------------------
+# constants used through out package
 
 #' Constant urls for data retrieval
 cdec_urls <- list(
