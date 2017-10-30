@@ -18,7 +18,7 @@ for multiple stations.
 Install using `devtools::install_github` 
 
 ```r 
-devtools::install_github("flowwest/CDECRetrieve", username="")
+devtools::install_github("flowwest/CDECRetrieve")
 ```
 
 # Usage 
@@ -26,11 +26,11 @@ devtools::install_github("flowwest/CDECRetrieve", username="")
 ## Basic Usage 
 
 CDECRetrieve exposes several useful functions to query services from CDEC. 
-The main function in the package is `retrieve_station_data`, 
+The main function in the package is `cdec_query`, 
 
 ```r 
 # download data from kwk, sensor 20, duration is event type
-kwk_flow <- retrieve_station_data("KWK", "20", "E", "2000-01-01", "2002-01-01")
+kwk_flow <- cdec_query("KWK", "20", "E", "2000-01-01", "2002-01-01")
 ```
 
 The returned data complies with both tidy data and third normal form, to 
@@ -70,125 +70,6 @@ kwk_flow %>%
 
 ![kwk](images/kwk_flow_ts.png)
 
-## Using with purrr
-
-CDECRetrieve does one thing, obtain data from a given station. We strongly believe 
-there are tools in R that can extend its functionality beyond this.
-Here we use the `purrr` package to map across a set of desired CDEC stations, and 
-this retrieving multiple station query.
-
-```r
-library(purrr)
-# define the stations of interest
-station_list <- c("BND", "KWK", "FRE", "CCR")
-
-# use map to retrieve all possible data
-resp <- map(station_list, safely(function(x) {
-  retrieve_station_data(x, "25", "H", "2015-01-01", "2017-02-28")
-}))
-
-# transpose and extract succesfull returns 
-resp <- transpose(resp)$results %>% bind_rows()
-```
-
-The query returns 
-
-```
-resp
-
-# A tibble: 56,808 × 5
-   agency_cd            datetime location_id parameter_cd parameter_value
-       <chr>              <dttm>       <chr>        <chr>           <dbl>
-1       CDEC 2015-01-01 00:00:00         BND          25H            45.3
-2       CDEC 2015-01-01 01:00:00         BND          25H            45.4
-3       CDEC 2015-01-01 02:00:00         BND          25H            45.4
-4       CDEC 2015-01-01 03:00:00         BND          25H            45.3
-5       CDEC 2015-01-01 04:00:00         BND          25H            45.3
-6       CDEC 2015-01-01 05:00:00         BND          25H            45.2
-7       CDEC 2015-01-01 06:00:00         BND          25H            45.1
-8       CDEC 2015-01-01 07:00:00         BND          25H            45.0
-9       CDEC 2015-01-01 08:00:00         BND          25H            45.0
-10      CDEC 2015-01-01 09:00:00         BND          25H            45.1
-# ... with 56,798 more rows
-```
-
-We can see all of the locations that had a result 
-
-```r
-table(resp$location_id)
-
-  BND   CCR   KWK 
-18936 18936 18936 
-```
-
-If this is useful enough we can place it in a function for reuse: 
-
-```r 
-multiple_station_query <- function(station_list, sensor_num, dur_code, 
-                                    start_date, end_date) {
-  resp <- map(station_list, safely(function(x) {
-    retrieve_station_data(x, sensor_num, dur_code, start_date, end_date)
-  }))
-  
-  transpose(resp)$result %>% bind_rows()
-}
-```
-
-and we call it as follow: 
-
-```r
-multiple_station_query(station_list, ....)
-
-# purrr (and functional programming) is great! We can further 
-# extend the use of the function 
-# Suppose we want to fix everything but the station, filling the remaining 
-# values over and over again is annoying so we can partially apply these values 
-multiple_station_temp_query <- purrr::partial(
-  multiple_station_query, 
-  sensor_num = "20", 
-  dur_code = "H",
-  start_date = "2015-01-01", 
-  end_date = "2017-01-01"
-)
-
-# now we can call this function ONLY with stations we are interested in 
-multiple_station_temp_query("KWK")
-multiple_station_temp_query("CCR")
-multiple_station_temp_query("BND")
-```
-
-### Renaming Columns 
-
-One of the goals of the package is to return data in a consistent structured way
-so that functionality can be built on top. If needed one can invoke `rename_params` 
-on a dataset to add additional columns that specify attributes of the `parameter_cd`.
-
-```r 
-kwk %>% rename_params()
-```
-
-```
-      agency_cd            datetime location_id parameter_cd parameter_value param_name param_units
-1          CDEC 2000-01-01 00:00:00         KWK          20H            5401       flow         cfs
-2          CDEC 2000-01-01 01:00:00         KWK          20H            4937       flow         cfs
-3          CDEC 2000-01-01 02:00:00         KWK          20H            5234       flow         cfs
-4          CDEC 2000-01-01 03:00:00         KWK          20H            5234       flow         cfs
-5          CDEC 2000-01-01 04:00:00         KWK          20H            5273       flow         cfs
-6          CDEC 2000-01-01 05:00:00         KWK          20H            5282       flow         cfs
-7          CDEC 2000-01-01 06:00:00         KWK          20H            5090       flow         cfs
-8          CDEC 2000-01-01 07:00:00         KWK          20H            5023       flow         cfs
-9          CDEC 2000-01-01 08:00:00         KWK          20H            5014       flow         cfs
-10         CDEC 2000-01-01 09:00:00         KWK          20H            5023       flow         cfs
-```
-
-All the function does is parse the parameter code and add two additional columns for a
-human readable name as well as units. **This functionality is still being developed**
-
-# Alternatives 
-
-Apart from going straight to CDEC for data, there is another R package called
-`sharpshootR` that allows for data retrieval in a similar way that `CDECRetrieve` 
-does.
 
 # Details 
 
