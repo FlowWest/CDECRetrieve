@@ -26,6 +26,6 @@ sensor number as well as duration value. Use show_avaialable_data() to view
 an update list of a stations data.
 }
 \examples{
-kwk_hourly_temp <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")
+kwk_hourly_flows <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")
 
 }

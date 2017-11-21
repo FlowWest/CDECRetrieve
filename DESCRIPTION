@@ -1,27 +1,26 @@
 Package: CDECRetrieve
 Type: Package
-Title: Package to retrieve historical and near realtime data from CDEC
+Title: Fucntion to retrieve historical and near realtime data from CDEC
 Version: 0.1.0
 Authors@R: person("emanuel", "rodriguez", email = "erodriguez@flowwest.com", role = c("aut", "cre"))
-Maintainer: <erodriguez@flowwest.com>
 Description: CDEC maintains a set of web services at http://cdec.water.ca.gov/queryTools.html
       In order to better interact and analyze the data this R packages allows
       users to quickly and easily retrieve data.
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.0.1
-Imports: dplyr,
-    tidyr,
-    magrittr,
-    purrr,
-    readr,
+Imports: dplyr (>= 0.7.0),
+    tidyr (>= 0.7),
+    magrittr (>= 1.5),
+    purrr (>= 0.2),
+    readr (>= 1.1.1),
     roxygen2,
-    rvest,
+    rvest (>= 0.3),
     xml2,
-    stringr,
+    stringr (>= 1.2.0),
     tibble,
-    lubridate,
-    httr,
+    lubridate (>= 1.6.0),
+    httr (>= 1.3.1),
     lazyeval
 Suggests: testthat
 License: file LICENSE

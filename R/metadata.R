@@ -19,19 +19,20 @@ get_station_metadata <- function(stations) {
 #' @return a dataframe with rows as stations submitted to the query
 #' @export
 cdec_metadata <- function(stations) {
+
+  call_cdec_meta_service <- function(station) {
+    cdec_urls$station_metadata %>%
+      stringr::str_replace("STATION", station) %>%
+      xml2::read_html() %>%
+      rvest::html_table() %>%
+      purrr::flatten()
+  }
+
   resp <- purrr::map_dfr(stations, ~call_cdec_meta_service(.))
   parse_meta_response(resp)
 }
 
 # Helpers
-
-call_cdec_meta_service <- function(station) {
-  cdec_urls$station_metadata %>%
-    stringr::str_replace("STATION", station) %>%
-    xml2::read_html() %>%
-    rvest::html_table() %>%
-    purrr::flatten()
-}
 
 parse_meta_response <- function(.d) {
   .d %>%

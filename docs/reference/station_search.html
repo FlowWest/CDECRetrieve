@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function queries the CDEC services to obtain desired station data. — cdec_query • CDECRetrieve</title>
+<title>search for stations in the cdec system — station_search • CDECRetrieve</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -75,70 +75,48 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Function queries the CDEC services to obtain desired station data.</h1>
+    <h1>search for stations in the cdec system</h1>
     </div>
 
     
-    <p>User must know beforehand if a given location uses the desired
-sensor number as well as duration value. Use show_avaialable_data() to view
-an update list of a stations data.</p>
+    <p>search the stations in thec CDEC system using the CDEC Station Search
+service <a href='https://cdec.water.ca.gov/cgi-progs/staSearch'>here</a></p>
     
 
-    <pre class="usage"><span class='fu'>cdec_query</span>(<span class='no'>stations</span>, <span class='no'>sensor_num</span>, <span class='no'>dur_code</span>, <span class='no'>start_date</span>, <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+    <pre class="usage"><span class='fu'>station_search</span>(<span class='no'>station_id</span>, <span class='no'>nearby_city</span>, <span class='no'>river_basin</span>, <span class='no'>hydro_area</span>, <span class='no'>county</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>stations</th>
-      <td><p>three letter identification for CDEC location (example "KWK", "SAC", "CCR")</p></td>
+      <th>station_id</th>
+      <td><p>string three letter station code</p></td>
     </tr>
     <tr>
-      <th>sensor_num</th>
-      <td><p>sensor number for the measure of interest. (example "20", "01", "25")</p></td>
+      <th>nearby_city</th>
+      <td><p>string search stations near supplied city</p></td>
     </tr>
     <tr>
-      <th>dur_code</th>
-      <td><p>duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.</p></td>
+      <th>river_basin</th>
+      <td><p>string search stations in supplied basin</p></td>
     </tr>
     <tr>
-      <th>start_date</th>
-      <td><p>date to start the query on.</p></td>
+      <th>hydro_area</th>
+      <td><p>string search stations in supplied hydrological area</p></td>
     </tr>
     <tr>
-      <th>end_date</th>
-      <td><p>a date to end query on, defaults to current date.</p></td>
+      <th>county</th>
+      <td><p>string search stations in supplied county</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>tidy dataframe</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>kwk_hourly_flows</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>CDECRetrieve</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/CDECRetrieve/topics/retrieve_station_data'>retrieve_station_data</a></span>(<span class='st'>"KWK"</span>, <span class='st'>"20"</span>, <span class='st'>"H"</span>, <span class='st'>"2017-01-01"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: function has been deprecated use 'query()'</span></div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
-#&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  X1 = col_character(),</span>
-#&gt; <span class='message'>  X2 = col_character(),</span>
-#&gt; <span class='message'>  X3 = col_integer(),</span>
-#&gt; <span class='message'>  X4 = col_character(),</span>
-#&gt; <span class='message'>  X5 = col_character(),</span>
-#&gt; <span class='message'>  X6 = col_character(),</span>
-#&gt; <span class='message'>  X7 = col_character(),</span>
-#&gt; <span class='message'>  X8 = col_character()</span>
-#&gt; <span class='message'>)</span></div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>
