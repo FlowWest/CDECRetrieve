@@ -4,3 +4,4 @@
 ^\images
 ^docs$
 ^_pkgdown\.yml$
+^index\.Rmd$

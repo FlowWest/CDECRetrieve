@@ -2,7 +2,7 @@
 % Please edit documentation in R/query.R
 \name{retrieve_station_data}
 \alias{retrieve_station_data}
-\title{Function queries the CDEC services to obtain desired station data}
+\title{Query observation data}
 \usage{
 retrieve_station_data(stations, sensor_num, dur_code, start_date,
   end_date = "")
@@ -23,6 +23,7 @@ tidy dataframe
 }
 \description{
 Function queries the CDEC services to obtain desired station data
+based on station, sensor number, duration code and start/end date.
 }
 \examples{
 kwk_hourly_flows <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")

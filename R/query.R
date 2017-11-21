@@ -1,4 +1,6 @@
-#' Function queries the CDEC services to obtain desired station data
+#' @title Query observation data
+#' @description Function queries the CDEC services to obtain desired station data
+#' based on station, sensor number, duration code and start/end date.
 #' @param stations three letter identification for CDEC location.
 #' @param sensor_num sensor number for the measure of interest.
 #' @param dur_code duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.
@@ -20,8 +22,9 @@ retrieve_station_data <- function(stations, sensor_num,
 }
 
 
-#' Function queries the CDEC services to obtain desired station data.
-#' @description User must know beforehand if a given location uses the desired
+#' @title Query observation data
+#' @description Function queries the CDEC services to obtain desired station data
+#' based on station, sensor number, duration code and start/end date.
 #' sensor number as well as duration value. Use show_avaialable_data() to view
 #' an update list of a stations data.
 #' @param stations three letter identification for CDEC location (example "KWK", "SAC", "CCR")

@@ -2,7 +2,7 @@
 % Please edit documentation in R/query.R
 \name{cdec_query}
 \alias{cdec_query}
-\title{Function queries the CDEC services to obtain desired station data.}
+\title{Query observation data}
 \usage{
 cdec_query(stations, sensor_num, dur_code, start_date, end_date = "")
 }
@@ -21,7 +21,8 @@ cdec_query(stations, sensor_num, dur_code, start_date, end_date = "")
 tidy dataframe
 }
 \description{
-User must know beforehand if a given location uses the desired
+Function queries the CDEC services to obtain desired station data
+based on station, sensor number, duration code and start/end date.
 sensor number as well as duration value. Use show_avaialable_data() to view
 an update list of a stations data.
 }
