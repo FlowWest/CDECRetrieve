@@ -4,7 +4,7 @@
 \name{cdec_urls}
 \alias{cdec_urls}
 \title{Constant urls for data retrieval}
-\format{An object of class \code{list} of length 5.}
+\format{An object of class \code{list} of length 6.}
 \usage{
 cdec_urls
 }

@@ -21,12 +21,10 @@ cdec_query(stations, sensor_num, dur_code, start_date, end_date = "")
 tidy dataframe
 }
 \description{
-Function queries the CDEC services to obtain desired station data
+Function queries the CDEC site to obtain desired station data
 based on station, sensor number, duration code and start/end date.
-sensor number as well as duration value. Use show_avaialable_data() to view
-an update list of a stations data.
+Use show_avaialable_data() to view an updated list of all available data at a station.
 }
 \examples{
 kwk_hourly_flows <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")
-
 }
