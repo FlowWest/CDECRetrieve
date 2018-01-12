@@ -18,15 +18,15 @@ retrieve_station_data <- function(stations, sensor_num,
               msg = "function has been deprecated use 'query()'")
 
   cdec_query(stations, sensor_num,
-        dur_code, start_date, end_date="")
+             dur_code, start_date, end_date="")
 }
 
 
+# TODO(emanuel) check whether start/end dates are inclusive or exclusive when calling cdec
 #' @title Query observation data
-#' @description Function queries the CDEC services to obtain desired station data
+#' @description Function queries the CDEC site to obtain desired station data
 #' based on station, sensor number, duration code and start/end date.
-#' sensor number as well as duration value. Use show_avaialable_data() to view
-#' an update list of a stations data.
+#' Use show_avaialable_data() to view an updated list of all available data at a station.
 #' @param stations three letter identification for CDEC location (example "KWK", "SAC", "CCR")
 #' @param sensor_num sensor number for the measure of interest. (example "20", "01", "25")
 #' @param dur_code duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.
@@ -35,44 +35,48 @@ retrieve_station_data <- function(stations, sensor_num,
 #' @return tidy dataframe
 #' @examples
 #' kwk_hourly_flows <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")
-#'
 #' @export
-cdec_query <- function(stations, sensor_num,
-                  dur_code, start_date, end_date="") {
+cdec_query <- function(stations, sensor_num, dur_code, start_date, end_date="") {
 
-  temp_file <- tempfile(pattern = "cdecQuery", tmpdir = tempdir())
+  temp_file <- tempfile(tmpdir = tempdir())
+  on.exit(file.remove(temp_file)) # dont wait for os to remove the file
+
   do_query <- function(station) {
 
     # a real ugly side effect here, download the file to temp location and
     # and read from it. Doing it this way allows us to query large amounts of data
-    download_failed <- utils::download.file(make_cdec_url(station, sensor_num,
-                                                   dur_code, start_date, end_date),
-                                     destfile = temp_file,
-                                     quiet = TRUE)
+    download_status <- utils::download.file(make_cdec_url(station, sensor_num,
+                                                          dur_code, start_date, end_date),
+                                            destfile = temp_file,
+                                            quiet = TRUE)
 
-    if(download_failed)
-      stop("could not read cdec services, maybe they are down?")
-
-    # catch the case when cdec is down
-    if (file.info(temp_file)$size == 0) {
-      stop("query did not produce a result, possible cdec is down?")
+    if(download_status == 0) {
+      if (file.info(temp_file)$size == 0) {
+        stop("call to cdec failed...", call. = FALSE)
+      }
+      parsed_df <- suppressWarnings(shef_to_tidy(temp_file)) # return
+      if (is.null(parsed_df)) {
+        warning(paste("station:", station, "failed"), call. = FALSE)
+        query_logs <- append(query_logs, station)
+        return()
+      } else {
+        return(parsed_df)
+      }
+    } else {
+      stop("call to cdec failed...(emanuel will improve this piece soon)",
+           call. = FALSE)
     }
-
-    on.exit(file.remove(temp_file))
-    resp <- suppressWarnings(shef_to_tidy(temp_file))
-    resp$agency_cd <- "CDEC"
-    resp[,c(5, 1:4)]
   }
 
   purrr::map_dfr(stations, ~do_query(.))
-
 }
 
 
-# Helpers
+# INTERNAL
 
 make_cdec_url <- function(station_id, sensor_num,
-                          dur_code, start_date, end_date=as.character(Sys.Date())) {
+                          dur_code, start_date,
+                          end_date=as.character(Sys.Date())) {
   cdec_urls$download_shef %>%
     stringr::str_replace("STATION", station_id) %>%
     stringr::str_replace("SENSOR", sensor_num) %>%
@@ -82,27 +86,35 @@ make_cdec_url <- function(station_id, sensor_num,
 
 }
 
-shef_to_tidy <- function(file) {
-  raw <- readr::read_delim(file, skip = 9, col_names = FALSE, delim = " ")
 
+# function uses a file on disk to process from shef to a tidy format
+shef_to_tidy <- function(file) {
+
+  #keep these columns which are: location_id, date, time, sensor_code, value
+  cols_to_keep <- c(2, 3, 5, 6, 7)
+
+  raw <- readr::read_delim(file, skip = 8, col_names = FALSE, delim = " ")
+
+  # exit out when the dataframe is not the right width
   if (ncol(raw) < 5) {
-    stop("A faulty query was requested, please check query,
-         does this station have this duration and sensor combination?")
+    return(NULL)
   }
 
-  raw <- raw[, c(2, 3, 5, 6, 7)]  # keep relevant cols
-  raw <- raw %>% tidyr::unite_(col = "datetime",
-                               from = c("X3", "X5"), sep ="", remove = TRUE)
-  raw$datetime <- lubridate::ymd_hm(raw$datetime, tz="America/Los_Angeles")
+  raw <- raw[, cols_to_keep]
 
+  # parse required cols
+  datetime_col <- lubridate::ymd_hm(paste0(raw$X3, raw$X5), tz="America/Los_Angeles")
   shef_code <- raw$X6[1]
   cdec_code <- ifelse(is.null(shef_code_lookup[[shef_code]]),
                       NA, shef_code_lookup[[shef_code]])
-  raw$X6 <- rep(cdec_code, nrow(raw))
-  colnames(raw) <- c("location_id", "datetime", "parameter_cd", "parameter_value")
+  cdec_code_col <- rep(cdec_code, nrow(raw))
+  parameter_value_col <- as.numeric(raw$X7)
 
-  # parse to correct type
-  raw$parameter_value <- as.numeric(raw$parameter_value)
-
-  return(raw[, c(2, 1, 3, 4)])
+  data.frame(
+    "agency_cd" = "CDEC",
+    "location_id" = raw$X2,
+    "datetime" = datetime_col,
+    "parameter_cd" = cdec_code_col,
+    "parameter_value" = parameter_value_col
+  )
 }
