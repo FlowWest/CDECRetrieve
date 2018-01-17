@@ -68,6 +68,10 @@ kwk_flow %>%
 
 ![kwk](images/kwk_flow_ts.png)
 
+*Note that appart from replacing sentinel values with appropriate NA values, 
+the package does no QA/QC. This can be seen in the plot above, where suspicoius 
+values are apparent.*
+
 
 # Details 
 
@@ -81,13 +85,16 @@ something the csv service can not do.
 ### Time Zone?
 
 All downloaded data is in PST. Data skips 2:00 am on days of daylight saving change.
-From the cdec site 
+From the cdec site,
 
-  If you are looking at the data on one of the web display pages, it's in local Pacific time. (PST during the
-  winter, PDT during the summer). On the text download pages such as queryCSV or querySHEF, it's in PST only.
-  Also, please be aware that due to architectural issues, the data during the change from PST to PDT and from
-  PDT to PST may not be correct.
+```
 
+If you are looking at the data on one of the web display pages, it's in local Pacific time. (PST during the
+winter, PDT during the summer). On the text download pages such as queryCSV or querySHEF, it's in PST only.
+Also, please be aware that due to architectural issues, the data during the change from PST to PDT and from
+PDT to PST may not be correct.
+
+```
 
 
 
