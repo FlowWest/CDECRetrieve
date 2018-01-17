@@ -124,7 +124,8 @@ csv
 ```
 
 One includes the last measurement before the start date specified, the other does not, 
-yet the values are all the same, meaning there are wrong by an jour on one of these. Or both. :'( 
+yet the values are all the same, meaning that one of these is wrong
+by an hour. :'( 
 
 
 
