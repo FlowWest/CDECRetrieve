@@ -93,6 +93,63 @@ Also, please be aware that due to architectural issues, the data during the chan
 PDT to PST may not be correct.*
 
 
+### Which is correct?
+
+Using the CDEC website to download data we get two following results 
+for the same query: 
+
+Shef
+
+```
+:  sta yyyymmdd PS DHhhmm /code value
+.A DVD 19971231 PS DH2300 /QRH 110
+.A DVD 19980101 PS DH0000 /QRH 108
+.A DVD 19980101 PS DH0100 /QRH 110
+.A DVD 19980101 PS DH0200 /QRH 109
+.A DVD 19980101 PS DH0300 /QRH 110
+```
+
+csv
+
+```
+6911,PST,'FLOW, RIVER DISCHARGE (cfs)'
+19980101,0000,110
+19980101,0100,108
+19980101,0200,110
+19980101,0300,109
+19980101,0400,110
+19980101,0500,108
+19980101,0600,107
+19980101,0700,108
+```
+
+One includes the last measurement before the start date specified, the other does not, 
+yet the values are all the same, meaning there are wrong by an jour on one of these. Or both. :'( 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
