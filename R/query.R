@@ -57,7 +57,6 @@ cdec_query <- function(stations, sensor_num, dur_code, start_date, end_date="") 
       parsed_df <- suppressWarnings(shef_to_tidy(temp_file)) # return
       if (is.null(parsed_df)) {
         warning(paste("station:", station, "failed"), call. = FALSE)
-        query_logs <- append(query_logs, station)
         return()
       } else {
         return(parsed_df)
@@ -103,7 +102,7 @@ shef_to_tidy <- function(file) {
   raw <- raw[, cols_to_keep]
 
   # parse required cols
-  datetime_col <- lubridate::ymd_hm(paste0(raw$X3, raw$X5), tz="America/Los_Angeles")
+  datetime_col <- lubridate::ymd_hm(paste0(raw$X3, raw$X5))
   shef_code <- raw$X6[1]
   cdec_code <- ifelse(is.null(shef_code_lookup[[shef_code]]),
                       NA, shef_code_lookup[[shef_code]])
