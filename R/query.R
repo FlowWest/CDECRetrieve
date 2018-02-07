@@ -67,7 +67,9 @@ cdec_query <- function(stations, sensor_num, dur_code, start_date, end_date="") 
     }
   }
 
-  purrr::map_dfr(stations, ~do_query(.))
+  d <- purrr::map_dfr(stations, ~do_query(.))
+  attr(d, "cdec_service") <- "cdec_data"
+  return(d)
 }
 
 
@@ -75,13 +77,13 @@ cdec_query <- function(stations, sensor_num, dur_code, start_date, end_date="") 
 
 make_cdec_url <- function(station_id, sensor_num,
                           dur_code, start_date,
-                          end_date=as.character(Sys.Date())) {
+                          end_date=Sys.Date()) {
   cdec_urls$download_shef %>%
     stringr::str_replace("STATION", station_id) %>%
     stringr::str_replace("SENSOR", sensor_num) %>%
     stringr::str_replace("DURCODE", dur_code) %>%
-    stringr::str_replace("STARTDATE", start_date) %>%
-    stringr::str_replace("ENDDATE", end_date)
+    stringr::str_replace("STARTDATE", as.character(start_date)) %>%
+    stringr::str_replace("ENDDATE", as.character(end_date))
 
 }
 
