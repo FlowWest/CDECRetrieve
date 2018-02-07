@@ -11,6 +11,13 @@ data with a single function call. CDECRetrieve specifically uses the SHEF downlo
 service due to the fact that it is the most robust of the services. You can learn 
 more about the SHEF format [here](http://www.nws.noaa.gov/om/water/resources/SHEF_CodeManual_5July2012.pdf).
 
+The design of this package maps different CDEC url endpoints into "services" that 
+make sense. For example there is a **datasets** service that allows the user to 
+view all datasets available at a given location. There is **query/data** service
+that allows the user to bring observations into memory. The goal is to allow a
+workflow where a user can pipe reponses from one service into another, and eventually
+into the **data** service to get the data, and be able to automate this process.
+
 Please see the *Details* section below for limitations and possible annoyances 
 inherited from the CDEC service.
 
