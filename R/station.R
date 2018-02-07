@@ -80,7 +80,6 @@ create_station_query <- function(station_id=NULL, nearby_city=NULL, river_basin=
 
 # r is a response from the cdec service
 cdec_station_parse <- function(data) {
-
   tibble::tibble(
     station_id = data$ID,
     name = tolower(data$`Station Name`),
@@ -88,7 +87,7 @@ cdec_station_parse <- function(data) {
     county = tolower(data$County),
     longitude = data$Longitude,
     latitude = data$Latitude,
-    elevation = data$`Elevation Feet`,
+    elevation = data[, 7],
     operator = data$Operator
   )
 }
