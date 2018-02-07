@@ -7,67 +7,68 @@
 #' @param hydro_area string search stations in supplied hydrological area
 #' @param county string search stations in supplied county
 #' @export
-station_search <- function(station_id, nearby_city, river_basin, hydro_area,
-                           county) {
+cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
+                          hydro_area=NULL, county=NULL) {
 
-  query <- form_url(station_id, nearby_city, river_basin, hydro_area,
-                    county)
+  query <- create_station_query(station_id=station_id, nearby_city=nearby_city,
+                                river_basin=river_basin, hydro_area=hydro_area,
+                                county=county)
 
   resp <- httr::GET("https://cdec.water.ca.gov/cgi-progs/staSearch",
                    query = query)
 
-  if (!is_ok(resp)) stop(sprintf("request to cdec station search failed with status code: %d"),
-                         httr::status_code(resp))
+  #TODO(emanuel) implement a good way to catch a bad response from cdec here
+  html_page <- xml2::read_html(resp$url)
+  html_table_node <- rvest::html_node(html_page, "table")
 
-  parsed_resp <- parse_resp(resp)
-  return(parsed_resp)
+  if (missing_xml(html_table_node)) {
+    stop("request returned no data, please check input values", call. = FALSE)
+  }
+
+  raw_station_data <- rvest::html_table(html_table_node)
+
+
+  stations_data <- cdec_station_parse(raw_station_data)
+  attr(stations_data, "cdec_service") <- "cdec_stations"
+  return(stations_data)
 }
 
 # INTERNAL
 
-is_ok <- function(r) {
-  identical(httr::status_code(r), 200L)
-}
-
-xml_is_missing <- function(r) {
-  identical(class(r), "xml_missing")
-}
-
-form_url <- function(station_id, nearby_city, river_basin, hydro_area,
-                     county) {
-
+create_station_query <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
+                                 hydro_area=NULL, county=NULL) {
   query <- list()
 
-
-  if (missing(station_id)) {
+  if (is.null(station_id)) {
     query$sta = ""
-  } else {
+  }
+  else {
     query$sta = station_id
     query$sta_chk = "on"
   }
 
-  if (missing(nearby_city)) {
+  if (is.null(nearby_city)) {
     query$nearby = ""
   } else {
     query$nearby = nearby_city
     query$nearby_chk = "on"
   }
 
-  if (missing(river_basin)) {
+  if (is.null(river_basin)) {
     query$basin = ""
   } else {
     query$basin = river_basin
     query$basin_chk = "on"
   }
 
-  if (missing(hydro_area)) {
+  if (is.null(hydro_area)) {
     query$hydro = ""
   } else {
     query$hydro = hydro_area
     query$hydro_chk = "on"
   }
 
-  if (missing(county)) {
+  if (is.null(county)) {
     query$county = ""
   } else {
     query$county = county
@@ -77,16 +78,22 @@ form_url <- function(station_id, nearby_city, river_basin, hydro_area,
   return(query)
 }
 
-parse_resp <- function(r) {
-  html_page <- xml2::read_html(r$url)
-  html_table_node <- rvest::html_node(html_page, "table")
+# r is a response from the cdec service
+cdec_station_parse <- function(data) {
 
-  if (xml_is_missing(html_table_node)) {
-    stop(sprintf("unable to parse response, cdec response to query was not in the form of a table.
-                 check supplied arguments to `station_search()`"),
-         call. = FALSE)
-  }
-
-  table_resp <- rvest::html_table(html_table_node)
-  return(table_resp)
+  tibble::tibble(
+    station_id = data$ID,
+    name = tolower(data$`Station Name`),
+    river_basin = tolower(data$`River Basin`),
+    county = tolower(data$County),
+    longitude = data$Longitude,
+    latitude = data$Latitude,
+    elevation = data$`Elevation Feet`,
+    operator = data$Operator
+  )
 }
+
+
+
+
+
