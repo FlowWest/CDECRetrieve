@@ -2,6 +2,12 @@
 
 ![travis_mater_status](https://travis-ci.org/FlowWest/CDECRetrieve.svg?branch=master) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/CDECRetrieve)](https://cran.r-project.org/package=CDECRetrieve)
 
+## Recent Updates
+
+* New Rating table query available using `cdec_rt()`, view more help with `?cdec_rt`
+* new functions names throughout, namely the names of these are more intuitive and all start with `cdec_*`
+* overall refactor of code
+
 
 # What is CDECRetrieve?
 
