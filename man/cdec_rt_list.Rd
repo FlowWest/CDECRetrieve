@@ -6,12 +6,13 @@
 \usage{
 cdec_rt_list(station_id = NULL)
 }
+\arguments{
+\item{station_id}{station for the location to get rt for}
+}
 \description{
 Get a list of all rating tables available through CDEC
 }
 \examples{
 # list all rating tables in CDEC, you can use filter to search
 cdec_rt_list()
-# search
-cdec_rt_list() \%>\% dplyr::filter(station_id == "dcv")
 }
