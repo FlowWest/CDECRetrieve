@@ -4,10 +4,10 @@
 \alias{cdec_query}
 \title{Query observation data}
 \usage{
-cdec_query(stations, sensor_num, dur_code, start_date, end_date = "")
+cdec_query(station, sensor_num, dur_code, start_date, end_date = "")
 }
 \arguments{
-\item{stations}{three letter identification for CDEC location (example "KWK", "SAC", "CCR")}
+\item{station}{three letter identification for CDEC location (example "KWK", "SAC", "CCR")}
 
 \item{sensor_num}{sensor number for the measure of interest. (example "20", "01", "25")}
 
