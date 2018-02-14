@@ -15,7 +15,7 @@ retrieve_station_data <- function(stations, sensor_num,
                                   dur_code, start_date, end_date="") {
 
   .Deprecated("cdec_query", package = "CDECRetrieve",
-              msg = "function has been deprecated use 'query()'")
+              msg = "function has been deprecated use 'cdec_query()'")
 
   cdec_query(stations, sensor_num,
              dur_code, start_date, end_date="")

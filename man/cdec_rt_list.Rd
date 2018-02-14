@@ -7,7 +7,7 @@
 cdec_rt_list(station_id = NULL)
 }
 \arguments{
-\item{station_id}{station for the location to get rt for}
+\item{station_id}{station for the location to get rating description for.}
 }
 \description{
 Get a list of all rating tables available through CDEC

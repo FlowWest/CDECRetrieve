@@ -2,12 +2,12 @@
 # to add to the stage, and then this should just give the result that we want.
 
 
-#' Get a rating table
-#' Use  station id to find the rating table for the station
+#' @title Get a rating table
+#' @description Use  station id to find the rating table for stage to flow used by CDEC.
 #' @param station_id three letter CDEC station id
-#' @return dataframe of rating table
-#' @example
-#' cdec_rt("abj")
+#' @return dataframe of rating table, with stage (feet) and flow (cfs) as columns
+#' @examples
+#' cdec_rt("abj") # get the stage to rating curve for ABJ
 #' @export
 cdec_rt <- function(station_id) {
   if (!rating_is_available(station_id)) {
@@ -26,17 +26,20 @@ cdec_rt <- function(station_id) {
   rt <- suppressWarnings(dplyr::bind_cols(lapply(rating_table, as.numeric)))
   colnames(rt) <- colnames_to_be
   rt <- rt[!is.na(rt$`rating_Stage (feet)` ), ] #ugh ill make pretty later
-  rt_gathered <- tidyr::gather(rt, dummy, value, -`rating_Stage (feet)`)
-  rt_sep <- tidyr::separate(rt_gathered, dummy, into=c("dummier", "precision"), sep="_")
-  rt_mutate <- dplyr::mutate(rt_sep, rating_stage = `rating_Stage (feet)` + as.numeric(precision))
+  rt_gathered <- tidyr::gather(rt, "dummy", "value", -"rating_Stage (feet)")
+  rt_sep <- tidyr::separate(rt_gathered, "dummy", into=c("dummier", "precision"), sep="_")
 
+  # using mutate causes notes that I dont want.... so we use base R instead
+  # rt_mutate <- dplyr::mutate(rt_sep, "rating_stage" = `rating_Stage (feet)` + as.numeric(precision))
+  rt_mutate <- rt_sep # copy, i dont like overwritting
+  rt_mutate$rating_stage <- rt_sep$`rating_Stage (feet)` + as.numeric(rt_sep$precision)
 
-  return(dplyr::select(rt_mutate, rating_stage, flow=value))
+  return(dplyr::select(rt_mutate, "rating_stage", "flow"="value"))
 }
 
 #' @title List Rating Tables
 #' @description Get a list of all rating tables available through CDEC
-#' @param station_id station for the location to get rt for
+#' @param station_id station for the location to get rating description for.
 #' @examples
 #' # list all rating tables in CDEC, you can use filter to search
 #' cdec_rt_list()
@@ -63,6 +66,5 @@ cdec_rt_list <- function(station_id = NULL) {
 
 # Internal
 rating_is_available <- function(station) {
-  rts <- cdec_rt_list()
-  tolower(station) %in% rts$station_id
+  tolower(station) %in% cdec_rt_list()$station_id
 }
