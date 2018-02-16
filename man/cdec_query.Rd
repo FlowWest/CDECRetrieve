@@ -4,7 +4,8 @@
 \alias{cdec_query}
 \title{Query observation data}
 \usage{
-cdec_query(station, sensor_num, dur_code, start_date, end_date = "")
+cdec_query(station, sensor_num = NULL, dur_code = NULL, start_date = NULL,
+  end_date = NULL)
 }
 \arguments{
 \item{station}{three letter identification for CDEC location (example "KWK", "SAC", "CCR")}
@@ -23,8 +24,8 @@ tidy dataframe
 \description{
 Function queries the CDEC site to obtain desired station data
 based on station, sensor number, duration code and start/end date.
-Use show_avaialable_data() to view an updated list of all available data at a station.
+Use cdec_datasets() to view an updated list of all available data at a station.
 }
 \examples{
-kwk_hourly_flows <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")
+kwk_hourly_flows <- CDECRetrieve::cdec_query("KWK", "20", "H", "2017-01-01")
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{parse_dataset_resp}
 \alias{parse_dataset_resp}
-\title{Function parses a response from CDEC avaialable data service}
+\title{Function parses a response from CDEC available data service}
 \usage{
 parse_dataset_resp(df)
 }
@@ -13,5 +13,5 @@ parse_dataset_resp(df)
 parsed version of table returned from cdec
 }
 \description{
-Function parses a response from CDEC avaialable data service
+Function parses a response from CDEC available data service
 }

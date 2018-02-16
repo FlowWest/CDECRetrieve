@@ -4,6 +4,12 @@
 
 ## Recent Updates
 
+* Map CDEC stations after search for them:
+
+```r
+#requires leaflet!
+cdec_stations(county="shasta") %>% map_stations(label=~station_id)
+```
 * New Rating table query available using `cdec_rt()`, view more help with `?cdec_rt`
 * new functions names throughout, namely the names of these are more intuitive and all start with `cdec_*`
 * overall refactor of code
@@ -79,7 +85,7 @@ kwk_flow %>%
   geom_line()
 ```
 
-![kwk](images/kwk_flow_ts.png)
+![kwk](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/kwk_flow_ts.png)
 
 *Note that appart from replacing sentinel values with appropriate NA values, 
 the package does no QA/QC. This can be seen in the plot above, where suspicoius 

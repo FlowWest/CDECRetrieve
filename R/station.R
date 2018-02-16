@@ -33,10 +33,34 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
   return(stations_data)
 }
 
+#' @title Map Station Search
+#' @description Populate a leaflet map with the results of cdec_stations() call
+#' @param .data result of a cdec_stations() call
+#' @return map in viewer
+#' @export
+map_stations <- function(.data, ...) {
+  if(!is_cdec_station(.data)) {
+    stop(".data appears to not be a result of calling cdec_stations() (map_stations)",
+         call. = FALSE)
+  }
+
+  if (!requireNamespace("leaflet", quietly = TRUE)) {
+    stop("map_stations() requires leaflet to be installed (map_stations)")
+  }
+
+  m <- leaflet::leaflet(.data)
+  m <- leaflet::addTiles(m)
+  leaflet::addCircleMarkers(m, ...)
+}
+
+
 # INTERNAL
 
 create_station_query <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
                                  hydro_area=NULL, county=NULL) {
+
+
+
   query <- list()
 
   if (is.null(station_id)) {

@@ -49,7 +49,7 @@ cdec_datasets_service <- function(station) {
 
 }
 
-#' Function parses a response from CDEC avaialable data service
+#' Function parses a response from CDEC available data service
 #' @param df a response table from cdec via the function call_cdec_avail_service
 #' @return parsed version of table returned from cdec
 parse_dataset_resp <- function(df) {

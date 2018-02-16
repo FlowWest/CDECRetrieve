@@ -26,7 +26,7 @@ retrieve_station_data <- function(stations, sensor_num,
 #' @title Query observation data
 #' @description Function queries the CDEC site to obtain desired station data
 #' based on station, sensor number, duration code and start/end date.
-#' Use show_avaialable_data() to view an updated list of all available data at a station.
+#' Use cdec_datasets() to view an updated list of all available data at a station.
 #' @param station three letter identification for CDEC location (example "KWK", "SAC", "CCR")
 #' @param sensor_num sensor number for the measure of interest. (example "20", "01", "25")
 #' @param dur_code duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.
@@ -34,18 +34,18 @@ retrieve_station_data <- function(stations, sensor_num,
 #' @param end_date a date to end query on, defaults to current date.
 #' @return tidy dataframe
 #' @examples
-#' kwk_hourly_flows <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")
+#' kwk_hourly_flows <- CDECRetrieve::cdec_query("KWK", "20", "H", "2017-01-01")
 #' @export
-cdec_query <- function(station, sensor_num, dur_code, start_date, end_date="") {
+cdec_query <- function(station, sensor_num = NULL, dur_code = NULL, start_date = NULL, end_date = NULL) {
+
+  query_url <- make_cdec_url(station, sensor_num, dur_code, start_date, end_date)
 
   temp_file <- tempfile(tmpdir = tempdir())
-  on.exit(file.remove(temp_file)) # dont wait for os to remove the file
+  on.exit(file.remove(temp_file)) # remove file as soon as possible
 
   # a real ugly side effect here, download the file to temp location and
   # and read from it. Doing it this way allows us to query large amounts of data
-  download_status <- utils::download.file(make_cdec_url(station, sensor_num,
-                                                        dur_code, start_date, end_date),
-                                          destfile = temp_file, quiet = TRUE)
+  download_status <- utils::download.file(query_url, destfile = temp_file, quiet = TRUE)
 
   # check the status of the download, 0 == GOOD, 1 == BAD
   if(download_status == 0) {
@@ -74,6 +74,13 @@ cdec_query <- function(station, sensor_num, dur_code, start_date, end_date="") {
 make_cdec_url <- function(station_id, sensor_num,
                           dur_code, start_date,
                           end_date=Sys.Date()) {
+
+  if (is.null(station_id)) stop("station id is required for all queries (make_cdec_url)", call. = FALSE)
+  if (is.null(sensor_num)) {stop("sensor number is required for all queries (make_cdec_url)", call. = FALSE)}
+  if (is.null(dur_code)) {stop("duration code is required for all queries (make_cdec_url)", call. = FALSE)}
+  if (is.null(start_date)) {start_date <- Sys.Date() - 1} # get one day of data
+  if (is.null(end_date)) {end_date <- Sys.Date()}
+
   cdec_urls$download_shef %>%
     stringr::str_replace("STATION", station_id) %>%
     stringr::str_replace("SENSOR", sensor_num) %>%
