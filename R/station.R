@@ -36,6 +36,7 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
 #' @title Map Station Search
 #' @description Populate a leaflet map with the results of cdec_stations() call
 #' @param .data result of a cdec_stations() call
+#' @param ... named arguments passed into leaflet::addCircleMarkers
 #' @return map in viewer
 #' @export
 map_stations <- function(.data, ...) {

@@ -8,6 +8,8 @@ map_stations(.data, ...)
 }
 \arguments{
 \item{.data}{result of a cdec_stations() call}
+
+\item{...}{named arguments passed into leaflet::addCircleMarkers}
 }
 \value{
 map in viewer
