@@ -1,5 +1,8 @@
 #' Function returns a dataframe of the available data
-#' @param station a three letter cdec station if
+#' @param station a three letter cdec station
+#' @examples
+#' # get a list of dataframes available for CCR
+#' cdec_datasets("ccr")
 #' @return dataframe of available data for station
 #' @export
 cdec_available <- function(station) {
@@ -43,6 +46,12 @@ cdec_datasets_service <- function(station) {
   resp <- httr::GET(cdec_urls$datasets, query=query)
   resp_html <- xml2::read_html(resp)
   resp_at_node <- rvest::html_nodes(resp_html, "div#main_content table")
+
+  if (length(resp_at_node) == 0) {
+    stop(paste0("CDEC datasets service returned no data for '", station, "'. (cdec_datasets_service)"),
+         call. = FALSE)
+  }
+
   resp_at_table <- rvest::html_table(resp_at_node)[[1]]
 
   return(resp_at_table)

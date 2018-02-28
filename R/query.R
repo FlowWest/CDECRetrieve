@@ -35,6 +35,7 @@ retrieve_station_data <- function(stations, sensor_num,
 #' @return tidy dataframe
 #' @examples
 #' kwk_hourly_flows <- CDECRetrieve::cdec_query("KWK", "20", "H", "2017-01-01")
+#' ccr_hourly_temps <- CDECRetrieve::cdec_query("CCR", "25", "H", Sys.Date())
 #' @export
 cdec_query <- function(station, sensor_num = NULL, dur_code = NULL, start_date = NULL, end_date = NULL) {
 

@@ -7,11 +7,15 @@
 cdec_available(station)
 }
 \arguments{
-\item{station}{a three letter cdec station if}
+\item{station}{a three letter cdec station}
 }
 \value{
 dataframe of available data for station
 }
 \description{
 Function returns a dataframe of the available data
+}
+\examples{
+# get a list of dataframes available for CCR
+cdec_datasets("ccr")
 }

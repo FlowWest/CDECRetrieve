@@ -28,4 +28,5 @@ Use cdec_datasets() to view an updated list of all available data at a station.
 }
 \examples{
 kwk_hourly_flows <- CDECRetrieve::cdec_query("KWK", "20", "H", "2017-01-01")
+ccr_hourly_temps <- CDECRetrieve::cdec_query("CCR", "25", "H", Sys.Date())
 }

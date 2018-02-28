@@ -6,6 +6,11 @@
 #' @param river_basin string search stations in supplied basin
 #' @param hydro_area string search stations in supplied hydrological area
 #' @param county string search stations in supplied county
+#' @examples
+#' # cdec_stations() can be used to find locations within an area of interest
+#' cdec_stations(county = "alameda")
+#' # or it can be used to get metadata attributes for a location
+#' cdec_stations(station_id = "ccr")
 #' @export
 cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
                           hydro_area=NULL, county=NULL) {
@@ -17,7 +22,6 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
   resp <- httr::GET("https://cdec.water.ca.gov/cgi-progs/staSearch",
                    query = query)
 
-  #TODO(emanuel) implement a good way to catch a bad response from cdec here
   html_page <- xml2::read_html(resp$url)
   html_table_node <- rvest::html_node(html_page, "table")
 
@@ -37,7 +41,10 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
 #' @description Populate a leaflet map with the results of cdec_stations() call
 #' @param .data result of a cdec_stations() call
 #' @param ... named arguments passed into leaflet::addCircleMarkers
-#' @return map in viewer
+#' @examples
+#' if (interactive()) {
+#'     cdec_stations(county = "alameda") %>% map_stations(label=~name, popup=~station_id)
+#' }
 #' @export
 map_stations <- function(.data, ...) {
   if(!is_cdec_station(.data)) {
@@ -54,16 +61,13 @@ map_stations <- function(.data, ...) {
   leaflet::addCircleMarkers(m, ...)
 }
 
-
 # INTERNAL
 
 create_station_query <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
                                  hydro_area=NULL, county=NULL) {
-
-
-
   query <- list()
 
+  # certain defaults need to be present for queries to work
   if (is.null(station_id)) {
     query$sta = ""
   }
@@ -106,14 +110,15 @@ create_station_query <- function(station_id=NULL, nearby_city=NULL, river_basin=
 # r is a response from the cdec service
 cdec_station_parse <- function(data) {
   tibble::tibble(
-    station_id = data$ID,
+    station_id = tolower(data$ID),
     name = tolower(data$`Station Name`),
     river_basin = tolower(data$`River Basin`),
     county = tolower(data$County),
     longitude = data$Longitude,
     latitude = data$Latitude,
     elevation = data[, 7],
-    operator = data$Operator
+    operator = data$Operator,
+    state = "ca"
   )
 }
 
