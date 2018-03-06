@@ -30,7 +30,7 @@ cdec_datasets <- function(station) {
 
 
 
-#' Function parses a response from CDEC available data service
+# Function parses a response from CDEC available data service
 clean_datasets_resp <- function(df) {
 
 
@@ -55,7 +55,7 @@ clean_datasets_resp <- function(df) {
   end_range <- stringr::str_replace_all(
     stringr::str_extract(daterange_raw, "to(.*)"), "to |\\.", "")
 
-  # eh, not functional but its aite
+  # eh, not functional but its ok
   end <- lubridate::as_date(
     ifelse(end_range == "present", lubridate::today(), lubridate::mdy(end_range)))
 

@@ -48,5 +48,6 @@ to benefit from the work we do. You can view, download and extend CDECRetrieve
 [here](#), as well as open any issues regarding bugs, or features you want to see
 in future version.
 
-You can learn more as well see fully implemented examples using CDECRetrieve [here]()
+You can learn more as well see fully implemented examples using CDECRetrieve 
+[here](https://flowwest.github.io/CDECRetrieve/)
 

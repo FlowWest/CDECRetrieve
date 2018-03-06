@@ -12,8 +12,4 @@ sac_valley_wy_types
 Chronological Reconstructed Sacramento Valley Water Year Hydrologic Classification Indices
 Based on measured unimpaired runoff (in million acre-feet), subject to revision.
 }
-\examples{
-sac_valley_wy_types
-
-}
 \keyword{datasets}

@@ -1,6 +1,4 @@
-# constants used through out package
-
-#' Constant urls for data retrieval
+# Constant urls for data retrieval
 cdec_urls <- list(
 
   download_shef = "http://cdec.water.ca.gov/cgi-progs/querySHEF?station_id=STATION&sensor_num=SENSOR&dur_code=DURCODE&start_date=STARTDATE&end_date=ENDDATE&data_wish=Download+SHEF+Data+Now",
@@ -13,7 +11,7 @@ cdec_urls <- list(
 )
 
 
-#' Look up table to go from SHEF Code ---> CDEC Param Code
+# Look up table to go from SHEF Code ---> CDEC Param Code
 shef_code_lookup <- list(
   "/HGH" = "1", #stage
   "/HGE" = "1", #stage
