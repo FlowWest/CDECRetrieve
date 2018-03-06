@@ -1,29 +1,4 @@
 #' @title Query observation data
-#' @description Function queries the CDEC services to obtain desired station data
-#' based on station, sensor number, duration code and start/end date.
-#' @param stations three letter identification for CDEC location.
-#' @param sensor_num sensor number for the measure of interest.
-#' @param dur_code duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.
-#' @param start_date date to start the query on.
-#' @param end_date a date to end query on, defaults to current date.
-#' @return tidy dataframe
-#' @examples
-#' kwk_hourly_flows <- CDECRetrieve::retrieve_station_data("KWK", "20", "H", "2017-01-01")
-#'
-#' @export
-retrieve_station_data <- function(stations, sensor_num,
-                                  dur_code, start_date, end_date="") {
-
-  .Deprecated("cdec_query", package = "CDECRetrieve",
-              msg = "function has been deprecated use 'cdec_query()'")
-
-  cdec_query(stations, sensor_num,
-             dur_code, start_date, end_date="")
-}
-
-
-# TODO(emanuel) check whether start/end dates are inclusive or exclusive when calling cdec
-#' @title Query observation data
 #' @description Function queries the CDEC site to obtain desired station data
 #' based on station, sensor number, duration code and start/end date.
 #' Use cdec_datasets() to view an updated list of all available data at a station.
@@ -32,14 +7,20 @@ retrieve_station_data <- function(stations, sensor_num,
 #' @param dur_code duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.
 #' @param start_date date to start the query on.
 #' @param end_date a date to end query on, defaults to current date.
-#' @return tidy dataframe
+#' @return dataframe
 #' @examples
 #' kwk_hourly_flows <- CDECRetrieve::cdec_query("KWK", "20", "H", "2017-01-01")
 #' ccr_hourly_temps <- CDECRetrieve::cdec_query("CCR", "25", "H", Sys.Date())
 #' @export
-cdec_query <- function(station, sensor_num = NULL, dur_code = NULL, start_date = NULL, end_date = NULL) {
+cdec_query <- function(station, sensor_num=NULL, dur_code=NULL, start_date=NULL, end_date=NULL) {
 
-  query_url <- make_cdec_url(station, sensor_num, dur_code, start_date, end_date)
+  if (is.null(start_date)) {start_date <- Sys.Date() - 2} # an arbitrary choice
+  if (is.null(end_date)) {end_date <- Sys.Date() + 1}
+
+  query_params = c("STATION" = station, "SENSOR" = sensor_num, "DURCODE" = dur_code,
+                   "STARTDATE" = as.character(start_date), "ENDDATE" = as.character(end_date))
+
+  query_url <- locate_and_replace_in_place(cdec_urls$download_shef, query_params)
 
   temp_file <- tempfile(tmpdir = tempdir())
   on.exit(file.remove(temp_file)) # remove file as soon as possible
@@ -67,28 +48,6 @@ cdec_query <- function(station, sensor_num = NULL, dur_code = NULL, start_date =
 
   attr(d, "cdec_service") <- "cdec_data"
   return(d)
-}
-
-
-# INTERNAL
-
-make_cdec_url <- function(station_id, sensor_num,
-                          dur_code, start_date,
-                          end_date=Sys.Date()) {
-
-  if (is.null(station_id)) stop("station id is required for all queries (make_cdec_url)", call. = FALSE)
-  if (is.null(sensor_num)) {stop("sensor number is required for all queries (make_cdec_url)", call. = FALSE)}
-  if (is.null(dur_code)) {stop("duration code is required for all queries (make_cdec_url)", call. = FALSE)}
-  if (is.null(start_date)) {start_date <- Sys.Date() - 1} # get one day of data
-  if (is.null(end_date)) {end_date <- Sys.Date()}
-
-  cdec_urls$download_shef %>%
-    stringr::str_replace("STATION", station_id) %>%
-    stringr::str_replace("SENSOR", sensor_num) %>%
-    stringr::str_replace("DURCODE", dur_code) %>%
-    stringr::str_replace("STARTDATE", as.character(start_date)) %>%
-    stringr::str_replace("ENDDATE", as.character(end_date))
-
 }
 
 

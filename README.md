@@ -43,9 +43,7 @@ package.install("CDECRetrieve")
 devtools::install_github("flowwest/CDECRetrieve")
 ```
 
-# Usage 
-
-## Basic Usage 
+# Basic Usage 
 
 CDECRetrieve exposes several useful functions to query services from CDEC. 
 The main function in the package is `cdec_query`, 
@@ -102,79 +100,4 @@ values are apparent.*
 The package uses the shef download service to download the data. It was chosen
 for its undocumented ability to download multiple years of data with one call,
 something the csv service can not do.
-
-### Time Zone?
-
-All downloaded data is in PST. Data skips 2:00 am on days of daylight saving change.
-From the cdec site,
-
-*If you are looking at the data on one of the web display pages, it's in local Pacific time. (PST during the
-winter, PDT during the summer). On the text download pages such as queryCSV or querySHEF, it's in PST only.
-Also, please be aware that due to architectural issues, the data during the change from PST to PDT and from
-PDT to PST may not be correct.*
-
-
-### Which is correct?
-
-Using the CDEC website to download data we get two following results 
-for the same query: 
-
-Shef
-
-```
-:  sta yyyymmdd PS DHhhmm /code value
-.A DVD 19971231 PS DH2300 /QRH 110
-.A DVD 19980101 PS DH0000 /QRH 108
-.A DVD 19980101 PS DH0100 /QRH 110
-.A DVD 19980101 PS DH0200 /QRH 109
-.A DVD 19980101 PS DH0300 /QRH 110
-```
-
-csv
-
-```
-6911,PST,'FLOW, RIVER DISCHARGE (cfs)'
-19980101,0000,110
-19980101,0100,108
-19980101,0200,110
-19980101,0300,109
-19980101,0400,110
-19980101,0500,108
-19980101,0600,107
-19980101,0700,108
-```
-
-One includes the last measurement before the start date specified, the other does not, 
-yet the values are all the same, meaning that one of these is wrong
-by an hour. :'( 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

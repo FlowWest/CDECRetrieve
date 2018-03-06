@@ -1,0 +1,52 @@
+---
+title: "CDEC Retrieve is now part of CRAN!"
+author: "Emanuel Rodriguez"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>", 
+  eval = FALSE
+)
+```
+
+## What is CDECRetrieve?
+
+CDECRetrieve is an R package developed at FlowWest that enables users to streamline
+analysis and reporting of CDEC data, with just a few function calls users are able to
+go from exploration to analysis without leaving the R environment. CDECRetrieve 
+was built with users in mind from the start, and is used extensively by both engineers
+and data scientists at FlowWest. We are excited to announce its recent acceptance into 
+CRAN with version 0.1.0.
+
+## Why use CDECRetrieve? 
+
+#### CDECRetrieve is Tidy
+
+CDECRetrieve follows most of the conventions set by the tidyverse, so users can quickly
+start making use of packages like, ggplot2, dplyr and tidyr. 
+
+#### CDECRetrieve is Intuitive
+
+Although CDEC provides a good data service its interface lacks in user interface.
+CDECRetrieve was designed to capture the key pieces of CDEC and the relationships 
+between each of these. Doing so this way a user can go from exploring locations with
+`cdec_stations()` to datasets within a location with `cdec_datasets()` and lastly 
+querying for actual data with `cdec_query()`.
+
+#### CDECRetrieve is Open Source
+
+Here at FlowWest we strongly believe in open source software, we want everyone
+to benefit from the work we do. You can view, download and extend CDECRetrieve 
+[here](#), as well as open any issues regarding bugs, or features you want to see
+in future version.
+
+You can learn more as well see fully implemented examples using CDECRetrieve [here]()
+

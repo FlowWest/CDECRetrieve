@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Constant urls for data retrieval — cdec_urls • CDECRetrieve</title>
+<title>Sacramento Valley Water Year Index — sac_valley_wy_types • CDECRetrieve</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,9 +27,10 @@
 <script src="../pkgdown.js"></script>
   
   
-<meta property="og:title" content="Constant urls for data retrieval — cdec_urls" />
+<meta property="og:title" content="Sacramento Valley Water Year Index — sac_valley_wy_types" />
 
-<meta property="og:description" content="Constant urls for data retrieval" />
+<meta property="og:description" content="Chronological Reconstructed Sacramento Valley Water Year Hydrologic Classification Indices
+Based on measured unimpaired runoff (in million acre-feet), subject to revision." />
 <meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -93,27 +94,46 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Constant urls for data retrieval</h1>
+    <h1>Sacramento Valley Water Year Index</h1>
     </div>
 
     
-    <p>Constant urls for data retrieval</p>
+    <p>Chronological Reconstructed Sacramento Valley Water Year Hydrologic Classification Indices
+Based on measured unimpaired runoff (in million acre-feet), subject to revision.</p>
     
 
-    <pre class="usage"><span class='no'>cdec_urls</span></pre>
+    <pre class="usage"><span class='no'>sac_valley_wy_types</span></pre>
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>An object of class <code>list</code> of length 6.</p>
+    <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 111 rows and 6 columns.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>sac_valley_wy_types</span></div><div class='output co'>#&gt; # A tibble: 111 x 6
+#&gt;     year oct_mar apr_jul wy_sum wy_index yr_type
+#&gt;    &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;  
+#&gt;  1  1906   12.6    12.9    26.7    11.8  W      
+#&gt;  2  1907   19.0    13.4    33.7    14.1  W      
+#&gt;  3  1908    8.29    5.60   14.8     7.73 BN     
+#&gt;  4  1909   20.6     8.98   30.7    12.1  W      
+#&gt;  5  1910   13.1     6.11   20.1     9.38 W      
+#&gt;  6  1911   12.3    13.1    26.4    11.7  W      
+#&gt;  7  1912    4.84    5.65   11.4     6.71 BN     
+#&gt;  8  1913    5.72    6.29   12.8     6.24 D      
+#&gt;  9  1914   16.7    10.1    27.8    10.9  W      
+#&gt; 10  1915   11.4    11.4    23.9    11.0  W      
+#&gt; # ... with 101 more rows</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       
       <li><a href="#format">Format</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

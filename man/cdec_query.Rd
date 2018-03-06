@@ -19,7 +19,7 @@ cdec_query(station, sensor_num = NULL, dur_code = NULL, start_date = NULL,
 \item{end_date}{a date to end query on, defaults to current date.}
 }
 \value{
-tidy dataframe
+dataframe
 }
 \description{
 Function queries the CDEC site to obtain desired station data

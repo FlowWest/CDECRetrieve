@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Query observation data — cdec_query • CDECRetrieve</title>
+<title>search for stations in the cdec system — cdec_stations • CDECRetrieve</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,11 +27,10 @@
 <script src="../pkgdown.js"></script>
   
   
-<meta property="og:title" content="Query observation data — cdec_query" />
+<meta property="og:title" content="search for stations in the cdec system — cdec_stations" />
 
-<meta property="og:description" content="Function queries the CDEC site to obtain desired station data
-based on station, sensor number, duration code and start/end date.
-Use cdec_datasets() to view an updated list of all available data at a station." />
+<meta property="og:description" content="search the stations in thec CDEC system using the CDEC Station Search
+service here" />
 <meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -95,78 +94,70 @@ Use cdec_datasets() to view an updated list of all available data at a station."
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Query observation data</h1>
+    <h1>search for stations in the cdec system</h1>
     </div>
 
     
-    <p>Function queries the CDEC site to obtain desired station data
-based on station, sensor number, duration code and start/end date.
-Use cdec_datasets() to view an updated list of all available data at a station.</p>
+    <p>search the stations in thec CDEC system using the CDEC Station Search
+service <a href='https://cdec.water.ca.gov/cgi-progs/staSearch'>here</a></p>
     
 
-    <pre class="usage"><span class='fu'>cdec_query</span>(<span class='no'>station</span>, <span class='kw'>sensor_num</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dur_code</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>cdec_stations</span>(<span class='kw'>station_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>nearby_city</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>river_basin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>hydro_area</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>county</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>station</th>
-      <td><p>three letter identification for CDEC location (example "KWK", "SAC", "CCR")</p></td>
+      <th>station_id</th>
+      <td><p>string three letter station code</p></td>
     </tr>
     <tr>
-      <th>sensor_num</th>
-      <td><p>sensor number for the measure of interest. (example "20", "01", "25")</p></td>
+      <th>nearby_city</th>
+      <td><p>string search stations near supplied city</p></td>
     </tr>
     <tr>
-      <th>dur_code</th>
-      <td><p>duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.</p></td>
+      <th>river_basin</th>
+      <td><p>string search stations in supplied basin</p></td>
     </tr>
     <tr>
-      <th>start_date</th>
-      <td><p>date to start the query on.</p></td>
+      <th>hydro_area</th>
+      <td><p>string search stations in supplied hydrological area</p></td>
     </tr>
     <tr>
-      <th>end_date</th>
-      <td><p>a date to end query on, defaults to current date.</p></td>
+      <th>county</th>
+      <td><p>string search stations in supplied county</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>dataframe</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>kwk_hourly_flows</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>CDECRetrieve</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/CDECRetrieve/topics/cdec_query'>cdec_query</a></span>(<span class='st'>"KWK"</span>, <span class='st'>"20"</span>, <span class='st'>"H"</span>, <span class='st'>"2017-01-01"</span>)</div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
-#&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  X1 = col_character(),</span>
-#&gt; <span class='message'>  X2 = col_character(),</span>
-#&gt; <span class='message'>  X3 = col_integer(),</span>
-#&gt; <span class='message'>  X4 = col_character(),</span>
-#&gt; <span class='message'>  X5 = col_character(),</span>
-#&gt; <span class='message'>  X6 = col_character(),</span>
-#&gt; <span class='message'>  X7 = col_character(),</span>
-#&gt; <span class='message'>  X8 = col_character()</span>
-#&gt; <span class='message'>)</span></div><div class='input'><span class='no'>ccr_hourly_temps</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>CDECRetrieve</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/CDECRetrieve/topics/cdec_query'>cdec_query</a></span>(<span class='st'>"CCR"</span>, <span class='st'>"25"</span>, <span class='st'>"H"</span>, <span class='fu'>Sys.Date</span>())</div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
-#&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  X1 = col_character(),</span>
-#&gt; <span class='message'>  X2 = col_character(),</span>
-#&gt; <span class='message'>  X3 = col_integer(),</span>
-#&gt; <span class='message'>  X4 = col_character(),</span>
-#&gt; <span class='message'>  X5 = col_character(),</span>
-#&gt; <span class='message'>  X6 = col_character(),</span>
-#&gt; <span class='message'>  X7 = col_character(),</span>
-#&gt; <span class='message'>  X8 = col_character()</span>
-#&gt; <span class='message'>)</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># cdec_stations() can be used to find locations within an area of interest</span>
+<span class='fu'>cdec_stations</span>(<span class='kw'>county</span> <span class='kw'>=</span> <span class='st'>"alameda"</span>)</div><div class='output co'>#&gt; # A tibble: 27 x 9
+#&gt;    station_id name    river_basin county longitude latitude elevation operator 
+#&gt;    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    
+#&gt;  1 dco        del va… east bay    alame…      -122     37.6 542 &amp;nbsp CA Dept …
+#&gt;  2 oso        oaklan… east bay    alame…      -122     37.8 1000 &amp;nb… Oakland …
+#&gt;  3 chb        chabot  alameda cr  alame…      -122     37.7 250 &amp;nbsp East Bay…
+#&gt;  4 bth        bethan… delta       alame…      -122     37.8 250 &amp;nbsp CA Dept …
+#&gt;  5 cvc        castro… east bay    alame…      -122     37.7 100 &amp;nbsp US Geolo…
+#&gt;  6 aln        alamed… alameda cr  alame…      -122     37.6 86 &amp;nbsp  US Geolo…
+#&gt;  7 cad        calave… alameda cr  alame…      -122     37.6 1140 &amp;nb… San Fran…
+#&gt;  8 usl        u san … alameda cr  alame…      -122     37.8 477 &amp;nbsp East Bay…
+#&gt;  9 ono        oaklan… east bay    alame…      -122     37.9 1500 &amp;nb… Oakland …
+#&gt; 10 nbv        vallec… sf bay      alame…      -122     37.6 635 &amp;nbsp CA Dept …
+#&gt; # ... with 17 more rows, and 1 more variable: state &lt;chr&gt;</div><div class='input'><span class='co'># or it can be used to get metadata attributes for a location</span>
+<span class='fu'>cdec_stations</span>(<span class='kw'>station_id</span> <span class='kw'>=</span> <span class='st'>"ccr"</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 9
+#&gt;   station_id name     river_basin county longitude latitude elevation operator 
+#&gt;   &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    
+#&gt; 1 ccr        sacrame… sacramento… shasta      -122     40.5 450 &amp;nbsp US Burea…
+#&gt; # ... with 1 more variable: state &lt;chr&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
 

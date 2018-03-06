@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Constant urls for data retrieval — cdec_urls • CDECRetrieve</title>
+<title>Show available data — cdec_datasets • CDECRetrieve</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,9 +27,9 @@
 <script src="../pkgdown.js"></script>
   
   
-<meta property="og:title" content="Constant urls for data retrieval — cdec_urls" />
+<meta property="og:title" content="Show available data — cdec_datasets" />
 
-<meta property="og:description" content="Constant urls for data retrieval" />
+<meta property="og:description" content="display a data frame of available data for a station." />
 <meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -93,27 +93,48 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Constant urls for data retrieval</h1>
+    <h1>Show available data</h1>
     </div>
 
     
-    <p>Constant urls for data retrieval</p>
+    <p>display a data frame of available data for a station.</p>
     
 
-    <pre class="usage"><span class='no'>cdec_urls</span></pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <pre class="usage"><span class='fu'>cdec_datasets</span>(<span class='no'>station</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>station</th>
+      <td><p>cdec station code</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code>list</code> of length 6.</p>
+    <p>data frame with available data as rows.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># get a list of dataframes available for CCR</span>
+<span class='fu'>cdec_datasets</span>(<span class='st'>"ccr"</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 6
+#&gt;   sensor_number sensor_name         sensor_units duration start      end       
+#&gt;           &lt;int&gt; &lt;chr&gt;               &lt;chr&gt;        &lt;chr&gt;    &lt;date&gt;     &lt;date&gt;    
+#&gt; 1            14 battery voltage     volts        hourly   1997-08-08 2018-03-05
+#&gt; 2            25 temperature water   deg f        hourly   1997-08-08 2018-03-05
+#&gt; 3            27 water turbidity     ntu          hourly   1998-11-16 2018-03-05
+#&gt; 4            61 water dissolved ox… mg/l         hourly   1998-11-16 2018-03-05</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#format">Format</a></li>
-          </ul>
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

@@ -7,3 +7,4 @@
 ^index\.Rmd$
 ^data-raw$
 ^README\.md$
+^\.httr-oauth$

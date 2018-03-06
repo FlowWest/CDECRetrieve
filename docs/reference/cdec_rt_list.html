@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Constant urls for data retrieval — cdec_urls • CDECRetrieve</title>
+<title>List Rating Tables — cdec_rt_list • CDECRetrieve</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,9 +27,9 @@
 <script src="../pkgdown.js"></script>
   
   
-<meta property="og:title" content="Constant urls for data retrieval — cdec_urls" />
+<meta property="og:title" content="List Rating Tables — cdec_rt_list" />
 
-<meta property="og:description" content="Constant urls for data retrieval" />
+<meta property="og:description" content="Get a list of all rating tables available through CDEC" />
 <meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -93,27 +93,49 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Constant urls for data retrieval</h1>
+    <h1>List Rating Tables</h1>
     </div>
 
     
-    <p>Constant urls for data retrieval</p>
+    <p>Get a list of all rating tables available through CDEC</p>
     
 
-    <pre class="usage"><span class='no'>cdec_urls</span></pre>
-        
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
-
-    <p>An object of class <code>list</code> of length 6.</p>
+    <pre class="usage"><span class='fu'>cdec_rt_list</span>(<span class='kw'>station_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>station_id</th>
+      <td><p>station for the location to get rating description for.</p></td>
+    </tr>
+    </table>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># list all rating tables in CDEC, you can use filter to search</span>
+<span class='fu'>cdec_rt_list</span>()</div><div class='output co'>#&gt; # A tibble: 302 x 4
+#&gt;    station_name                         station_id last_revised table_type
+#&gt;    &lt;chr&gt;                                &lt;chr&gt;      &lt;date&gt;       &lt;chr&gt;     
+#&gt;  1 a&amp;b canal nr johnstonville           abj        2005-07-10   loglog2flo
+#&gt;  2 alameda ck above div dam nr sunol ca acd        2018-03-04   usgsrate  
+#&gt;  3 alameda ck nr niles                  aln        2018-03-04   usgsrate  
+#&gt;  4 american river at chili bar          cbr        2016-05-04   usgsrate  
+#&gt;  5 american river at fair oaks          afo        2018-03-04   usgsrate  
+#&gt;  6 arroyo seco nr soledad               ass        2018-03-04   usgsrate  
+#&gt;  7 arroyo valle nr livermore            avl        2018-03-04   usgsrate  
+#&gt;  8 battle creek                         bat        2018-03-04   usgsrate  
+#&gt;  9 bear ck ab holsten cyn nr rumsey     brk        2018-03-04   usgsrate  
+#&gt; 10 bear ck blw eastside canal           bsd        2017-01-13   loglog2flo
+#&gt; # ... with 292 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#format">Format</a></li>
-          </ul>
+      <li><a href="#arguments">Arguments</a></li>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
