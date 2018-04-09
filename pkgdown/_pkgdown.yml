@@ -1,0 +1,7 @@
+template:
+  params:
+    bootswatch: flatly
+
+navbar:
+  type: inverse
+

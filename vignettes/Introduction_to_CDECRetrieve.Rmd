@@ -35,7 +35,7 @@ start making use of packages like, ggplot2, dplyr and tidyr.
 
 #### CDECRetrieve is Intuitive
 
-Although CDEC provides a good data service its interface lacks in user interface.
+Although CDEC provides a good data service its interface is not very intuitive.
 CDECRetrieve was designed to capture the key pieces of CDEC and the relationships 
 between each of these. Doing so this way a user can go from exploring locations with
 `cdec_stations()` to datasets within a location with `cdec_datasets()` and lastly 
@@ -45,9 +45,9 @@ querying for actual data with `cdec_query()`.
 
 Here at FlowWest we strongly believe in open source software, we want everyone
 to benefit from the work we do. You can view, download and extend CDECRetrieve 
-[here](#), as well as open any issues regarding bugs, or features you want to see
-in future version.
+[here](https://github.com/FlowWest/CDECRetrieve/), as well as open any issues regarding bugs, or features you want to see
+in future releases
 
 You can learn more as well see fully implemented examples using CDECRetrieve 
-[here](https://flowwest.github.io/CDECRetrieve/)
+[here](https://flowwest.github.io/CDECRetrieve/).
 

@@ -12,24 +12,26 @@
 #' kwk_hourly_flows <- CDECRetrieve::cdec_query("KWK", "20", "H", "2017-01-01")
 #' ccr_hourly_temps <- CDECRetrieve::cdec_query("CCR", "25", "H", Sys.Date())
 #' @export
-cdec_query <- function(station, sensor_num=NULL, dur_code=NULL, start_date=NULL, end_date=NULL) {
+cdec_query <- function(station, sensor_num, dur_code,
+                       start_date=NULL, end_date=NULL) {
 
   if (is.null(start_date)) {start_date <- Sys.Date() - 2} # an arbitrary choice
   if (is.null(end_date)) {end_date <- Sys.Date() + 1}
 
-  query_params = c("STATION" = station, "SENSOR" = sensor_num, "DURCODE" = dur_code,
-                   "STARTDATE" = as.character(start_date), "ENDDATE" = as.character(end_date))
+  query_params = c("STATION" = station,
+                   "SENSOR" = sensor_num,
+                   "DURCODE" = dur_code,
+                   "STARTDATE" = as.character(start_date),
+                   "ENDDATE" = as.character(end_date))
 
-  query_url <- locate_and_replace_in_place(cdec_urls$download_shef, query_params)
+  query_url <- locate_and_replace(cdec_urls$download_shef, query_params)
 
   temp_file <- tempfile(tmpdir = tempdir())
-  on.exit(file.remove(temp_file)) # remove file as soon as possible
 
   # a real ugly side effect here, download the file to temp location and
   # and read from it. Doing it this way allows us to query large amounts of data
   download_status <- utils::download.file(query_url, destfile = temp_file, quiet = TRUE)
 
-  # check the status of the download, 0 == GOOD, 1 == BAD
   if(download_status == 0) {
     # check if the file size downloaded has a size
     if (file.info(temp_file)$size == 0) {
@@ -42,7 +44,7 @@ cdec_query <- function(station, sensor_num=NULL, dur_code=NULL, start_date=NULL,
       stop(paste("station:", station, "failed"), call. = FALSE)
     }
   } else {
-    stop("call to cdec failed...(emanuel will improve this piece soon)",
+    stop("call to cdec failed for uknown reason, check http://cdec.water.ca.gov for status",
          call. = FALSE)
   }
 
@@ -76,9 +78,19 @@ shef_to_tidy <- function(file) {
 
   data.frame(
     "agency_cd" = "CDEC",
-    "location_id" = raw$X2,
+    "location_id" = as.character(raw$X2),
     "datetime" = datetime_col,
-    "parameter_cd" = cdec_code_col,
-    "parameter_value" = parameter_value_col
+    "parameter_cd" = as.character(cdec_code_col),
+    "parameter_value" = parameter_value_col,
+    stringsAsFactors = FALSE
   )
+}
+
+
+locate_and_replace <- function(string, v) {
+  for (i in seq_along(v)) {
+    string <- stringr::str_replace(string, names(v[i]), v[[i]])
+  }
+
+  return(string)
 }

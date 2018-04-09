@@ -25,11 +25,4 @@ missing_xml <- function(.) {
   identical(., xml2::xml_missing())
 }
 
-locate_and_replace_in_place <- function(string, v) {
-  re <- paste(names(v), collapse = "|")
-  for (i in seq_along(v)) {
-    string <- stringr::str_replace(string, names(v[i]), v[[i]])
-  }
 
-  return(string)
-}

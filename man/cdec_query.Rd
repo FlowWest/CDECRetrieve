@@ -4,7 +4,7 @@
 \alias{cdec_query}
 \title{Query observation data}
 \usage{
-cdec_query(station, sensor_num = NULL, dur_code = NULL, start_date = NULL,
+cdec_query(station, sensor_num, dur_code, start_date = NULL,
   end_date = NULL)
 }
 \arguments{
