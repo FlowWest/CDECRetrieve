@@ -18,18 +18,23 @@ cdec_query <- function(station, sensor_num, dur_code,
   if (is.null(start_date)) {start_date <- Sys.Date() - 2} # an arbitrary choice
   if (is.null(end_date)) {end_date <- Sys.Date() + 1}
 
-  query_params = c("STATION" = station,
-                   "SENSOR" = sensor_num,
-                   "DURCODE" = dur_code,
-                   "STARTDATE" = as.character(start_date),
-                   "ENDDATE" = as.character(end_date))
+  # decision was made here not to use httr::GET, since downloading a file
+  # is much more reliable and faster from CDEC, it for some reason does not
+  # handle large queries very well unless they are downloads.
+  # I am still working on hopefully switching over to a combination
+  # of httr and purrr but for now this works well.
+  #                               -ergz
 
-  query_url <- locate_and_replace(cdec_urls$download_shef, query_params)
+  query_url <- glue::glue(cdec_urls$download_shef,
+                          STATION=station,
+                          SENSOR = as.character(sensor_num),
+                          DURCODE = as.character(dur_code),
+                          STARTDATE = as.character(start_date),
+                          ENDDATE = as.character(end_date))
 
   temp_file <- tempfile(tmpdir = tempdir())
 
-  # a real ugly side effect here, download the file to temp location and
-  # and read from it. Doing it this way allows us to query large amounts of data
+
   download_status <- utils::download.file(query_url, destfile = temp_file, quiet = TRUE)
 
   if(download_status == 0) {
@@ -76,13 +81,12 @@ shef_to_tidy <- function(file) {
   cdec_code_col <- rep(cdec_code, nrow(raw))
   parameter_value_col <- as.numeric(raw$X7)
 
-  data.frame(
+  tibble::tibble(
     "agency_cd" = "CDEC",
     "location_id" = as.character(raw$X2),
     "datetime" = datetime_col,
     "parameter_cd" = as.character(cdec_code_col),
-    "parameter_value" = parameter_value_col,
-    stringsAsFactors = FALSE
+    "parameter_value" = parameter_value_col
   )
 }
 
