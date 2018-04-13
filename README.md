@@ -112,15 +112,18 @@ method eventhough its got a really ugly side effect.
 
 Here are some benchmarks for the first and second method:
 
-```
 DOWNLOAD METHOD ---
- min       lq     mean      median       uq      max     neval
- 2.093852 2.460448 2.548882 2.563623 2.691349 2.868398    100
+
+| min       |lq     |mean      |median       |uq      |max     |neval|
+|--------------------------------------------------------------------|
+| 2.093852 |2.460448| 2.548882| 2.563623| 2.691349| 2.868398|    100|
  
-HTTR METHOD ---
-min       lq        mean   median       uq      max     neval
-5.786492 5.923293 6.968335 5.949256 6.527922 11.66943    100
-```
+
+HTTR Method
+
+|min       |lq        |mean   |median       |uq     | max     |neval|
+|-------------------------------------------------------------------|
+|5.786492| 5.923293| 6.968335 |5.949256 |6.527922 |11.66943 |   100|
 
 
 
