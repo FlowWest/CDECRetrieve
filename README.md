@@ -101,3 +101,26 @@ The package uses the shef download service to download the data. It was chosen
 for its undocumented ability to download multiple years of data with one call,
 something the csv service can not do.
 
+
+### Why I download to a temp dir
+
+If you read the code you will note that it downloads a temp file to the operating 
+system's temp directory, it then parses the resulting file after reading in 
+with `read_csv`. The same work can be done with `httr::GET`, where instead the parsing
+happens in memory with one of `*apply` functions or `purrr::map`. I chose for the first
+method eventhough its got a really ugly side effect. 
+
+Here are some benchmarks for the first and second method:
+
+```
+DOWNLOAD METHOD ---
+ min       lq     mean      median       uq      max     neval
+ 2.093852 2.460448 2.548882 2.563623 2.691349 2.868398    100
+ 
+HTTR METHOD ---
+min       lq        mean   median       uq      max     neval
+5.786492 5.923293 6.968335 5.949256 6.527922 11.66943    100
+```
+
+
+
