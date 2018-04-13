@@ -159,7 +159,5 @@ parse_func <- function(line) {
 }
 
 purrr::map_df(data_rows, parse_func)
-
-
 ```
 
