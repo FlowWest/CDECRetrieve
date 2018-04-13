@@ -112,18 +112,54 @@ method eventhough its got a really ugly side effect.
 
 Here are some benchmarks for the first and second method:
 
-DOWNLOAD METHOD ---
+*Download Method*
 
 | min       |lq     |mean      |median       |uq      |max     |neval|
 |----------|---------|--------|-------------|-------|---------|-----------|
 | 2.093852 |2.460448| 2.548882| 2.563623| 2.691349| 2.868398|    100|
  
 
-HTTR Method
+*HTTR Method*
 
 |min       |lq        |mean   |median       |uq     | max     |neval|
 |----------|---------|--------|-------------|-------|---------|-----------|
 |5.786492| 5.923293| 6.968335 |5.949256 |6.527922 |11.66943 |   100|
 
+the benchmark expression used were:
 
+```r
+# for the download method
+CDECRetrieve::cdec_query("kwk", "20", "h", "2010-01-01", "2018-01-01")
+
+# for the HTTR method
+s <- "http://cdec.water.ca.gov/cgi-progs/querySHEF"
+
+q <- list(
+  station_id = "kwk",
+  sensor_num = "20",
+  dur_code = "h",
+  start_date = "2010-01-01",
+  end_date = "2018-01-01"
+)
+
+resp <- httr::GET(s, query = q)
+cont <- httr::content(resp)
+in_rows <- unlist(strsplit(cont, "\n"))
+data_rows <- in_rows[9:length(in_rows)]
+
+parse_func <- function(line) {
+  split_at_sapce <- trimws(unlist(strsplit(line, " ")))
+  list(
+    location_id = split_at_space[2],
+    date = split_at_space[3],
+    time = split_at_space[5],
+    shef_code = split_at_space[6],
+    value = split_at_space[7]
+  )
+}
+
+purrr::map_df(data_rows, parse_func)
+
+
+```
 
