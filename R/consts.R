@@ -49,6 +49,7 @@ shef_code_lookup <- list(
   "/LRH" = "94",
   "/TAD" = "30",
   "/TAH" = "04",
-  "/QMD" = "8"
+  "/QMD" = "8",
+  "/PPM" = "45"
 
 )
