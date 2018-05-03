@@ -151,6 +151,86 @@ kwk_flow <span class="op">%&gt;%</span><span class="st"> </span>
 <a href="#why-use-shef" class="anchor"></a>Why use shef?</h3>
 <p>The package uses the shef download service to download the data. It was chosen for its undocumented ability to download multiple years of data with one call, something the csv service can not do.</p>
 </div>
+<div id="why-i-download-to-a-temp-dir" class="section level3">
+<h3 class="hasAnchor">
+<a href="#why-i-download-to-a-temp-dir" class="anchor"></a>Why I download to a temp dir</h3>
+<p>If you read the code you will note that it downloads a temp file to the operating system’s temp directory, it then parses the resulting file after reading in with <code>read_csv</code>. The same work can be done with <code><a href="http://www.rdocumentation.org/packages/httr/topics/GET">httr::GET</a></code>, where instead the parsing happens in memory with one of <code>*apply</code> functions or <code><a href="http://www.rdocumentation.org/packages/purrr/topics/map">purrr::map</a></code>. I chose for the first method eventhough its got a really ugly side effect.</p>
+<p>Here are some benchmarks for the first and second method:</p>
+<p><em>Download Method</em></p>
+<table class="table">
+<thead><tr class="header">
+<th>min</th>
+<th>lq</th>
+<th>mean</th>
+<th>median</th>
+<th>uq</th>
+<th>max</th>
+<th>neval</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td>2.093852</td>
+<td>2.460448</td>
+<td>2.548882</td>
+<td>2.563623</td>
+<td>2.691349</td>
+<td>2.868398</td>
+<td>100</td>
+</tr></tbody>
+</table>
+<p><em>HTTR Method</em></p>
+<table class="table">
+<thead><tr class="header">
+<th>min</th>
+<th>lq</th>
+<th>mean</th>
+<th>median</th>
+<th>uq</th>
+<th>max</th>
+<th>neval</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td>5.786492</td>
+<td>5.923293</td>
+<td>6.968335</td>
+<td>5.949256</td>
+<td>6.527922</td>
+<td>11.66943</td>
+<td>100</td>
+</tr></tbody>
+</table>
+<p>the benchmark expression used were:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># for the download method</span>
+CDECRetrieve<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/CDECRetrieve/topics/cdec_query">cdec_query</a></span>(<span class="st">"kwk"</span>, <span class="st">"20"</span>, <span class="st">"h"</span>, <span class="st">"2010-01-01"</span>, <span class="st">"2018-01-01"</span>)
+
+<span class="co"># for the HTTR method</span>
+s &lt;-<span class="st"> "http://cdec.water.ca.gov/cgi-progs/querySHEF"</span>
+
+q &lt;-<span class="st"> </span><span class="kw">list</span>(
+  <span class="dt">station_id =</span> <span class="st">"kwk"</span>,
+  <span class="dt">sensor_num =</span> <span class="st">"20"</span>,
+  <span class="dt">dur_code =</span> <span class="st">"h"</span>,
+  <span class="dt">start_date =</span> <span class="st">"2010-01-01"</span>,
+  <span class="dt">end_date =</span> <span class="st">"2018-01-01"</span>
+)
+
+resp &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/httr/topics/GET">GET</a></span>(s, <span class="dt">query =</span> q)
+cont &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/httr/topics/content">content</a></span>(resp)
+in_rows &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">strsplit</span>(cont, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>))
+data_rows &lt;-<span class="st"> </span>in_rows[<span class="dv">9</span><span class="op">:</span><span class="kw">length</span>(in_rows)]
+
+parse_func &lt;-<span class="st"> </span><span class="cf">function</span>(line) {
+  split_at_sapce &lt;-<span class="st"> </span><span class="kw">trimws</span>(<span class="kw">unlist</span>(<span class="kw">strsplit</span>(line, <span class="st">" "</span>)))
+  <span class="kw">list</span>(
+    <span class="dt">location_id =</span> split_at_space[<span class="dv">2</span>],
+    <span class="dt">date =</span> split_at_space[<span class="dv">3</span>],
+    <span class="dt">time =</span> split_at_space[<span class="dv">5</span>],
+    <span class="dt">shef_code =</span> split_at_space[<span class="dv">6</span>],
+    <span class="dt">value =</span> split_at_space[<span class="dv">7</span>]
+  )
+}
+
+purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_df</a></span>(data_rows, parse_func)</code></pre></div>
+</div>
 </div>
 
   </div>

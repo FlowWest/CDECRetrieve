@@ -34,16 +34,13 @@ cdec_query <- function(station, sensor_num, dur_code,
 
   temp_file <- tempfile(tmpdir = tempdir())
 
-
-  download_status <- utils::download.file(query_url, destfile = temp_file, quiet = TRUE)
-
-  if(download_status == 0) {
+  if(!(utils::download.file(query_url, destfile = temp_file, quiet = TRUE))) {
     # check if the file size downloaded has a size
     if (file.info(temp_file)$size == 0) {
       stop("call to cdec failed...", call. = FALSE)
     }
 
-    d <- suppressWarnings(shef_to_tidy(temp_file)) # return
+    d <- suppressWarnings(shef_to_tidy(temp_file))
 
     if (is.null(d)) {
       stop(paste("station:", station, "failed"), call. = FALSE)
@@ -88,13 +85,4 @@ shef_to_tidy <- function(file) {
     "parameter_cd" = as.character(cdec_code_col),
     "parameter_value" = parameter_value_col
   )
-}
-
-
-locate_and_replace <- function(string, v) {
-  for (i in seq_along(v)) {
-    string <- stringr::str_replace(string, names(v[i]), v[[i]])
-  }
-
-  return(string)
 }

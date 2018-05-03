@@ -6,8 +6,8 @@ cdec_urls <- list(
   station_hydro_area = "http://cdec.water.ca.gov/cgi-progs/staMeta?station_id=STATION",
   station_metadata = "https://cdec.water.ca.gov/cgi-progs/staSearch?sta_chk=on&sta=STATION",
   datasets = "http://cdec.water.ca.gov/cgi-progs/selectQuery",
-  rating_tables = "http://cdec.water.ca.gov/rtables/"
-
+  rating_tables = "http://cdec.water.ca.gov/rtables/{STATION}.html",
+  wy_index = "http://cdec.water.ca.gov/cgi-progs/iodir/wsi"
 )
 
 

@@ -9,3 +9,4 @@
 ^README\.md$
 ^\.httr-oauth$
 ^pkgdown$
+^cran-comments\.md$

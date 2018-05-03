@@ -1,7 +1,6 @@
 # need to gather the rating cols, and then sep on "_" then use the decimal part
 # to add to the stage, and then this should just give the result that we want.
 
-
 #' @title Get a rating table
 #' @description Use  station id to find the rating table for stage to flow used by CDEC.
 #' @param station_id three letter CDEC station id
@@ -14,11 +13,12 @@ cdec_rt <- function(station_id) {
     stop(paste0("rating table not found for: ", station_id), call. = FALSE)
   }
 
-  rating_table_url <- paste0(cdec_urls$rating_tables, toupper(station_id), ".html")
+  rating_table_url <- glue::glue(cdec_urls$rating_tables,
+                                 STATION=toupper(station_id))
 
   rating_table_page <- xml2::read_html(rating_table_url)
   raw_rating_table <- rvest::html_table(rvest::html_node(rating_table_page, "table"),
-                                    fill = TRUE, header = FALSE)
+                                        fill = TRUE, header = FALSE)
 
   colnames_to_be <- paste0("rating_", as.character(raw_rating_table[2, ]))
   rating_table <- raw_rating_table[-c(1, 2), ]
@@ -45,7 +45,7 @@ cdec_rt <- function(station_id) {
 #' cdec_rt_list()
 #' @export
 cdec_rt_list <- function(station_id = NULL) {
-  url <- cdec_urls$rating_tables
+  url <- "http://cdec.water.ca.gov/rtables/"
   html_page <- xml2::read_html(url)
   list_of_tables <- rvest::html_table(rvest::html_node(html_page, "table"))
 
@@ -58,8 +58,7 @@ cdec_rt_list <- function(station_id = NULL) {
     table_type = tolower(list_of_tables$`Table Type`)
   )
 
-  if (is.null(station_id)) return(rts)
-  else return(dplyr::filter(rts, station_id == station_id))
+    return(rts)
 
 }
 
