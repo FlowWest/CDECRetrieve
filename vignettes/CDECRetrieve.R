@@ -32,5 +32,5 @@ library(magrittr)
 library(leaflet)
 
 cdec_stations(county = "tehama") %>% 
-  map()
+  map_stations()
 

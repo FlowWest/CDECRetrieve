@@ -58,19 +58,19 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
 #'     cdec_stations(county = "alameda") %>% map_stations(label=~name, popup=~station_id)
 #' }
 #' @export
-map.cdec_stations <- function(.data) {
-  # if (!inherits(.data, "cdec_stations")) {
-  #   stop(".data does not appear to be a call from cdec_stations()", call. = FALSE)
-  # }
+map_stations <- function(.data, ...) {
+  if (!inherits(.data, "cdec_stations")) {
+    stop(".data does not appear to be a call from cdec_stations()", call. = FALSE)
+  }
 
   if (!requireNamespace("leaflet", quietly = TRUE)) {
     stop("map_stations() requires leaflet to be installed (map_stations)")
   }
 
-  m <- leaflet::leaflet(dplyr::filter(.data, longitude > -500, longitude < 500))
+  m <- leaflet::leaflet(dplyr::filter(.data))
   m <- leaflet::addTiles(m)
-  leaflet::addCircleMarkers(m, label=~station_id, fillColor = "#666666",
-                            fillOpacity = 1, color="black")
+  leaflet::addCircleMarkers(m, fillColor = "#666666",
+                            fillOpacity = 1, color="black", ...)
 }
 
 
@@ -134,24 +134,4 @@ cdec_station_parse <- function(data) {
     state = "ca"
   )
 }
-
-
-
-#' @title Map search results
-#' @description Populate a leaflet map with the results of a cdec_* call. The function
-#' makes use of leaflet, and so will work only if this is installed on the system.
-#' This function is bundled simply for exploration purposes, it is highly suggested
-#' to make use of leaflet for production maps.
-#' @param .data result of a cdec_stations() call
-#' @param ... named arguments passed into leaflet::addCircleMarkers
-#' @examples
-#' if (interactive()) {
-#'     cdec_stations(county = "alameda") %>% map()
-#' }
-#' @export
-map <- function(x, ...) {
-  UseMethod("map", x)
-}
-
-
 
