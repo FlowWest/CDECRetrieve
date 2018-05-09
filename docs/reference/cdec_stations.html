@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>search for stations in the cdec system — cdec_stations • CDECRetrieve</title>
+<title>Search CDEC Stations — cdec_stations • CDECRetrieve</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,13 +25,20 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="search for stations in the cdec system — cdec_stations" />
+<meta property="og:title" content="Search CDEC Stations — cdec_stations" />
 
 <meta property="og:description" content="search the stations in thec CDEC system using the CDEC Station Search
-service here" />
+service here. Combinations
+of these parameters can be supplied to refine or be left out to generalize, at least
+one must be supplied." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -54,8 +61,12 @@ service here" />
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">CDECRetrieve</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">CDECRetrieve</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -65,7 +76,7 @@ service here" />
   </a>
 </li>
 <li>
-  <a href="../articles/CDECRetrieve.html">Get Started</a>
+  <a href="../articles/CDECRetrieve.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -83,13 +94,14 @@ service here" />
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -97,21 +109,27 @@ service here" />
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>search for stations in the cdec system</h1>
+    <h1>Search CDEC Stations</h1>
+    
+    <div class="hidden name"><code>cdec_stations.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>search the stations in thec CDEC system using the CDEC Station Search
-service <a href='https://cdec.water.ca.gov/cgi-progs/staSearch'>here</a></p>
+service <a href='https://cdec.water.ca.gov/cgi-progs/staSearch'>here</a>. Combinations
+of these parameters can be supplied to refine or be left out to generalize, at least
+one must be supplied.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>cdec_stations</span>(<span class='kw'>station_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>nearby_city</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>river_basin</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>hydro_area</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>county</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -142,21 +160,21 @@ service <a href='https://cdec.water.ca.gov/cgi-progs/staSearch'>here</a></p>
 <span class='fu'>cdec_stations</span>(<span class='kw'>county</span> <span class='kw'>=</span> <span class='st'>"alameda"</span>)</div><div class='output co'>#&gt; # A tibble: 27 x 9
 #&gt;    station_id name    river_basin county longitude latitude elevation operator 
 #&gt;    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    
-#&gt;  1 dco        del va… east bay    alame…      -122     37.6 542 &amp;nbsp CA Dept …
-#&gt;  2 oso        oaklan… east bay    alame…      -122     37.8 1000 &amp;nb… Oakland …
-#&gt;  3 chb        chabot  alameda cr  alame…      -122     37.7 250 &amp;nbsp East Bay…
-#&gt;  4 bth        bethan… delta       alame…      -122     37.8 250 &amp;nbsp CA Dept …
-#&gt;  5 cvc        castro… east bay    alame…      -122     37.7 100 &amp;nbsp US Geolo…
-#&gt;  6 aln        alamed… alameda cr  alame…      -122     37.6 86 &amp;nbsp  US Geolo…
-#&gt;  7 cad        calave… alameda cr  alame…      -122     37.6 1140 &amp;nb… San Fran…
-#&gt;  8 usl        u san … alameda cr  alame…      -122     37.8 477 &amp;nbsp East Bay…
-#&gt;  9 ono        oaklan… east bay    alame…      -122     37.9 1500 &amp;nb… Oakland …
-#&gt; 10 nbv        vallec… sf bay      alame…      -122     37.6 635 &amp;nbsp CA Dept …
+#&gt;  1 dco        del va… east bay    alame…     -122.     37.6 542 &amp;nbsp CA Dept …
+#&gt;  2 oso        oaklan… east bay    alame…     -122.     37.8 1000 &amp;nb… Oakland …
+#&gt;  3 chb        chabot  alameda cr  alame…     -122.     37.7 250 &amp;nbsp East Bay…
+#&gt;  4 bth        bethan… delta       alame…     -122.     37.8 250 &amp;nbsp CA Dept …
+#&gt;  5 cvc        castro… east bay    alame…     -122.     37.7 100 &amp;nbsp US Geolo…
+#&gt;  6 aln        alamed… alameda cr  alame…     -122.     37.6 86 &amp;nbsp  US Geolo…
+#&gt;  7 cad        calave… alameda cr  alame…     -122.     37.6 1140 &amp;nb… San Fran…
+#&gt;  8 usl        u san … alameda cr  alame…     -122.     37.8 477 &amp;nbsp East Bay…
+#&gt;  9 ono        oaklan… east bay    alame…     -122.     37.9 1500 &amp;nb… Oakland …
+#&gt; 10 nbv        vallec… sf bay      alame…     -122.     37.6 635 &amp;nbsp CA Dept …
 #&gt; # ... with 17 more rows, and 1 more variable: state &lt;chr&gt;</div><div class='input'><span class='co'># or it can be used to get metadata attributes for a location</span>
 <span class='fu'>cdec_stations</span>(<span class='kw'>station_id</span> <span class='kw'>=</span> <span class='st'>"ccr"</span>)</div><div class='output co'>#&gt; # A tibble: 1 x 9
 #&gt;   station_id name     river_basin county longitude latitude elevation operator 
 #&gt;   &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    
-#&gt; 1 ccr        sacrame… sacramento… shasta      -122     40.5 450 &amp;nbsp US Burea…
+#&gt; 1 ccr        sacrame… sacramento… shasta     -122.     40.5 450 &amp;nbsp US Burea…
 #&gt; # ... with 1 more variable: state &lt;chr&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -182,5 +200,8 @@ service <a href='https://cdec.water.ca.gov/cgi-progs/staSearch'>here</a></p>
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

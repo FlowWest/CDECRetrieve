@@ -25,12 +25,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="List Rating Tables — cdec_rt_list" />
 
 <meta property="og:description" content="Get a list of all rating tables available through CDEC" />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -53,8 +58,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">CDECRetrieve</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">CDECRetrieve</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -64,7 +73,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/CDECRetrieve.html">Get Started</a>
+  <a href="../articles/CDECRetrieve.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -82,13 +91,14 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -96,19 +106,23 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>List Rating Tables</h1>
+    
+    <div class="hidden name"><code>cdec_rt_list.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Get a list of all rating tables available through CDEC</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>cdec_rt_list</span>(<span class='kw'>station_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -120,20 +134,20 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># list all rating tables in CDEC, you can use filter to search</span>
-<span class='fu'>cdec_rt_list</span>()</div><div class='output co'>#&gt; # A tibble: 303 x 4
+<span class='fu'>cdec_rt_list</span>()</div><div class='output co'>#&gt; # A tibble: 300 x 4
 #&gt;    station_name                         station_id last_revised table_type
 #&gt;    &lt;chr&gt;                                &lt;chr&gt;      &lt;date&gt;       &lt;chr&gt;     
 #&gt;  1 a&amp;b canal nr johnstonville           abj        2005-07-10   loglog2flo
-#&gt;  2 alameda ck above div dam nr sunol ca acd        2018-04-11   usgsrate  
-#&gt;  3 alameda ck nr niles                  aln        2018-04-11   usgsrate  
+#&gt;  2 alameda ck above div dam nr sunol ca acd        2018-05-08   usgsrate  
+#&gt;  3 alameda ck nr niles                  aln        2018-05-08   usgsrate  
 #&gt;  4 american river at chili bar          cbr        2016-05-04   usgsrate  
-#&gt;  5 american river at fair oaks          afo        2018-04-11   usgsrate  
-#&gt;  6 arcade ck nr del paso hts            ack        2018-04-11   usgsrate  
-#&gt;  7 arroyo seco nr soledad               ass        2018-04-11   usgsrate  
-#&gt;  8 arroyo valle nr livermore            avl        2018-04-11   usgsrate  
-#&gt;  9 battle creek                         bat        2018-04-11   usgsrate  
-#&gt; 10 bear ck ab holsten cyn nr rumsey     brk        2018-04-11   usgsrate  
-#&gt; # ... with 293 more rows</div></pre>
+#&gt;  5 american river at fair oaks          afo        2018-05-08   usgsrate  
+#&gt;  6 arcade ck nr del paso hts            ack        2018-05-08   usgsrate  
+#&gt;  7 arroyo seco nr soledad               ass        2018-05-08   usgsrate  
+#&gt;  8 arroyo valle nr livermore            avl        2018-05-08   usgsrate  
+#&gt;  9 battle creek                         bat        2018-05-08   usgsrate  
+#&gt; 10 bear ck ab holsten cyn nr rumsey     brk        2018-05-08   usgsrate  
+#&gt; # ... with 290 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -158,5 +172,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

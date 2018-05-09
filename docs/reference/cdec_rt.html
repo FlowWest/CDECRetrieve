@@ -25,12 +25,17 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Get a rating table — cdec_rt" />
 
 <meta property="og:description" content="Use  station id to find the rating table for stage to flow used by CDEC." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -53,8 +58,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">CDECRetrieve</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">CDECRetrieve</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -64,7 +73,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/CDECRetrieve.html">Get Started</a>
+  <a href="../articles/CDECRetrieve.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -82,13 +91,14 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -96,19 +106,23 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get a rating table</h1>
+    
+    <div class="hidden name"><code>cdec_rt.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Use  station id to find the rating table for stage to flow used by CDEC.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>cdec_rt</span>(<span class='no'>station_id</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -126,16 +140,16 @@
     <pre class="examples"><div class='input'><span class='fu'>cdec_rt</span>(<span class='st'>"abj"</span>) <span class='co'># get the stage to rating curve for ABJ</span></div><div class='output co'>#&gt; # A tibble: 240 x 2
 #&gt;    rating_stage  flow
 #&gt;           &lt;dbl&gt; &lt;dbl&gt;
-#&gt;  1        0.200 NA   
-#&gt;  2        0.300  5.00
-#&gt;  3        0.400  7.00
-#&gt;  4        0.500 11.0 
-#&gt;  5        0.600 14.0 
-#&gt;  6        0.700 18.0 
-#&gt;  7        0.800 22.0 
-#&gt;  8        0.900 27.0 
-#&gt;  9        1.00  32.0 
-#&gt; 10        1.10  37.0 
+#&gt;  1        0.200   NA 
+#&gt;  2        0.300    5.
+#&gt;  3        0.400    7.
+#&gt;  4        0.500   11.
+#&gt;  5        0.600   14.
+#&gt;  6        0.700   18.
+#&gt;  7        0.800   22.
+#&gt;  8        0.900   27.
+#&gt;  9        1.00    32.
+#&gt; 10        1.10    37.
 #&gt; # ... with 230 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -163,5 +177,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

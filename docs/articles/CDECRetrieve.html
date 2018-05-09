@@ -19,7 +19,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -28,8 +28,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">CDECRetrieve</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">CDECRetrieve</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -39,7 +43,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/CDECRetrieve.html">Get Started</a>
+  <a href="../articles/CDECRetrieve.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -57,7 +61,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
@@ -69,21 +73,21 @@
 <!--/.navbar -->
 
       
-      </header><script src="CDECRetrieve_files/htmlwidgets-1.0/htmlwidgets.js"></script><script src="CDECRetrieve_files/jquery-1.12.4/jquery.min.js"></script><link href="CDECRetrieve_files/leaflet-0.7.7/leaflet.css" rel="stylesheet">
-<script src="CDECRetrieve_files/leaflet-0.7.7/leaflet.js"></script><link href="CDECRetrieve_files/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
-<link href="CDECRetrieve_files/leaflet-label-0.2.2/leaflet.label.css" rel="stylesheet">
-<script src="CDECRetrieve_files/leaflet-label-0.2.2/leaflet.label.js"></script><script src="CDECRetrieve_files/Proj4Leaflet-0.7.2/proj4-compressed.js"></script><script src="CDECRetrieve_files/Proj4Leaflet-0.7.2/proj4leaflet.js"></script><script src="CDECRetrieve_files/leaflet-binding-1.1.0/leaflet.js"></script><div class="row">
-  <div class="col-md-9">
+      </header><div class="row">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Getting Started</h1>
                         <h4 class="author">Emanuel Rodriguez</h4>
             
-            <h4 class="date">2018-04-13</h4>
-          </div>
+            <h4 class="date">2018-05-09</h4>
+      
+      
+      <div class="hidden name"><code>CDECRetrieve.Rmd</code></div>
+
+    </div>
 
     
     
-<div class="contents">
 <div id="install" class="section level1">
 <h1 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h1>
@@ -106,24 +110,25 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <div class="figure">
 <img src="cdec-station-search.png" alt="cdec station search"><p class="caption">cdec station search</p>
 </div>
-<p>The pakcage exposes this functionallity through <code><a href="../reference/cdec_stations.html">cdec_stations()</a></code>. Although it doesn’t (currently) map all options in the web form it does so for the most used, namely, station id, nearby city, river basin, hydro area and county.</p>
+<p>The pakcage exposes this functionallity through <code><a href="../reference/cdec_stations.html">cdec_stations()</a></code>. Although it doesn’t (currently) map all options in the web form it does so for the most used, namely, station id, nearby city, river basin, hydro area and county. At least one of the parameters must be supplied, and combination of these can be supplied to refine the search.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(CDECRetrieve)
 
-<span class="kw"><a href="../reference/cdec_stations.html">cdec_stations</a></span>(<span class="dt">station_id =</span> <span class="st">"kwk"</span>) <span class="co"># get metadata for Keswick Dam</span>
+<span class="kw"><a href="../reference/cdec_stations.html">cdec_stations</a></span>(<span class="dt">station_id =</span> <span class="st">"kwk"</span>) <span class="co"># return metadata for KWK</span>
 <span class="co">#&gt; # A tibble: 1 x 9</span>
 <span class="co">#&gt;   station_id name          river_basin county longitude latitude elevation</span>
 <span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 kwk        sacramento r… sacramento… shasta      -122     40.6 596 &amp;nbsp</span>
+<span class="co">#&gt; 1 kwk        sacramento r… sacramento… shasta     -122.     40.6 596 &amp;nbsp</span>
 <span class="co">#&gt; # ... with 2 more variables: operator &lt;chr&gt;, state &lt;chr&gt;</span>
 
-<span class="co"># show all locations near san francisco</span>
+<span class="co"># show all locations near san francisco, this returns a set of </span>
+<span class="co"># CDEC station that are near San Francisco</span>
 <span class="kw"><a href="../reference/cdec_stations.html">cdec_stations</a></span>(<span class="dt">nearby_city =</span> <span class="st">"san francisco"</span>)
 <span class="co">#&gt; # A tibble: 3 x 9</span>
 <span class="co">#&gt;   station_id name        river_basin county   longitude latitude elevation</span>
 <span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;        &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 sfn        san franci… sf bay      san fra…      -122     37.8 150 &amp;nbsp</span>
-<span class="co">#&gt; 2 cx2        daily x2 c… sf bay      san fra…      -122     37.8 0 &amp;nbsp  </span>
-<span class="co">#&gt; 3 ggt        golden gate sf bay      san fra…      -122     37.8 0 &amp;nbsp  </span>
+<span class="co">#&gt; 1 sfn        san franci… sf bay      san fra…     -122.     37.8 150 &amp;nbsp</span>
+<span class="co">#&gt; 2 cx2        daily x2 c… sf bay      san fra…     -122.     37.8 0 &amp;nbsp  </span>
+<span class="co">#&gt; 3 ggt        golden gate sf bay      san fra…     -122.     37.8 0 &amp;nbsp  </span>
 <span class="co">#&gt; # ... with 2 more variables: operator &lt;chr&gt;, state &lt;chr&gt;</span>
 
 <span class="co"># show all location in the sf bay river basin</span>
@@ -131,16 +136,16 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="co">#&gt; # A tibble: 25 x 9</span>
 <span class="co">#&gt;    station_id name        river_basin county  longitude latitude elevation</span>
 <span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    </span>
-<span class="co">#&gt;  1 mrh        marsh cree… sf bay      contra…     - 122     37.9 740 &amp;nbsp</span>
-<span class="co">#&gt;  2 sfn        san franci… sf bay      san fr…     - 122     37.8 150 &amp;nbsp</span>
-<span class="co">#&gt;  3 lsm        los medonos sf bay      contra…     - 122     38.0 130 &amp;nbsp</span>
-<span class="co">#&gt;  4 dvb        danville l… sf bay      contra…     - 122     37.8 364 &amp;nbsp</span>
-<span class="co">#&gt;  5 snn        san andreas sf bay      san ma…     - 122     37.6 456 &amp;nbsp</span>
-<span class="co">#&gt;  6 umn        mt. umunhu… sf bay      santa …     - 122     37.2 3090 &amp;nb…</span>
-<span class="co">#&gt;  7 rhl        richmond c… sf bay      contra…     - 122     37.9 55 &amp;nbsp </span>
-<span class="co">#&gt;  8 mas        main ave d… sf bay      santa …     -1000    100.0 9999     </span>
-<span class="co">#&gt;  9 cx2        daily x2 c… sf bay      san fr…     - 122     37.8 0 &amp;nbsp  </span>
-<span class="co">#&gt; 10 ccp        concord pa… sf bay      contra…     - 122     38.0 558 &amp;nbsp</span>
+<span class="co">#&gt;  1 mrh        marsh cree… sf bay      contra…     -122.     37.9 740 &amp;nbsp</span>
+<span class="co">#&gt;  2 sfn        san franci… sf bay      san fr…     -122.     37.8 150 &amp;nbsp</span>
+<span class="co">#&gt;  3 lsm        los medonos sf bay      contra…     -122.     38.0 130 &amp;nbsp</span>
+<span class="co">#&gt;  4 dvb        danville l… sf bay      contra…     -122.     37.8 364 &amp;nbsp</span>
+<span class="co">#&gt;  5 snn        san andreas sf bay      san ma…     -122.     37.6 456 &amp;nbsp</span>
+<span class="co">#&gt;  6 umn        mt. umunhu… sf bay      santa …     -122.     37.2 3090 &amp;nb…</span>
+<span class="co">#&gt;  7 rhl        richmond c… sf bay      contra…     -122.     37.9 55 &amp;nbsp </span>
+<span class="co">#&gt;  8 mas        main ave d… sf bay      santa …    -1000.    100.0 9999     </span>
+<span class="co">#&gt;  9 cx2        daily x2 c… sf bay      san fr…     -122.     37.8 0 &amp;nbsp  </span>
+<span class="co">#&gt; 10 ccp        concord pa… sf bay      contra…     -122.     38.0 558 &amp;nbsp</span>
 <span class="co">#&gt; # ... with 15 more rows, and 2 more variables: operator &lt;chr&gt;, state &lt;chr&gt;</span>
 
 <span class="co"># show all station in Tehama county</span>
@@ -148,26 +153,97 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <span class="co">#&gt; # A tibble: 45 x 9</span>
 <span class="co">#&gt;    station_id name         river_basin county longitude latitude elevation</span>
 <span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;    </span>
-<span class="co">#&gt;  1 teh        sacramento … sacramento… tehama      -122     40.0 213 &amp;nbsp</span>
-<span class="co">#&gt;  2 crg        corning air… sacramento… tehama      -122     39.9 294 &amp;nbsp</span>
-<span class="co">#&gt;  3 sbb        sacramento … sacto vly … tehama      -122     40.3 186 &amp;nbsp</span>
-<span class="co">#&gt;  4 btw        nf battle c… sacramento… tehama      -122     40.4 1200 &amp;nb…</span>
-<span class="co">#&gt;  5 lgs        log spring   sacto vly … tehama      -123     39.8 5100 &amp;nb…</span>
-<span class="co">#&gt;  6 bnd        sacramento … sacramento… tehama      -122     40.3 286 &amp;nbsp</span>
-<span class="co">#&gt;  7 atp        anthony peak stony cr    tehama      -123     39.8 6200 &amp;nb…</span>
-<span class="co">#&gt;  8 dvr        davis ranch  cottonwood… tehama      -122     40.4 550 &amp;nbsp</span>
-<span class="co">#&gt;  9 sh1        sheet iron … sacramento… tehama      -123     39.5 6500 &amp;nb…</span>
-<span class="co">#&gt; 10 bas        south fork … sacramento… tehama      -122     40.4 997 &amp;nbsp</span>
+<span class="co">#&gt;  1 teh        sacramento … sacramento… tehama     -122.     40.0 213 &amp;nbsp</span>
+<span class="co">#&gt;  2 crg        corning air… sacramento… tehama     -122.     39.9 294 &amp;nbsp</span>
+<span class="co">#&gt;  3 sbb        sacramento … sacto vly … tehama     -122.     40.3 186 &amp;nbsp</span>
+<span class="co">#&gt;  4 btw        nf battle c… sacramento… tehama     -122.     40.4 1200 &amp;nb…</span>
+<span class="co">#&gt;  5 lgs        log spring   sacto vly … tehama     -123.     39.8 5100 &amp;nb…</span>
+<span class="co">#&gt;  6 atp        anthony peak stony cr    tehama     -123.     39.8 6200 &amp;nb…</span>
+<span class="co">#&gt;  7 bnd        sacramento … sacramento… tehama     -122.     40.3 286 &amp;nbsp</span>
+<span class="co">#&gt;  8 dvr        davis ranch  cottonwood… tehama     -122.     40.4 550 &amp;nbsp</span>
+<span class="co">#&gt;  9 sh1        sheet iron … sacramento… tehama     -123.     39.5 6500 &amp;nb…</span>
+<span class="co">#&gt; 10 bas        south fork … sacramento… tehama     -122.     40.4 997 &amp;nbsp</span>
 <span class="co">#&gt; # ... with 35 more rows, and 2 more variables: operator &lt;chr&gt;, state &lt;chr&gt;</span></code></pre></div>
 <p>Since we are simply exploring for locations of interest, it may be useful to map these for visual inspection. CDECRetrieve provides a simple function to do exactly this <code><a href="../reference/map_stations.html">map_stations()</a></code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
 <span class="kw">library</span>(leaflet)
 
 <span class="kw"><a href="../reference/cdec_stations.html">cdec_stations</a></span>(<span class="dt">county =</span> <span class="st">"tehama"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="../reference/map_stations.html">map_stations</a></span>(<span class="dt">label =</span> <span class="op">~</span>station_id)
-<span class="co">#&gt; Assuming 'longitude' and 'latitude' are longitude and latitude, respectively</span></code></pre></div>
-<div id="htmlwidget-18b9587d7391b3cff651" style="width:672px;height:480px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-18b9587d7391b3cff651">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"maxNativeZoom":null,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"continuousWorld":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":null,"unloadInvisibleTiles":null,"updateWhenIdle":null,"detectRetina":false,"reuseTiles":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[40.02876,39.939,40.289,40.4204,39.833,40.28849,39.842,40.35,39.4917,40.4058,40.26469,40.152,40.3172,40.317,39.8186,39.8083,40.42433,39.90874,39.808,40.02377,40.348,40.333,40.387,39.96362,40.35,40.01405,39.81,40.0095,40.179,40.167,99.999,40.0546,40.35,39.815,39.8139,40.40251,39.90874,39.88784,40.15436,40.417,39.858,40.3871,40.04006,40.35,40.39821],[-122.11798,-122.17,-122.186,-121.96123,-122.783,-122.18666,-122.95,-122.45,-122.7339,-121.98067,-121.45106,-122.254,-122.1897,-122.881,-122.3239,-122.3292,-121.98695,-122.09247,-122.329,-122.51195,-121.609,-121.75,-122.239,-122.03436,-121.6,-121.94832,-122.3292,-121.95719,-122.229,-122.8,-999.999,-122.02415,-121.6,-122.3322,-122.3367,-121.96908,-122.09247,-122.52856,-122.20195,-122.193,-122.612,-122.23861,-122.10463,-121.7,-122.14639],10,null,null,{"lineCap":null,"lineJoin":null,"clickable":true,"pointerEvents":null,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2,"dashArray":null},null,null,null,null,["teh","crg","sbb","btw","lgs","bnd","atp","dvr","sh1","bas","dch","rbf","jlf","ctn","bbq","blw","bnf","vin","blb","ecp","min","btr","cot","dvd","mim","dcv","sdv","did","rdf","sad","psk","mlm","mnr","bbg","bbp","btb","vno","tho","rdb","bsf","tck","cwa","mch","las","bat"],null,null]}],"limits":{"lat":[39.4917,99.999],"lng":[-999.999,-121.45106]}},"evals":[],"jsHooks":[]}</script>
+<span class="st">  </span><span class="kw"><a href="../reference/map_stations.html">map_stations</a></span>()</code></pre></div>
+<p>The same can be done with leaflet functions</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cdec_stations.html">cdec_stations</a></span>(<span class="dt">county =</span> <span class="st">"tehama"</span>)
+<span class="kw"><a href="http://www.rdocumentation.org/packages/leaflet/topics/leaflet">leaflet</a></span>(d) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/leaflet/topics/map-layers">addTiles</a></span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/leaflet/topics/map-layers">addCircleMarkers</a></span>(<span class="dt">label=</span><span class="op">~</span>station_id) <span class="co">#psk is way off here </span></code></pre></div>
+</div>
+<div id="exploring-datasets-within-a-station" class="section level1">
+<h1 class="hasAnchor">
+<a href="#exploring-datasets-within-a-station" class="anchor"></a>Exploring Datasets within a Station</h1>
+<p>After exploring stations in a desired location. We can start focusing on the datasets available at the locations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">station &lt;-<span class="st"> "sha"</span>
+<span class="kw"><a href="../reference/cdec_datasets.html">cdec_datasets</a></span>(<span class="st">"sha"</span>)
+<span class="co">#&gt; # A tibble: 21 x 6</span>
+<span class="co">#&gt;    sensor_number sensor_name   sensor_units duration start      end       </span>
+<span class="co">#&gt;            &lt;int&gt; &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;    &lt;date&gt;     &lt;date&gt;    </span>
+<span class="co">#&gt;  1             2 precipitatio… inches       daily    2003-10-01 2018-05-09</span>
+<span class="co">#&gt;  2             2 precipitatio… inches       monthly  1953-10-01 2018-05-09</span>
+<span class="co">#&gt;  3             6 reservoir el… feet         daily    1985-01-01 2018-05-09</span>
+<span class="co">#&gt;  4             6 reservoir el… feet         hourly   1993-12-09 2018-05-09</span>
+<span class="co">#&gt;  5             8 full natural… cfs          daily    1987-05-31 2018-05-09</span>
+<span class="co">#&gt;  6            15 reservoir st… af           daily    1985-01-01 2018-05-09</span>
+<span class="co">#&gt;  7            15 reservoir st… af           hourly   1994-06-24 2018-05-09</span>
+<span class="co">#&gt;  8            15 reservoir st… af           monthly  1953-10-01 2018-05-09</span>
+<span class="co">#&gt;  9            22 reservoir st… af           daily    1993-10-03 2018-05-09</span>
+<span class="co">#&gt; 10            23 reservoir ou… cfs          daily    1987-01-05 2018-05-09</span>
+<span class="co">#&gt; # ... with 11 more rows</span></code></pre></div>
+<p>Since all of these functions return a tidy dataframe we can make use of the <code>dplyr</code> to filter, mutate and explore. Here we look for datasets in Shasta that report a storage</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
+
+<span class="kw"><a href="../reference/cdec_datasets.html">cdec_datasets</a></span>(<span class="st">"sha"</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="kw">grepl</span>(<span class="st">"storage"</span>, sensor_name))
+<span class="co">#&gt; # A tibble: 5 x 6</span>
+<span class="co">#&gt;   sensor_number sensor_name    sensor_units duration start      end       </span>
+<span class="co">#&gt;           &lt;int&gt; &lt;chr&gt;          &lt;chr&gt;        &lt;chr&gt;    &lt;date&gt;     &lt;date&gt;    </span>
+<span class="co">#&gt; 1            15 reservoir sto… af           daily    1985-01-01 2018-05-09</span>
+<span class="co">#&gt; 2            15 reservoir sto… af           hourly   1994-06-24 2018-05-09</span>
+<span class="co">#&gt; 3            15 reservoir sto… af           monthly  1953-10-01 2018-05-09</span>
+<span class="co">#&gt; 4            22 reservoir sto… af           daily    1993-10-03 2018-05-09</span>
+<span class="co">#&gt; 5            94 reservoir top… af           daily    2000-10-24 2018-05-09</span></code></pre></div>
+<p>Take note of the sensor number, and duration, these will be needed for querying data in the next section.</p>
+</div>
+<div id="query-data" class="section level1">
+<h1 class="hasAnchor">
+<a href="#query-data" class="anchor"></a>Query Data</h1>
+<p>Now that we have a location, parameter of interest and duration we can start to query for actual data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sha_storage_daily &lt;-<span class="st"> </span><span class="kw"><a href="../reference/cdec_query.html">cdec_query</a></span>(<span class="dt">station =</span> <span class="st">"sha"</span>, <span class="dt">sensor_num =</span> <span class="st">"15"</span>, 
+                                <span class="dt">dur_code =</span> <span class="st">"d"</span>, <span class="dt">start_date =</span> <span class="st">"2018-01-01"</span>, 
+                                <span class="dt">end_date =</span> <span class="kw">Sys.Date</span>())
+
+sha_storage_daily
+<span class="co">#&gt; # A tibble: 129 x 5</span>
+<span class="co">#&gt;    agency_cd location_id datetime            parameter_cd parameter_value</span>
+<span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;                  &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 CDEC      SHA         2018-01-01 00:00:00 15                  3203249.</span>
+<span class="co">#&gt;  2 CDEC      SHA         2018-01-02 00:00:00 15                  3202064.</span>
+<span class="co">#&gt;  3 CDEC      SHA         2018-01-03 00:00:00 15                  3203723.</span>
+<span class="co">#&gt;  4 CDEC      SHA         2018-01-04 00:00:00 15                  3206566.</span>
+<span class="co">#&gt;  5 CDEC      SHA         2018-01-05 00:00:00 15                  3210358.</span>
+<span class="co">#&gt;  6 CDEC      SHA         2018-01-06 00:00:00 15                  3215097.</span>
+<span class="co">#&gt;  7 CDEC      SHA         2018-01-07 00:00:00 15                  3217003.</span>
+<span class="co">#&gt;  8 CDEC      SHA         2018-01-08 00:00:00 15                  3229391.</span>
+<span class="co">#&gt;  9 CDEC      SHA         2018-01-09 00:00:00 15                  3237014.</span>
+<span class="co">#&gt; 10 CDEC      SHA         2018-01-10 00:00:00 15                  3242032.</span>
+<span class="co">#&gt; # ... with 119 more rows</span></code></pre></div>
+<p>Once again the the data is in a tidy form.</p>
+<div id="plot" class="section level3">
+<h3 class="hasAnchor">
+<a href="#plot" class="anchor"></a>Plot</h3>
+<p>We can plot with ggplot2</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+
+sha_storage_daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(datetime, parameter_value)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>()</code></pre></div>
+<p><img src="CDECRetrieve_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
 </div>
 </div>
   </div>
@@ -180,6 +256,8 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <li><a href="#install">Install</a></li>
       <li><a href="#intro">Intro</a></li>
       <li><a href="#exploring-locations">Exploring Locations</a></li>
+      <li><a href="#exploring-datasets-within-a-station">Exploring Datasets within a Station</a></li>
+      <li><a href="#query-data">Query Data</a></li>
       </ul>
 </div>
       </div>
@@ -197,6 +275,8 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

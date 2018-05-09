@@ -74,13 +74,94 @@ map these for visual inspection. CDECRetrieve provides a simple function to
 do exactly this `map_stations()`.
 
 
-```{r}
+```{r eval=FALSE}
 library(magrittr)
 library(leaflet)
 
 cdec_stations(county = "tehama") %>% 
   map_stations()
 ```
+
+The same can be done with leaflet functions 
+
+```{r eval=FALSE}
+d <- cdec_stations(county = "tehama")
+leaflet(d) %>% 
+  addTiles() %>% 
+  addCircleMarkers(label=~station_id) #psk is way off here 
+```
+
+# Exploring Datasets within a Station 
+
+After exploring stations in a desired location. We can start focusing on 
+the datasets available at the locations. 
+
+```{r} 
+station <- "sha"
+cdec_datasets("sha")
+```
+
+
+Since all of these functions return a tidy dataframe we can make use of the `dplyr`
+to filter, mutate and explore. Here we look for datasets in Shasta that report a
+storage 
+
+```{r}
+library(magrittr)
+
+cdec_datasets("sha") %>% 
+  dplyr::filter(grepl("storage", sensor_name))
+```
+
+Take note of the sensor number, and duration, these will be needed for querying data
+in the next section.
+
+
+# Query Data 
+
+Now that we have a location, parameter of interest and duration we can start to
+query for actual data. 
+
+```{r message=FALSE}
+sha_storage_daily <- cdec_query(station = "sha", sensor_num = "15", 
+                                dur_code = "d", start_date = "2018-01-01", 
+                                end_date = Sys.Date())
+
+sha_storage_daily
+```
+
+
+Once again the the data is in a tidy form. 
+
+### Plot 
+
+We can plot with ggplot2
+
+```{r warning=FALSE}
+library(ggplot2)
+
+sha_storage_daily %>% 
+  ggplot(aes(datetime, parameter_value)) + geom_line()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

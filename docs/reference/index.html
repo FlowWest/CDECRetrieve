@@ -25,9 +25,14 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Function reference" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -50,8 +55,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">CDECRetrieve</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">CDECRetrieve</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -61,7 +70,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/CDECRetrieve.html">Get Started</a>
+  <a href="../articles/CDECRetrieve.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -79,13 +88,14 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -93,88 +103,83 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9">
+<div class="row">
+  <div class="contents col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.1.0</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    <table class="ref-index">
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <colgroup>
+      <col class="alias" />
+      <col class="title" />
+    </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cdec_datasets.html">cdec_datasets</a></code> </p>
-          </td>
-          <td><p>Show available data</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cdec_query.html">cdec_query</a></code> </p>
-          </td>
-          <td><p>Query observation data</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="CDECRetrieve.html">CDECRetrieve</a></code> </p>
-          </td>
-          <td><p>CDECRetrieve</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cdec_rt_list.html">cdec_rt_list</a></code> </p>
-          </td>
-          <td><p>List Rating Tables</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cdec_rt.html">cdec_rt</a></code> </p>
-          </td>
-          <td><p>Get a rating table</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="cdec_stations.html">cdec_stations</a></code> </p>
-          </td>
-          <td><p>search for stations in the cdec system</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="map_stations.html">map_stations</a></code> </p>
-          </td>
-          <td><p>Map Station Search</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="sac_valley_wy_types.html">sac_valley_wy_types</a></code> </p>
-          </td>
-          <td><p>Sacramento Valley Water Year Index</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="san_joaquin_wy_types.html">san_joaquin_wy_types</a></code> </p>
-          </td>
-          <td><p>San Joaquin Valley Water Year Index</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="CDECRetrieve.html">CDECRetrieve</a></code> </p>
+        </td>
+        <td><p>CDECRetrieve</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="cdec_datasets.html">cdec_datasets()</a></code> </p>
+        </td>
+        <td><p>Show available data</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="cdec_query.html">cdec_query()</a></code> </p>
+        </td>
+        <td><p>Query observation data</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="cdec_rt.html">cdec_rt()</a></code> </p>
+        </td>
+        <td><p>Get a rating table</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="cdec_rt_list.html">cdec_rt_list()</a></code> </p>
+        </td>
+        <td><p>List Rating Tables</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="cdec_stations.html">cdec_stations()</a></code> </p>
+        </td>
+        <td><p>Search CDEC Stations</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="map_stations.html">map_stations()</a></code> </p>
+        </td>
+        <td><p>Map Station Search</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="sac_valley_wy_types.html">sac_valley_wy_types</a></code> </p>
+        </td>
+        <td><p>Sacramento Valley Water Year Index</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="san_joaquin_wy_types.html">san_joaquin_wy_types</a></code> </p>
+        </td>
+        <td><p>San Joaquin Valley Water Year Index</p></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -197,5 +202,8 @@
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   
 <meta property="og:title" content="Query observation data — cdec_query" />
@@ -33,6 +36,8 @@
 based on station, sensor number, duration code and start/end date.
 Use cdec_datasets() to view an updated list of all available data at a station." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -55,8 +60,12 @@ Use cdec_datasets() to view an updated list of all available data at a station."
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">CDECRetrieve</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">CDECRetrieve</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -66,7 +75,7 @@ Use cdec_datasets() to view an updated list of all available data at a station."
   </a>
 </li>
 <li>
-  <a href="../articles/CDECRetrieve.html">Get Started</a>
+  <a href="../articles/CDECRetrieve.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -84,13 +93,14 @@ Use cdec_datasets() to view an updated list of all available data at a station."
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
         
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -98,22 +108,26 @@ Use cdec_datasets() to view an updated list of all available data at a station."
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Query observation data</h1>
+    
+    <div class="hidden name"><code>cdec_query.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Function queries the CDEC site to obtain desired station data
 based on station, sensor number, duration code and start/end date.
 Use cdec_datasets() to view an updated list of all available data at a station.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>cdec_query</span>(<span class='no'>station</span>, <span class='no'>sensor_num</span>, <span class='no'>dur_code</span>, <span class='kw'>start_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>end_date</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -191,5 +205,8 @@ Use cdec_datasets() to view an updated list of all available data at a station.<
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
