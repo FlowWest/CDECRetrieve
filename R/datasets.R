@@ -23,9 +23,9 @@ cdec_datasets <- function(station) {
   raw_data <- rvest::html_table(resp_at_node)[[1]]
 
   # minor cleaning of the data
-  datasets_data <- clean_datasets_resp(raw_data)
-  attr(datasets_data, "cdec_service") <- "datasets"
-  return(datasets_data)
+  d <- clean_datasets_resp(raw_data)
+  class(d) <- append(class(d), "cdec_datasets")
+  return(d)
 }
 
 

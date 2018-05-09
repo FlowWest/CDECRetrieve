@@ -48,13 +48,16 @@ form with a lot of options,
 The pakcage exposes this functionallity through `cdec_stations()`. Although 
 it doesn't (currently) map all options in the web form it does so for the most
 used, namely, station id, nearby city, river basin, hydro area and county.
+At least one of the parameters must be supplied, and combination of these can 
+be supplied to refine the search. 
 
 ```{r}
 library(CDECRetrieve)
 
-cdec_stations(station_id = "kwk") # get metadata for Keswick Dam
+cdec_stations(station_id = "kwk") # return metadata for KWK
 
-# show all locations near san francisco
+# show all locations near san francisco, this returns a set of 
+# CDEC station that are near San Francisco
 cdec_stations(nearby_city = "san francisco")
 
 # show all location in the sf bay river basin
@@ -76,5 +79,5 @@ library(magrittr)
 library(leaflet)
 
 cdec_stations(county = "tehama") %>% 
-  map_stations(label = ~station_id)
+  map()
 ```

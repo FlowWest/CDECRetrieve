@@ -1,6 +1,8 @@
-#' search for stations in the cdec system
+#' Search CDEC Stations
 #' @description search the stations in thec CDEC system using the CDEC Station Search
-#' service \href{https://cdec.water.ca.gov/cgi-progs/staSearch}{here}
+#' service \href{https://cdec.water.ca.gov/cgi-progs/staSearch}{here}. Combinations
+#' of these parameters can be supplied to refine or be left out to generalize, at least
+#' one must be supplied.
 #' @param station_id string three letter station code
 #' @param nearby_city string search stations near supplied city
 #' @param river_basin string search stations in supplied basin
@@ -14,6 +16,13 @@
 #' @export
 cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
                           hydro_area=NULL, county=NULL) {
+
+  if (is.null(c(station_id,
+                       nearby_city,
+                       river_basin,
+                       hydro_area,
+                       county))) stop("at least one search parameter must be supplied",
+                                          call. = FALSE)
 
   query <- create_station_query(station_id=station_id, nearby_city=nearby_city,
                                 river_basin=river_basin, hydro_area=hydro_area,
@@ -32,13 +41,16 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
   raw_station_data <- rvest::html_table(html_table_node)
 
 
-  stations_data <- cdec_station_parse(raw_station_data)
-  attr(stations_data, "cdec_service") <- "cdec_stations"
-  return(stations_data)
+  d <- cdec_station_parse(raw_station_data)
+  class(d) <- append(class(d), "cdec_stations")
+  return(d)
 }
 
 #' @title Map Station Search
-#' @description Populate a leaflet map with the results of cdec_stations() call
+#' @description Populate a leaflet map with the results of cdec_stations() call. The function
+#' makes use of leaflet, and so will work only if this is installed on the system.
+#' This function is bundled simply for exploration purposes, it is highly suggested
+#' to make use of leaflet for production maps.
 #' @param .data result of a cdec_stations() call
 #' @param ... named arguments passed into leaflet::addCircleMarkers
 #' @examples
@@ -46,20 +58,21 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
 #'     cdec_stations(county = "alameda") %>% map_stations(label=~name, popup=~station_id)
 #' }
 #' @export
-map_stations <- function(.data, ...) {
-  if(!is_cdec_station(.data)) {
-    stop(".data appears to not be a result of calling cdec_stations() (map_stations)",
-         call. = FALSE)
-  }
+map.cdec_stations <- function(.data) {
+  # if (!inherits(.data, "cdec_stations")) {
+  #   stop(".data does not appear to be a call from cdec_stations()", call. = FALSE)
+  # }
 
   if (!requireNamespace("leaflet", quietly = TRUE)) {
     stop("map_stations() requires leaflet to be installed (map_stations)")
   }
 
-  m <- leaflet::leaflet(.data)
+  m <- leaflet::leaflet(dplyr::filter(.data, longitude > -500, longitude < 500))
   m <- leaflet::addTiles(m)
-  leaflet::addCircleMarkers(m, ...)
+  leaflet::addCircleMarkers(m, label=~station_id, fillColor = "#666666",
+                            fillOpacity = 1, color="black")
 }
+
 
 # INTERNAL
 
@@ -121,3 +134,24 @@ cdec_station_parse <- function(data) {
     state = "ca"
   )
 }
+
+
+
+#' @title Map search results
+#' @description Populate a leaflet map with the results of a cdec_* call. The function
+#' makes use of leaflet, and so will work only if this is installed on the system.
+#' This function is bundled simply for exploration purposes, it is highly suggested
+#' to make use of leaflet for production maps.
+#' @param .data result of a cdec_stations() call
+#' @param ... named arguments passed into leaflet::addCircleMarkers
+#' @examples
+#' if (interactive()) {
+#'     cdec_stations(county = "alameda") %>% map()
+#' }
+#' @export
+map <- function(x, ...) {
+  UseMethod("map", x)
+}
+
+
+

@@ -50,7 +50,7 @@ cdec_query <- function(station, sensor_num, dur_code,
          call. = FALSE)
   }
 
-  attr(d, "cdec_service") <- "cdec_data"
+  class(d) <- append(class(d), "cdec_data")
   return(d)
 }
 

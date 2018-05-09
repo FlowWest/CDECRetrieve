@@ -14,9 +14,10 @@ knitr::opts_chunk$set(
 ## ------------------------------------------------------------------------
 library(CDECRetrieve)
 
-cdec_stations(station_id = "kwk") # get metadata for Keswick Dam
+cdec_stations(station_id = "kwk") # return metadata for KWK
 
-# show all locations near san francisco
+# show all locations near san francisco, this returns a set of 
+# CDEC station that are near San Francisco
 cdec_stations(nearby_city = "san francisco")
 
 # show all location in the sf bay river basin
@@ -31,5 +32,5 @@ library(magrittr)
 library(leaflet)
 
 cdec_stations(county = "tehama") %>% 
-  map_stations(label = ~station_id)
+  map()
 

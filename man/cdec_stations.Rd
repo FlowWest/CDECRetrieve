@@ -2,7 +2,7 @@
 % Please edit documentation in R/stations.R
 \name{cdec_stations}
 \alias{cdec_stations}
-\title{search for stations in the cdec system}
+\title{Search CDEC Stations}
 \usage{
 cdec_stations(station_id = NULL, nearby_city = NULL, river_basin = NULL,
   hydro_area = NULL, county = NULL)
@@ -20,7 +20,9 @@ cdec_stations(station_id = NULL, nearby_city = NULL, river_basin = NULL,
 }
 \description{
 search the stations in thec CDEC system using the CDEC Station Search
-service \href{https://cdec.water.ca.gov/cgi-progs/staSearch}{here}
+service \href{https://cdec.water.ca.gov/cgi-progs/staSearch}{here}. Combinations
+of these parameters can be supplied to refine or be left out to generalize, at least
+one must be supplied.
 }
 \examples{
 # cdec_stations() can be used to find locations within an area of interest
