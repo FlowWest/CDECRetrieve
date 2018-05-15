@@ -1,7 +1,7 @@
 Package: CDECRetrieve
 Type: Package
 Title: Retrieve Historical and Near Realtime Data from CDEC
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: person("Emanuel", "Rodriguez", email = "erodriguez@flowwest.com", role = c("aut", "cre"))
 Description: CDEC maintains a set of web services at <http://cdec.water.ca.gov/queryTools.html>.
       In order to better interact and analyze the data this R packages allows
@@ -28,6 +28,7 @@ Imports: dplyr (>= 0.7.0),
 Suggests: testthat,
     leaflet,
     knitr,
-    rmarkdown
+    rmarkdown,
+    ggplot2
 License: MIT + file LICENSE
 VignetteBuilder: knitr
