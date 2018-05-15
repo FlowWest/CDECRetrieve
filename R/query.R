@@ -13,7 +13,7 @@
 #' ccr_hourly_temps <- CDECRetrieve::cdec_query("CCR", "25", "H", Sys.Date())
 #' @export
 cdec_query <- function(station, sensor_num, dur_code,
-                       start_date=NULL, end_date=NULL) {
+                       start_date=NULL, end_date=NULL, tzone='America/Los_Angeles') {
 
   if (is.null(start_date)) {start_date <- Sys.Date() - 2} # an arbitrary choice
   if (is.null(end_date)) {end_date <- Sys.Date() + 1}
@@ -40,7 +40,7 @@ cdec_query <- function(station, sensor_num, dur_code,
       stop("call to cdec failed...", call. = FALSE)
     }
 
-    d <- suppressWarnings(shef_to_tidy(temp_file))
+    d <- suppressWarnings(shef_to_tidy(temp_file, tzone))
 
     if (is.null(d)) {
       stop(paste("station:", station, "failed"), call. = FALSE)
@@ -56,7 +56,7 @@ cdec_query <- function(station, sensor_num, dur_code,
 
 
 # function uses a file on disk to process from shef to a tidy format
-shef_to_tidy <- function(file) {
+shef_to_tidy <- function(file, tzone) {
 
   #keep these columns which are: location_id, date, time, sensor_code, value
   cols_to_keep <- c(2, 3, 5, 6, 7)
@@ -71,7 +71,7 @@ shef_to_tidy <- function(file) {
   raw <- raw[, cols_to_keep]
 
   # parse required cols
-  datetime_col <- lubridate::ymd_hm(paste0(raw$X3, raw$X5))
+  datetime_col <- lubridate::ymd_hm(paste0(raw$X3, raw$X5), tz=tzone)
   shef_code <- raw$X6[1]
   cdec_code <- ifelse(is.null(shef_code_lookup[[shef_code]]),
                       NA, shef_code_lookup[[shef_code]])
