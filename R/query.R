@@ -7,6 +7,7 @@
 #' @param dur_code duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.
 #' @param start_date date to start the query on.
 #' @param end_date a date to end query on, defaults to current date.
+#' @param tzone a time zone to attached to datetime objects in R
 #' @return dataframe
 #' @examples
 #' kwk_hourly_flows <- CDECRetrieve::cdec_query("KWK", "20", "H", "2017-01-01")

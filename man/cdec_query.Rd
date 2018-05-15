@@ -17,6 +17,8 @@ cdec_query(station, sensor_num, dur_code, start_date = NULL,
 \item{start_date}{date to start the query on.}
 
 \item{end_date}{a date to end query on, defaults to current date.}
+
+\item{tzone}{a time zone to attached to datetime objects in R}
 }
 \value{
 dataframe
