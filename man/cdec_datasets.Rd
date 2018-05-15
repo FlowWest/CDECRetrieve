@@ -17,5 +17,7 @@ display a data frame of available data for a station.
 }
 \examples{
 # get a list of dataframes available for CCR
+\dontrun{
 cdec_datasets("ccr")
+}
 }

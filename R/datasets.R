@@ -4,7 +4,9 @@
 #' @return data frame with available data as rows.
 #' @examples
 #' # get a list of dataframes available for CCR
+#' \dontrun{
 #' cdec_datasets("ccr")
+#' }
 #' @export
 cdec_datasets <- function(station) {
 

@@ -10,8 +10,10 @@
 #' @param tzone a time zone to attached to datetime objects in R
 #' @return dataframe
 #' @examples
+#' \dontrun{
 #' kwk_hourly_flows <- CDECRetrieve::cdec_query("KWK", "20", "H", "2017-01-01")
 #' ccr_hourly_temps <- CDECRetrieve::cdec_query("CCR", "25", "H", Sys.Date())
+#' }
 #' @export
 cdec_query <- function(station, sensor_num, dur_code,
                        start_date=NULL, end_date=NULL, tzone='America/Los_Angeles') {
