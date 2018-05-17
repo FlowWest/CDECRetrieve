@@ -6,7 +6,7 @@
 #' @param sensor_num sensor number for the measure of interest. (example "20", "01", "25")
 #' @param dur_code duration code for measure interval, "E", "H", "D", which correspong to Event, Hourly and Daily.
 #' @param start_date date to start the query on.
-#' @param end_date a date to end query on, defaults to current date.
+#' @param end_date an optional date to end query on, defaults to current date.
 #' @param tzone a time zone to attached to datetime objects in R
 #' @return dataframe
 #' @examples
@@ -16,7 +16,7 @@
 #' }
 #' @export
 cdec_query <- function(station, sensor_num, dur_code,
-                       start_date=NULL, end_date=NULL, tzone='America/Los_Angeles') {
+                       start_date, end_date=NULL, tzone='America/Los_Angeles') {
 
   if (is.null(start_date)) {start_date <- Sys.Date() - 2} # an arbitrary choice
   if (is.null(end_date)) {end_date <- Sys.Date() + 1}

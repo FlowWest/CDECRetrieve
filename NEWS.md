@@ -1,3 +1,4 @@
+
 # CDECRetrieve 0.1.1 
 
 * `cdec_query` now correctly does not force strings as factors.
