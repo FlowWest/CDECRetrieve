@@ -16,7 +16,13 @@
 #' }
 #' @export
 cdec_query <- function(station, sensor_num, dur_code,
-                       start_date=NULL, end_date=NULL, tzone='America/Los_Angeles') {
+                       start_date=NULL, end_date=NULL,
+                       tzone='America/Los_Angeles') {
+
+  if (!any(tolower(dur_code) == c("h", "d", "m", "e"))) {
+    stop("'dur_code' can only be one of 'h', 'd', 'm', 'e'",
+         call. = FALSE)
+  }
 
   # determine default choices
   if (is.null(start_date)) {
@@ -54,7 +60,8 @@ cdec_query <- function(station, sensor_num, dur_code,
     d <- suppressWarnings(shef_to_tidy(temp_file, tzone))
 
     if (is.null(d)) {
-      stop(paste("station:", station, "failed"), call. = FALSE)
+      stop(paste("station:", station,
+                 "failed, but a file was returned from CDEC, please check the query, use 'cdec_datasets()' to confirm the dataset exists"), call. = FALSE)
     }
   } else {
     stop("call to cdec failed for uknown reason, check http://cdec.water.ca.gov for status",
