@@ -16,9 +16,17 @@
 #' }
 #' @export
 cdec_query <- function(station, sensor_num, dur_code,
-                       start_date, end_date=NULL, tzone='America/Los_Angeles') {
+                       start_date=NULL, end_date=NULL, tzone='America/Los_Angeles') {
 
-  if (is.null(start_date)) {start_date <- Sys.Date() - 2} # an arbitrary choice
+  # determine default choices
+  if (is.null(start_date)) {
+    start_date <- switch (tolower(dur_code),
+      "e" = Sys.Date() - 2, # 2 days of data
+      "h" = Sys.Date() - 2, # 2 days of data
+      "m" = Sys.Date() - 90, # around 3 months
+      "d" = Sys.Date() - 30 # month of data
+    )}
+
   if (is.null(end_date)) {end_date <- Sys.Date() + 1}
 
   # decision was made here not to use httr::GET, since downloading a file
