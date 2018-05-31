@@ -54,13 +54,13 @@ cdec_query <- function(station, sensor_num, dur_code,
   if(!(utils::download.file(query_url, destfile = temp_file, quiet = TRUE))) {
     # check if the file size downloaded has a size
     if (file.info(temp_file)$size == 0) {
-      stop("call to cdec failed...", call. = FALSE)
+      stop("call to cdec failed, please visit https://cdec.water.ca.gov/ for status on their services", call. = FALSE)
     }
 
     d <- suppressWarnings(shef_to_tidy(temp_file, tzone))
 
     if (is.null(d)) {
-      stop(paste("station:", station,
+      stop(paste(station,
                  "failed, but a file was returned from CDEC, please check the query, use 'cdec_datasets()' to confirm the dataset exists"), call. = FALSE)
     }
   } else {

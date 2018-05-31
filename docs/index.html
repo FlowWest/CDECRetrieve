@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">CDECRetrieve</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.1</span>
       </span>
     </div>
 
@@ -60,6 +60,9 @@
 <li>
       <a href="articles/Introduction_to_CDECRetrieve.html">CDEC Retrieve is now part of CRAN!</a>
     </li>
+    <li>
+      <a href="articles/advanced-queries.html">Advanced Queries</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -82,14 +85,15 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#cdecretrieve" class="anchor"></a>CDECRetrieve</h1></div>
 <p><img src="https://travis-ci.org/FlowWest/CDECRetrieve.svg?branch=master" alt="travis_mater_status"><a href="https://cran.r-project.org/package=CDECRetrieve"><img src="http://www.r-pkg.org/badges/version/CDECRetrieve" alt="CRAN_Status_Badge"></a></p>
+<p><img src="https://cranlogs.r-pkg.org/badges/CDECRetrieve"></p>
 <div id="recent-updates" class="section level2">
 <h2 class="hasAnchor">
 <a href="#recent-updates" class="anchor"></a>Recent Updates</h2>
 <ul>
 <li>Map CDEC stations after search for them:</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#requires leaflet!</span>
-<span class="kw"><a href="reference/cdec_stations.html">cdec_stations</a></span>(<span class="dt">county=</span><span class="st">"shasta"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/map_stations.html">map_stations</a></span>(<span class="dt">label=</span><span class="op">~</span>station_id)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">#requires leaflet!</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="reference/cdec_stations.html">cdec_stations</a></span>(<span class="dt">county=</span><span class="st">"shasta"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/map_stations.html">map_stations</a></span>(<span class="dt">label=</span><span class="op">~</span>station_id)</a></code></pre></div>
 <ul>
 <li>New Rating table query available using <code><a href="reference/cdec_rt.html">cdec_rt()</a></code>, view more help with <code><a href="reference/cdec_rt.html">?cdec_rt</a></code>
 </li>
@@ -109,18 +113,18 @@
 <div id="installation" class="section level1">
 <h1 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h1>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># stable version </span>
-<span class="kw">package.install</span>(<span class="st">"CDECRetrieve"</span>)
-
-<span class="co"># dev version</span>
-devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"flowwest/CDECRetrieve"</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># stable version </span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw">package.install</span>(<span class="st">"CDECRetrieve"</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co"># dev version</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"flowwest/CDECRetrieve"</span>)</a></code></pre></div>
 </div>
 <div id="basic-usage" class="section level1">
 <h1 class="hasAnchor">
 <a href="#basic-usage" class="anchor"></a>Basic Usage</h1>
 <p>CDECRetrieve exposes several useful functions to query services from CDEC. The main function in the package is <code>cdec_query</code>,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># download data from kwk, sensor 20, duration is event type</span>
-kwk_flow &lt;-<span class="st"> </span><span class="kw"><a href="reference/cdec_query.html">cdec_query</a></span>(<span class="st">"KWK"</span>, <span class="st">"20"</span>, <span class="st">"E"</span>, <span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># download data from kwk, sensor 20, duration is event type</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">kwk_flow &lt;-<span class="st"> </span><span class="kw"><a href="reference/cdec_query.html">cdec_query</a></span>(<span class="st">"KWK"</span>, <span class="st">"20"</span>, <span class="st">"E"</span>, <span class="st">"2000-01-01"</span>, <span class="st">"2002-01-01"</span>)</a></code></pre></div>
 <p>The data returned,</p>
 <pre><code># A tibble: 17,544 × 5
    agency_cd            datetime location_id parameter_cd parameter_value
@@ -137,13 +141,13 @@ kwk_flow &lt;-<span class="st"> </span><span class="kw"><a href="reference/cdec_
 10      CDEC 2000-01-01 09:00:00         KWK          20H            5023
 # ... with 17,534 more rows</code></pre>
 <p>Visualize these flows,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
-<span class="kw">library</span>(ggplot2)
-
-kwk_flow <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(parameter_value <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># sentinel values -9998 and -9997 are present</span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(datetime, parameter_value)) <span class="op">+</span><span class="st"> </span>
-<span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">kwk_flow <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="http://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(parameter_value <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># sentinel values -9998 and -9997 are present</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(datetime, parameter_value)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>()</a></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/kwk_flow_ts.png" alt="kwk"></p>
 <p><em>Note that appart from replacing sentinel values with appropriate NA values, the package does no QA/QC. This can be seen in the plot above, where suspicoius values are apparent.</em></p>
 </div>
@@ -203,37 +207,37 @@ kwk_flow <span class="op">%&gt;%</span><span class="st"> </span>
 </tr></tbody>
 </table>
 <p>the benchmark expression used were:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># for the download method</span>
-CDECRetrieve<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/CDECRetrieve/topics/cdec_query">cdec_query</a></span>(<span class="st">"kwk"</span>, <span class="st">"20"</span>, <span class="st">"h"</span>, <span class="st">"2010-01-01"</span>, <span class="st">"2018-01-01"</span>)
-
-<span class="co"># for the HTTR method</span>
-s &lt;-<span class="st"> "http://cdec.water.ca.gov/cgi-progs/querySHEF"</span>
-
-q &lt;-<span class="st"> </span><span class="kw">list</span>(
-  <span class="dt">station_id =</span> <span class="st">"kwk"</span>,
-  <span class="dt">sensor_num =</span> <span class="st">"20"</span>,
-  <span class="dt">dur_code =</span> <span class="st">"h"</span>,
-  <span class="dt">start_date =</span> <span class="st">"2010-01-01"</span>,
-  <span class="dt">end_date =</span> <span class="st">"2018-01-01"</span>
-)
-
-resp &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/httr/topics/GET">GET</a></span>(s, <span class="dt">query =</span> q)
-cont &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/httr/topics/content">content</a></span>(resp)
-in_rows &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">strsplit</span>(cont, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>))
-data_rows &lt;-<span class="st"> </span>in_rows[<span class="dv">9</span><span class="op">:</span><span class="kw">length</span>(in_rows)]
-
-parse_func &lt;-<span class="st"> </span><span class="cf">function</span>(line) {
-  split_at_sapce &lt;-<span class="st"> </span><span class="kw">trimws</span>(<span class="kw">unlist</span>(<span class="kw">strsplit</span>(line, <span class="st">" "</span>)))
-  <span class="kw">list</span>(
-    <span class="dt">location_id =</span> split_at_space[<span class="dv">2</span>],
-    <span class="dt">date =</span> split_at_space[<span class="dv">3</span>],
-    <span class="dt">time =</span> split_at_space[<span class="dv">5</span>],
-    <span class="dt">shef_code =</span> split_at_space[<span class="dv">6</span>],
-    <span class="dt">value =</span> split_at_space[<span class="dv">7</span>]
-  )
-}
-
-purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_df</a></span>(data_rows, parse_func)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># for the download method</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">CDECRetrieve<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/CDECRetrieve/topics/cdec_query">cdec_query</a></span>(<span class="st">"kwk"</span>, <span class="st">"20"</span>, <span class="st">"h"</span>, <span class="st">"2010-01-01"</span>, <span class="st">"2018-01-01"</span>)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co"># for the HTTR method</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">s &lt;-<span class="st"> "http://cdec.water.ca.gov/cgi-progs/querySHEF"</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">q &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">  <span class="dt">station_id =</span> <span class="st">"kwk"</span>,</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">  <span class="dt">sensor_num =</span> <span class="st">"20"</span>,</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10">  <span class="dt">dur_code =</span> <span class="st">"h"</span>,</a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">  <span class="dt">start_date =</span> <span class="st">"2010-01-01"</span>,</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">  <span class="dt">end_date =</span> <span class="st">"2018-01-01"</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">)</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">resp &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/httr/topics/GET">GET</a></span>(s, <span class="dt">query =</span> q)</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16">cont &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/httr/topics/content">content</a></span>(resp)</a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">in_rows &lt;-<span class="st"> </span><span class="kw">unlist</span>(<span class="kw">strsplit</span>(cont, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>))</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18">data_rows &lt;-<span class="st"> </span>in_rows[<span class="dv">9</span><span class="op">:</span><span class="kw">length</span>(in_rows)]</a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">parse_func &lt;-<span class="st"> </span><span class="cf">function</span>(line) {</a>
+<a class="sourceLine" id="cb6-21" data-line-number="21">  split_at_sapce &lt;-<span class="st"> </span><span class="kw">trimws</span>(<span class="kw">unlist</span>(<span class="kw">strsplit</span>(line, <span class="st">" "</span>)))</a>
+<a class="sourceLine" id="cb6-22" data-line-number="22">  <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb6-23" data-line-number="23">    <span class="dt">location_id =</span> split_at_space[<span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb6-24" data-line-number="24">    <span class="dt">date =</span> split_at_space[<span class="dv">3</span>],</a>
+<a class="sourceLine" id="cb6-25" data-line-number="25">    <span class="dt">time =</span> split_at_space[<span class="dv">5</span>],</a>
+<a class="sourceLine" id="cb6-26" data-line-number="26">    <span class="dt">shef_code =</span> split_at_space[<span class="dv">6</span>],</a>
+<a class="sourceLine" id="cb6-27" data-line-number="27">    <span class="dt">value =</span> split_at_space[<span class="dv">7</span>]</a>
+<a class="sourceLine" id="cb6-28" data-line-number="28">  )</a>
+<a class="sourceLine" id="cb6-29" data-line-number="29">}</a>
+<a class="sourceLine" id="cb6-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb6-31" data-line-number="31">purrr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map">map_df</a></span>(data_rows, parse_func)</a></code></pre></div>
 </div>
 </div>
 

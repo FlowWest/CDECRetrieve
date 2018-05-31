@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">CDECRetrieve</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.1</span>
       </span>
     </div>
 
@@ -87,6 +87,9 @@
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="../articles/Introduction_to_CDECRetrieve.html">CDEC Retrieve is now part of CRAN!</a>
+    </li>
+    <li>
+      <a href="../articles/advanced-queries.html">Advanced Queries</a>
     </li>
   </ul>
 </li>
@@ -137,14 +140,10 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># get a list of dataframes available for CCR</span>
-<span class='fu'>cdec_datasets</span>(<span class='st'>"ccr"</span>)</div><div class='output co'>#&gt; # A tibble: 4 x 6
-#&gt;   sensor_number sensor_name         sensor_units duration start      end       
-#&gt;           &lt;int&gt; &lt;chr&gt;               &lt;chr&gt;        &lt;chr&gt;    &lt;date&gt;     &lt;date&gt;    
-#&gt; 1            14 battery voltage     volts        hourly   1997-08-08 2018-05-09
-#&gt; 2            25 temperature water   deg f        hourly   1997-08-08 2018-05-09
-#&gt; 3            27 water turbidity     ntu          hourly   1998-11-16 2018-05-09
-#&gt; 4            61 water dissolved ox… mg/l         hourly   1998-11-16 2018-05-09</div></pre>
+    <pre class="examples"><div class='input'># get a list of dataframes available for CCR
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>cdec_datasets</span>(<span class='st'>"ccr"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

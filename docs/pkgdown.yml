@@ -1,7 +1,8 @@
-pandoc: 1.19.2.1
+pandoc: 2.2.1
 pkgdown: 1.0.0
 pkgdown_sha: ~
 articles:
   CDECRetrieve: CDECRetrieve.html
   Introduction_to_CDECRetrieve: Introduction_to_CDECRetrieve.html
+  advanced-queries: advanced-queries.html
 
