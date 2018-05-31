@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advanced Queries • CDECRetrieve</title>
+<title>Advanced Queries with purrr • CDECRetrieve</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Advanced Queries">
+<meta property="og:title" content="Advanced Queries with purrr">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -59,7 +59,7 @@
       <a href="../articles/Introduction_to_CDECRetrieve.html">CDEC Retrieve is now part of CRAN!</a>
     </li>
     <li>
-      <a href="../articles/advanced-queries.html">Advanced Queries</a>
+      <a href="../articles/advanced-queries.html">Advanced Queries with purrr</a>
     </li>
   </ul>
 </li>
@@ -79,7 +79,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Advanced Queries</h1>
+      <h1>Advanced Queries with purrr</h1>
                         <h4 class="author">Emanuel Rodriguez</h4>
             
             <h4 class="date">2018-05-31</h4>
@@ -253,7 +253,7 @@
 </div>
 <div id="all-combinations-of-arguments" class="section level3">
 <h3 class="hasAnchor">
-<a href="#all-combinations-of-arguments" class="anchor"></a>All Combinations of Arguments</h3>
+<a href="#all-combinations-of-arguments" class="anchor"></a>All combinations of arguments</h3>
 <p>Here is a way to query for a set of all combination of inputs for a given set of stations and sensors.</p>
 <p><strong>Note</strong>: you need confirm these combinations make sense to query.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">stations_of_interest &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"bsf"</span>, <span class="st">"kwk"</span>)</a>
@@ -266,65 +266,70 @@
 <a class="sourceLine" id="cb9-8" data-line-number="8">                   <span class="dt">z=</span>dur_code, </a>
 <a class="sourceLine" id="cb9-9" data-line-number="9">                   <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a>
 <a class="sourceLine" id="cb9-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map2">pmap_df</a></span>(<span class="kw">list</span>(ins<span class="op">$</span>x, ins<span class="op">$</span>y, ins<span class="op">$</span>z), <span class="op">~</span><span class="kw"><a href="../reference/cdec_query.html">cdec_query</a></span>(..<span class="dv">1</span>, ..<span class="dv">2</span>, ..<span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt; Parsed with column specification:</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; cols(</span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt;   X1 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt;   X2 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt;   X3 = col_integer(),</span></a>
-<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt;   X4 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt;   X5 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-19" data-line-number="19"><span class="co">#&gt;   X6 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">#&gt;   X7 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="co">#&gt;   X8 = col_character()</span></a>
-<a class="sourceLine" id="cb9-22" data-line-number="22"><span class="co">#&gt; )</span></a>
-<a class="sourceLine" id="cb9-23" data-line-number="23"><span class="co">#&gt; Parsed with column specification:</span></a>
-<a class="sourceLine" id="cb9-24" data-line-number="24"><span class="co">#&gt; cols(</span></a>
-<a class="sourceLine" id="cb9-25" data-line-number="25"><span class="co">#&gt;   X1 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-26" data-line-number="26"><span class="co">#&gt;   X2 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-27" data-line-number="27"><span class="co">#&gt;   X3 = col_integer(),</span></a>
-<a class="sourceLine" id="cb9-28" data-line-number="28"><span class="co">#&gt;   X4 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-29" data-line-number="29"><span class="co">#&gt;   X5 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-30" data-line-number="30"><span class="co">#&gt;   X6 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-31" data-line-number="31"><span class="co">#&gt;   X7 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-32" data-line-number="32"><span class="co">#&gt;   X8 = col_character()</span></a>
-<a class="sourceLine" id="cb9-33" data-line-number="33"><span class="co">#&gt; )</span></a>
-<a class="sourceLine" id="cb9-34" data-line-number="34"><span class="co">#&gt; Parsed with column specification:</span></a>
-<a class="sourceLine" id="cb9-35" data-line-number="35"><span class="co">#&gt; cols(</span></a>
-<a class="sourceLine" id="cb9-36" data-line-number="36"><span class="co">#&gt;   X1 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-37" data-line-number="37"><span class="co">#&gt;   X2 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-38" data-line-number="38"><span class="co">#&gt;   X3 = col_integer(),</span></a>
-<a class="sourceLine" id="cb9-39" data-line-number="39"><span class="co">#&gt;   X4 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-40" data-line-number="40"><span class="co">#&gt;   X5 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-41" data-line-number="41"><span class="co">#&gt;   X6 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-42" data-line-number="42"><span class="co">#&gt;   X7 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-43" data-line-number="43"><span class="co">#&gt;   X8 = col_character()</span></a>
-<a class="sourceLine" id="cb9-44" data-line-number="44"><span class="co">#&gt; )</span></a>
-<a class="sourceLine" id="cb9-45" data-line-number="45"><span class="co">#&gt; Parsed with column specification:</span></a>
-<a class="sourceLine" id="cb9-46" data-line-number="46"><span class="co">#&gt; cols(</span></a>
-<a class="sourceLine" id="cb9-47" data-line-number="47"><span class="co">#&gt;   X1 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-48" data-line-number="48"><span class="co">#&gt;   X2 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-49" data-line-number="49"><span class="co">#&gt;   X3 = col_integer(),</span></a>
-<a class="sourceLine" id="cb9-50" data-line-number="50"><span class="co">#&gt;   X4 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-51" data-line-number="51"><span class="co">#&gt;   X5 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-52" data-line-number="52"><span class="co">#&gt;   X6 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-53" data-line-number="53"><span class="co">#&gt;   X7 = col_character(),</span></a>
-<a class="sourceLine" id="cb9-54" data-line-number="54"><span class="co">#&gt;   X8 = col_character()</span></a>
-<a class="sourceLine" id="cb9-55" data-line-number="55"><span class="co">#&gt; )</span></a>
-<a class="sourceLine" id="cb9-56" data-line-number="56"><span class="co">#&gt; # A tibble: 292 x 5</span></a>
-<a class="sourceLine" id="cb9-57" data-line-number="57"><span class="co">#&gt;    agency_cd location_id datetime            parameter_cd parameter_value</span></a>
-<a class="sourceLine" id="cb9-58" data-line-number="58"><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;                  &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb9-59" data-line-number="59"><span class="co">#&gt;  1 CDEC      BSF         2018-05-29 00:00:00 25                      55.4</span></a>
-<a class="sourceLine" id="cb9-60" data-line-number="60"><span class="co">#&gt;  2 CDEC      BSF         2018-05-29 01:00:00 25                      54.8</span></a>
-<a class="sourceLine" id="cb9-61" data-line-number="61"><span class="co">#&gt;  3 CDEC      BSF         2018-05-29 02:00:00 25                      54.4</span></a>
-<a class="sourceLine" id="cb9-62" data-line-number="62"><span class="co">#&gt;  4 CDEC      BSF         2018-05-29 03:00:00 25                      54.0</span></a>
-<a class="sourceLine" id="cb9-63" data-line-number="63"><span class="co">#&gt;  5 CDEC      BSF         2018-05-29 04:00:00 25                      53.7</span></a>
-<a class="sourceLine" id="cb9-64" data-line-number="64"><span class="co">#&gt;  6 CDEC      BSF         2018-05-29 05:00:00 25                      53.4</span></a>
-<a class="sourceLine" id="cb9-65" data-line-number="65"><span class="co">#&gt;  7 CDEC      BSF         2018-05-29 06:00:00 25                      53.3</span></a>
-<a class="sourceLine" id="cb9-66" data-line-number="66"><span class="co">#&gt;  8 CDEC      BSF         2018-05-29 07:00:00 25                      53.1</span></a>
-<a class="sourceLine" id="cb9-67" data-line-number="67"><span class="co">#&gt;  9 CDEC      BSF         2018-05-29 08:00:00 25                      53.1</span></a>
-<a class="sourceLine" id="cb9-68" data-line-number="68"><span class="co">#&gt; 10 CDEC      BSF         2018-05-29 09:00:00 25                      53.4</span></a>
-<a class="sourceLine" id="cb9-69" data-line-number="69"><span class="co">#&gt; # ... with 282 more rows</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-11" data-line-number="11">temp_and_turb &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/purrr/topics/map2">pmap_df</a></span>(<span class="kw">list</span>(ins<span class="op">$</span>x, ins<span class="op">$</span>y, ins<span class="op">$</span>z), <span class="op">~</span><span class="kw"><a href="../reference/cdec_query.html">cdec_query</a></span>(..<span class="dv">1</span>, ..<span class="dv">2</span>, ..<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; Parsed with column specification:</span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; cols(</span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt;   X1 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt;   X2 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt;   X3 = col_integer(),</span></a>
+<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt;   X4 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-19" data-line-number="19"><span class="co">#&gt;   X5 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">#&gt;   X6 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="co">#&gt;   X7 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-22" data-line-number="22"><span class="co">#&gt;   X8 = col_character()</span></a>
+<a class="sourceLine" id="cb9-23" data-line-number="23"><span class="co">#&gt; )</span></a>
+<a class="sourceLine" id="cb9-24" data-line-number="24"><span class="co">#&gt; Parsed with column specification:</span></a>
+<a class="sourceLine" id="cb9-25" data-line-number="25"><span class="co">#&gt; cols(</span></a>
+<a class="sourceLine" id="cb9-26" data-line-number="26"><span class="co">#&gt;   X1 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-27" data-line-number="27"><span class="co">#&gt;   X2 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-28" data-line-number="28"><span class="co">#&gt;   X3 = col_integer(),</span></a>
+<a class="sourceLine" id="cb9-29" data-line-number="29"><span class="co">#&gt;   X4 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-30" data-line-number="30"><span class="co">#&gt;   X5 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-31" data-line-number="31"><span class="co">#&gt;   X6 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-32" data-line-number="32"><span class="co">#&gt;   X7 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-33" data-line-number="33"><span class="co">#&gt;   X8 = col_character()</span></a>
+<a class="sourceLine" id="cb9-34" data-line-number="34"><span class="co">#&gt; )</span></a>
+<a class="sourceLine" id="cb9-35" data-line-number="35"><span class="co">#&gt; Parsed with column specification:</span></a>
+<a class="sourceLine" id="cb9-36" data-line-number="36"><span class="co">#&gt; cols(</span></a>
+<a class="sourceLine" id="cb9-37" data-line-number="37"><span class="co">#&gt;   X1 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-38" data-line-number="38"><span class="co">#&gt;   X2 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-39" data-line-number="39"><span class="co">#&gt;   X3 = col_integer(),</span></a>
+<a class="sourceLine" id="cb9-40" data-line-number="40"><span class="co">#&gt;   X4 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-41" data-line-number="41"><span class="co">#&gt;   X5 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-42" data-line-number="42"><span class="co">#&gt;   X6 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-43" data-line-number="43"><span class="co">#&gt;   X7 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-44" data-line-number="44"><span class="co">#&gt;   X8 = col_character()</span></a>
+<a class="sourceLine" id="cb9-45" data-line-number="45"><span class="co">#&gt; )</span></a>
+<a class="sourceLine" id="cb9-46" data-line-number="46"><span class="co">#&gt; Parsed with column specification:</span></a>
+<a class="sourceLine" id="cb9-47" data-line-number="47"><span class="co">#&gt; cols(</span></a>
+<a class="sourceLine" id="cb9-48" data-line-number="48"><span class="co">#&gt;   X1 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-49" data-line-number="49"><span class="co">#&gt;   X2 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-50" data-line-number="50"><span class="co">#&gt;   X3 = col_integer(),</span></a>
+<a class="sourceLine" id="cb9-51" data-line-number="51"><span class="co">#&gt;   X4 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-52" data-line-number="52"><span class="co">#&gt;   X5 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-53" data-line-number="53"><span class="co">#&gt;   X6 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-54" data-line-number="54"><span class="co">#&gt;   X7 = col_character(),</span></a>
+<a class="sourceLine" id="cb9-55" data-line-number="55"><span class="co">#&gt;   X8 = col_character()</span></a>
+<a class="sourceLine" id="cb9-56" data-line-number="56"><span class="co">#&gt; )</span></a>
+<a class="sourceLine" id="cb9-57" data-line-number="57"></a>
+<a class="sourceLine" id="cb9-58" data-line-number="58"><span class="kw">head</span>(temp_and_turb)</a>
+<a class="sourceLine" id="cb9-59" data-line-number="59"><span class="co">#&gt; # A tibble: 6 x 5</span></a>
+<a class="sourceLine" id="cb9-60" data-line-number="60"><span class="co">#&gt;   agency_cd location_id datetime            parameter_cd parameter_value</span></a>
+<a class="sourceLine" id="cb9-61" data-line-number="61"><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;                  &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb9-62" data-line-number="62"><span class="co">#&gt; 1 CDEC      BSF         2018-05-29 00:00:00 25                      55.4</span></a>
+<a class="sourceLine" id="cb9-63" data-line-number="63"><span class="co">#&gt; 2 CDEC      BSF         2018-05-29 01:00:00 25                      54.8</span></a>
+<a class="sourceLine" id="cb9-64" data-line-number="64"><span class="co">#&gt; 3 CDEC      BSF         2018-05-29 02:00:00 25                      54.4</span></a>
+<a class="sourceLine" id="cb9-65" data-line-number="65"><span class="co">#&gt; 4 CDEC      BSF         2018-05-29 03:00:00 25                      54.0</span></a>
+<a class="sourceLine" id="cb9-66" data-line-number="66"><span class="co">#&gt; 5 CDEC      BSF         2018-05-29 04:00:00 25                      53.7</span></a>
+<a class="sourceLine" id="cb9-67" data-line-number="67"><span class="co">#&gt; 6 CDEC      BSF         2018-05-29 05:00:00 25                      53.4</span></a></code></pre></div>
+<p>and now we can visualize these</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">param_names &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"25"</span> =<span class="st"> "Temperature (F)"</span>, <span class="st">"27"</span> =<span class="st"> "Turbidity (NTU)"</span>)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">temp_and_turb <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(datetime, parameter_value, <span class="dt">color=</span>location_id)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(. <span class="op">~</span><span class="st"> </span>param_names[parameter_cd], <span class="dt">scales =</span> <span class="st">"free"</span>)</a></code></pre></div>
+<p><img src="advanced-queries_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 </div>
 </div>
   </div>

@@ -1,10 +1,10 @@
 ---
-title: "Advanced Queries"
+title: "Advanced Queries with purrr"
 author: "Emanuel Rodriguez"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Advanced Queries}
+  %\VignetteIndexEntry{Advanced Queries with purrr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -123,7 +123,7 @@ map2_df(stations_of_interest, sensors_of_interest,
 ```
 
 
-### All Combinations of Arguments 
+### All combinations of arguments
 
 Here is a way to query for a set of all combination of inputs for a given set of 
 stations and sensors. 
@@ -141,7 +141,20 @@ ins <- expand.grid(x=stations_of_interest,
                    z=dur_code, 
                    stringsAsFactors = FALSE)
 
-pmap_df(list(ins$x, ins$y, ins$z), ~cdec_query(..1, ..2, ..3))
+temp_and_turb <- 
+  pmap_df(list(ins$x, ins$y, ins$z), ~cdec_query(..1, ..2, ..3))
+
+head(temp_and_turb)
+```
+
+and now we can visualize these
+
+```{r, warning=FALSE}
+param_names <- c("25" = "Temperature (F)", "27" = "Turbidity (NTU)")
+temp_and_turb %>% 
+  ggplot(aes(datetime, parameter_value, color=location_id)) + 
+  geom_line() + 
+  facet_grid(. ~ param_names[parameter_cd], scales = "free")
 ```
 
 
