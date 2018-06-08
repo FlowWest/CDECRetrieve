@@ -24,4 +24,4 @@ stations <- "http://cdec.water.ca.gov/dynamicapp/staMeta?station_id=" %>%
   })
 
 
-devtools::use_data(stations)
+devtools::use_data(stations, overwrite = TRUE)

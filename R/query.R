@@ -51,21 +51,53 @@ cdec_query <- function(station, sensor_num, dur_code,
 
   temp_file <- tempfile(tmpdir = tempdir())
 
-  if(!(utils::download.file(query_url, destfile = temp_file, quiet = TRUE))) {
-    # check if the file size downloaded has a size
-    if (file.info(temp_file)$size == 0) {
-      stop("call to cdec failed, please visit https://cdec.water.ca.gov/ for status on their services", call. = FALSE)
-    }
-
-    d <- suppressWarnings(shef_to_tidy(temp_file, tzone))
-
-    if (is.null(d)) {
-      stop(paste(station,
-                 "failed, but a file was returned from CDEC, please check the query, use 'cdec_datasets()' to confirm the dataset exists"), call. = FALSE)
-    }
-  } else {
+  if(utils::download.file(query_url, destfile = temp_file, quiet = TRUE)) {
     stop("call to cdec failed for uknown reason, check http://cdec.water.ca.gov for status",
          call. = FALSE)
+  }
+
+  # check if the file size downloaded has a size
+  if (file.info(temp_file)$size == 0) {
+    stop("call to cdec failed, please visit https://cdec.water.ca.gov/ for status on their services", call. = FALSE)
+  }
+
+  shef_to_tidy <- function(file, tzone) {
+
+    #keep these columns which are: location_id, date, time, sensor_code, value
+    cols_to_keep <- c(2, 3, 5, 6, 7)
+
+    raw <- readr::read_delim(file, skip = 8, col_names = FALSE, delim = " ")
+
+    # exit out when the dataframe is not the right width
+    if (ncol(raw) < 5) {
+      return(NULL)
+    }
+
+    raw <- raw[, cols_to_keep]
+
+    # parse required cols
+    datetime_col <- lubridate::ymd_hm(paste0(raw$X3, raw$X5), tz=tzone)
+    shef_code <- raw$X6[1]
+    cdec_code <- ifelse(is.null(shef_code_lookup[[shef_code]]),
+                        NA, shef_code_lookup[[shef_code]])
+    cdec_code_col <- rep(cdec_code, nrow(raw))
+    parameter_value_col <- as.numeric(raw$X7)
+
+    tibble::tibble(
+      "agency_cd" = "CDEC",
+      "location_id" = as.character(raw$X2),
+      "datetime" = datetime_col,
+      "parameter_cd" = as.character(cdec_code_col),
+      "parameter_value" = parameter_value_col
+    )
+  }
+
+
+  d <- suppressWarnings(shef_to_tidy(temp_file, tzone))
+
+  if (is.null(d)) {
+    stop(paste(station,
+               "failed, but a file was returned from CDEC, please check the query, use 'cdec_datasets()' to confirm the dataset exists"), call. = FALSE)
   }
 
   class(d) <- append(class(d), "cdec_data")
@@ -73,34 +105,3 @@ cdec_query <- function(station, sensor_num, dur_code,
 }
 
 
-# function uses a file on disk to process from shef to a tidy format
-shef_to_tidy <- function(file, tzone) {
-
-  #keep these columns which are: location_id, date, time, sensor_code, value
-  cols_to_keep <- c(2, 3, 5, 6, 7)
-
-  raw <- readr::read_delim(file, skip = 8, col_names = FALSE, delim = " ")
-
-  # exit out when the dataframe is not the right width
-  if (ncol(raw) < 5) {
-    return(NULL)
-  }
-
-  raw <- raw[, cols_to_keep]
-
-  # parse required cols
-  datetime_col <- lubridate::ymd_hm(paste0(raw$X3, raw$X5), tz=tzone)
-  shef_code <- raw$X6[1]
-  cdec_code <- ifelse(is.null(shef_code_lookup[[shef_code]]),
-                      NA, shef_code_lookup[[shef_code]])
-  cdec_code_col <- rep(cdec_code, nrow(raw))
-  parameter_value_col <- as.numeric(raw$X7)
-
-  tibble::tibble(
-    "agency_cd" = "CDEC",
-    "location_id" = as.character(raw$X2),
-    "datetime" = datetime_col,
-    "parameter_cd" = as.character(cdec_code_col),
-    "parameter_value" = parameter_value_col
-  )
-}
