@@ -15,7 +15,7 @@
 #' ccr_hourly_temps <- CDECRetrieve::cdec_query("CCR", "25", "H", Sys.Date())
 #' }
 #' @export
-cdec_query <- function(station, sensor_num, dur_code,
+cdec_query <- memoise::memoise(function(station, sensor_num, dur_code,
                        start_date=NULL, end_date=NULL,
                        tzone='America/Los_Angeles') {
 
@@ -97,11 +97,11 @@ cdec_query <- function(station, sensor_num, dur_code,
 
   if (is.null(d)) {
     stop(paste(station,
-               "failed, but a file was returned from CDEC, please check the query, use 'cdec_datasets()' to confirm the dataset exists"), call. = FALSE)
+               "prasing failed, but a file was returned from CDEC, please check the query, use 'cdec_datasets()' to confirm the dataset exists"), call. = FALSE)
   }
 
   class(d) <- append(class(d), "cdec_data")
   return(d)
-}
+})
 
 
