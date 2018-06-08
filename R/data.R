@@ -14,3 +14,11 @@
 #' Based on measured unimpaired runoff (in million acre-feet), subject to revision.
 #'
 "san_joaquin_wy_types"
+
+
+#' CDEC Stations
+#'
+#' @description
+#' List of all stations reporting data through CDEC. Last updated 2018-06-08
+#'
+"stations"
