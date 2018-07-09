@@ -1,4 +1,4 @@
-# CDECRetrieve
+![cdec_retrieve_logo](cdecretrieve_logo.png)
 
 ![travis_mater_status](https://travis-ci.org/FlowWest/CDECRetrieve.svg?branch=master)    [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/CDECRetrieve)](https://cran.r-project.org/package=CDECRetrieve)
 
@@ -6,16 +6,10 @@
 
 ## Recent Updates
 
-* Map CDEC stations after search for them:
-
-```r
-#requires leaflet!
-cdec_stations(county="shasta") %>% map_stations(label=~station_id)
-```
-* New Rating table query available using `cdec_rt()`, view more help with `?cdec_rt`
-* new functions names throughout, namely the names of these are more intuitive and all start with `cdec_*`
-* overall refactor of code
-
+`cdec_query()` now uses memoisation by using the `memoise` package. This allows for 
+caching of already run queries. The next iteration will allow caching to happen in a 
+filesystem or s3 rather than just memory that way regardless of status of CDEC you can
+run memoized queries. 
 
 # What is CDECRetrieve?
 
