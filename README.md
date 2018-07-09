@@ -1,4 +1,4 @@
-![cdec_retrieve_logo](cdecretrieve_logo.png)
+![cdec_retrieve_logo](images/cdecretrieve_logo.png)
 
 ![travis_mater_status](https://travis-ci.org/FlowWest/CDECRetrieve.svg?branch=master)    [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/CDECRetrieve)](https://cran.r-project.org/package=CDECRetrieve)
 

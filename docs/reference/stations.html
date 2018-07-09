@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Map Station Search — map_stations • CDECRetrieve</title>
+<title>CDEC Stations — stations • CDECRetrieve</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,12 +30,9 @@
 
   <link href="../extra.css" rel="stylesheet">
   
-<meta property="og:title" content="Map Station Search — map_stations" />
+<meta property="og:title" content="CDEC Stations — stations" />
 
-<meta property="og:description" content="Populate a leaflet map with the results of cdec_stations() call. The function
-makes use of leaflet, and so will work only if this is installed on the system.
-This function is bundled simply for exploration purposes, it is highly suggested
-to make use of leaflet for production maps." />
+<meta property="og:description" content="List of all stations reporting data through CDEC. Last updated 2018-06-08" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -115,48 +112,31 @@ to make use of leaflet for production maps." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Map Station Search</h1>
+    <h1>CDEC Stations</h1>
     
-    <div class="hidden name"><code>map_stations.Rd</code></div>
+    <div class="hidden name"><code>stations.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Populate a leaflet map with the results of cdec_stations() call. The function
-makes use of leaflet, and so will work only if this is installed on the system.
-This function is bundled simply for exploration purposes, it is highly suggested
-to make use of leaflet for production maps.</p>
+    <p>List of all stations reporting data through CDEC. Last updated 2018-06-08</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>map_stations</span>(<span class='no'>.data</span>, <span class='no'>...</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>.data</th>
-      <td><p>result of a cdec_stations() call</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>named arguments passed into leaflet::addCircleMarkers</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='no'>stations</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>An object of class <code>tbl_df</code> (inherits from <code>tbl</code>, <code>data.frame</code>) with 2671 rows and 2 columns.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'>interactive</span>()) {
-    <span class='fu'><a href='cdec_stations.html'>cdec_stations</a></span>(<span class='kw'>county</span> <span class='kw'>=</span> <span class='st'>"alameda"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>map_stations</span>(<span class='kw'>label</span><span class='kw'>=</span>~<span class='no'>name</span>, <span class='kw'>popup</span><span class='kw'>=</span>~<span class='no'>station_id</span>)
-}</div><div class='output co'>#&gt; <span class='error'>Error in cdec_stations(county = "alameda") %&gt;% map_stations(label = ~name,     popup = ~station_id): could not find function "%&gt;%"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      
+      <li><a href="#format">Format</a></li>
+          </ul>
 
   </div>
 </div>
