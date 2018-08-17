@@ -22,3 +22,4 @@
 #' List of all stations reporting data through CDEC. Last updated 2018-06-08
 #'
 "stations"
+

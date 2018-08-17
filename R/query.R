@@ -15,7 +15,7 @@
 #' ccr_hourly_temps <- CDECRetrieve::cdec_query("CCR", "25", "H", Sys.Date())
 #' }
 #' @export
-cdec_query <- memoise::memoise(function(station, sensor_num, dur_code,
+cdec_query <- function(station, sensor_num, dur_code,
                        start_date=NULL, end_date=NULL,
                        tzone='America/Los_Angeles') {
 
@@ -23,6 +23,7 @@ cdec_query <- memoise::memoise(function(station, sensor_num, dur_code,
     stop("'dur_code' can only be one of 'h', 'd', 'm', 'e'",
          call. = FALSE)
   }
+
 
   # determine default choices
   if (is.null(start_date)) {
@@ -102,6 +103,4 @@ cdec_query <- memoise::memoise(function(station, sensor_num, dur_code,
 
   class(d) <- append(class(d), "cdec_data")
   return(d)
-})
-
-
+}

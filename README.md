@@ -4,13 +4,6 @@
 
 ![](https://cranlogs.r-pkg.org/badges/CDECRetrieve)
 
-## Recent Updates
-
-`cdec_query()` now uses memoisation by using the `memoise` package. This allows for 
-caching of already run queries. The next iteration will allow caching to happen in a 
-filesystem or s3 rather than just memory that way regardless of status of CDEC you can
-run memoized queries. 
-
 # What is CDECRetrieve?
 
 CDECRetrieve uses the web services provided by the California Data Exchange Center
