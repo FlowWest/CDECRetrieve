@@ -5,7 +5,7 @@
 ![](https://cranlogs.r-pkg.org/badges/CDECRetrieve)
 
 
-### Read this first!
+## Read this first!
 
 Current development version implements changes made to CDEC.gov, namely changes to 
 the way datasets for a station are listed. Install this version using
