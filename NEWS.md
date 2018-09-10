@@ -1,3 +1,6 @@
+# CDECRetrieve 0.1.2
+
+* update code to reflect recent changes on CDEC.gov, namely use the SHEF endpoint for `cdec_datasets()`.
 
 # CDECRetrieve 0.1.1 
 
@@ -10,6 +13,4 @@
 
 * Version available through CRAN
 * Added a `NEWS.md` file to track changes to the package.
-
-
 
