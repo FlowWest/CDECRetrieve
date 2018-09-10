@@ -1,21 +1,3 @@
-cdec_status_check <- function() {
-  e <- 0
-  tryCatch(
-    r <- suppressMessages(cdec_query("kwk", "20", "h", Sys.Date())),
-    error = (e <- 1)
-  )
-
-  if (e) {
-    warning("It looks like CDEC is down! We used Keswick, Flow, Hourly to test", call. = FALSE)
-    invisible(list(
-
-    ))
-  } else {
-    message("CDEC looks good")
-    invisible(e)
-  }
-}
-
 is_cdec_data <- function(.) {
   identical(get_cdec_serivce(.), "cdec_data")
 }
