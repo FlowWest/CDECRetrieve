@@ -4,20 +4,6 @@
 
 ![](https://cranlogs.r-pkg.org/badges/CDECRetrieve)
 
-
-# Read this first!
-
-Current development version implements changes made to CDEC.gov, namely changes to 
-the way datasets for a station are listed. Install this version using
-
-```r
-devtools::install_github("flowwest/CDECRetrieve")
-```
-
-this version will be pushed to CRAN as soon as staff at CRAN return from vacation: 
-[https://cran.r-project.org/submit.html](https://cran.r-project.org/submit.html)
-
-
 # What is CDECRetrieve?
 
 CDECRetrieve uses the web services provided by the California Data Exchange Center
