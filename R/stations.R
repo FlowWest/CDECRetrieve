@@ -85,7 +85,7 @@ create_station_query <- function(station_id=NULL, nearby_city=NULL, river_basin=
     query$sta = ""
   }
   else {
-    query$sta = station_id
+    query$sta = toupper(station_id)
     query$sta_chk = "on"
   }
 
