@@ -37,5 +37,5 @@ san_joaquin_wy_types <- purrr::map_df(list_lines, function(line) {
 
 
 
-devtools::use_data(sac_valley_wy_types, overwrite = TRUE)
-devtools::use_data(san_joaquin_wy_types, overwrite = TRUE)
+usethis::use_data(sac_valley_wy_types, overwrite = TRUE)
+usethis::use_data(san_joaquin_wy_types, overwrite = TRUE)

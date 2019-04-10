@@ -20,6 +20,13 @@ cdec_rt <- function(station_id) {
   raw_rating_table <- rvest::html_table(rvest::html_node(rating_table_page, "table"),
                                         fill = TRUE, header = FALSE)
 
+  rating_table_revised_on <-
+    rating_table_page %>%
+    html_nodes("h3") %>%
+    html_text() %>%
+    magrittr::extract(2) %>%
+    str_extract("[0-9]+/[0-9]+/[0-9]+")
+
   colnames_to_be <- paste0("rating_", as.character(raw_rating_table[2, ]))
   rating_table <- raw_rating_table[-c(1, 2), ]
   # process all columns as numerics
@@ -34,7 +41,7 @@ cdec_rt <- function(station_id) {
   rt_mutate <- rt_sep # copy, i dont like overwritting
   rt_mutate$rating_stage <- rt_sep$`rating_Stage (feet)` + as.numeric(rt_sep$precision)
 
-  return(dplyr::select(rt_mutate, "rating_stage", "flow"="value"))
+  return(dplyr::transmute(rt_mutate, rating_stage, flow=value, revised_on=rating_table_revised_on))
 }
 
 #' @title List Rating Tables

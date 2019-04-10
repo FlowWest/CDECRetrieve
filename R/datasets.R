@@ -13,10 +13,20 @@ cdec_datasets <- function(station) {
   query <- list(station_id=station,
                 sensor_num=NULL)
 
-  resp <- httr::GET(cdec_urls$datasets, query=query)
+  # resp <- httr::GET(cdec_urls$datasets, query=query)
+
+  resp <- tryCatch(
+    httr::GET(cdec_urls$datasets, query=query),
+    error = function(e) {
+      stop("CDEC could not be reached, it is most likekly down for maintenance.")
+    }
+  )
+
   resp_html <- xml2::read_html(resp)
   resp_at_node <- rvest::html_nodes(resp_html, "div#main_content table")
 
+  # cdec does not return any error code when a faulty query is submitted
+  # here I check when the returned response is of length zero instead
   if (length(resp_at_node) == 0) {
     stop(paste0("CDEC datasets service returned no data for '", station, "'. (cdec_datasets_service)"),
          call. = FALSE)
@@ -24,15 +34,11 @@ cdec_datasets <- function(station) {
 
   raw_data <- rvest::html_table(resp_at_node)[[1]]
 
-  # minor cleaning of the data
-  d <- clean_datasets_resp(raw_data)
-  class(d) <- append(class(d), "cdec_datasets")
-  return(d)
+  clean_datasets_resp(raw_data)
 }
 
+# INTERNAL -----
 
-
-# Function parses a response from CDEC available data service
 clean_datasets_resp <- function(df) {
 
 

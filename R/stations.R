@@ -28,8 +28,12 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
                                 river_basin=river_basin, hydro_area=hydro_area,
                                 county=county)
 
-  resp <- httr::GET("https://cdec.water.ca.gov/cgi-progs/staSearch",
-                   query = query)
+  resp <- tryCatch(
+    httr::GET("https://cdec.water.ca.gov/cgi-progs/staSearch", query = query),
+    error = function(e) {
+      stop("Could not reach CDEC services", call. = FALSE)
+    }
+  )
 
   html_page <- xml2::read_html(resp$url)
   html_table_node <- rvest::html_node(html_page, "table")
@@ -41,9 +45,7 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
   raw_station_data <- rvest::html_table(html_table_node)
 
 
-  d <- cdec_station_parse(raw_station_data)
-  class(d) <- append(class(d), "cdec_stations")
-  return(d)
+  cdec_station_parse(raw_station_data)
 }
 
 #' @title Map Station Search

@@ -18,7 +18,8 @@ cdec_query(station, sensor_num, dur_code, start_date = NULL,
 
 \item{end_date}{an optional date to end query on, defaults to current date.}
 
-\item{tzone}{a time zone to attached to datetime objects in R}
+\item{tzone}{a time zone used. By default this is America/Los_Angeles, this accounts
+for daylight saving.}
 }
 \value{
 dataframe
