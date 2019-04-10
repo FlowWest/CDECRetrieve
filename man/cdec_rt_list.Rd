@@ -14,5 +14,7 @@ Get a list of all rating tables available through CDEC
 }
 \examples{
 # list all rating tables in CDEC, you can use filter to search
+\dontrun{
 cdec_rt_list()
+}
 }

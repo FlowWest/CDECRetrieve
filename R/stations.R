@@ -1,8 +1,10 @@
 #' Search CDEC Stations
-#' @description search the stations in thec CDEC system using the CDEC Station Search
+#'
+#' Search the stations in the CDEC system using the CDEC Station Search
 #' service \href{https://cdec.water.ca.gov/cgi-progs/staSearch}{here}. Combinations
 #' of these parameters can be supplied to refine or be left out to generalize, at least
 #' one must be supplied.
+#'
 #' @param station_id string three letter station code
 #' @param nearby_city string search stations near supplied city
 #' @param river_basin string search stations in supplied basin
@@ -48,11 +50,13 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
   cdec_station_parse(raw_station_data)
 }
 
-#' @title Map Station Search
-#' @description Populate a leaflet map with the results of cdec_stations() call. The function
+#' Map Station Search
+#'
+#' Populate a leaflet map with the results of cdec_stations() call. The function
 #' makes use of leaflet, and so will work only if this is installed on the system.
 #' This function is bundled simply for exploration purposes, it is highly suggested
 #' to make use of leaflet for production maps.
+#'
 #' @param .data result of a cdec_stations() call
 #' @param ... named arguments passed into leaflet::addCircleMarkers
 #' @examples
@@ -77,6 +81,11 @@ map_stations <- function(.data, ...) {
 
 
 # INTERNAL
+
+missing_xml <- function(.) {
+  identical(., xml2::xml_missing())
+}
+
 
 create_station_query <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
                                  hydro_area=NULL, county=NULL) {

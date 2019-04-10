@@ -16,5 +16,7 @@ dataframe of rating table, with stage (feet) and flow (cfs) as columns
 Use  station id to find the rating table for stage to flow used by CDEC.
 }
 \examples{
+\dontrun{
 cdec_rt("abj") # get the stage to rating curve for ABJ
+}
 }

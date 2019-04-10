@@ -1,5 +1,7 @@
-#' @title Show available data
-#' @description display a data frame of available data for a station.
+#' Show available data
+#'
+#' display a data frame of available data for a station.
+#'
 #' @param station cdec station code
 #' @return data frame with available data as rows.
 #' @examples
