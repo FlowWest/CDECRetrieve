@@ -22,9 +22,15 @@ cdec_query <- function(station, sensor_num, dur_code,
                        start_date=NULL, end_date=NULL,
                        tzone='America/Los_Angeles') {
 
-  if (!any(tolower(dur_code) == c("h", "d", "m", "e"))) {
-    stop("'dur_code' can only be one of 'h', 'd', 'm', 'e'",
+  if (!any(tolower(dur_code) == c("h", "d", "m", "e",
+                                  "hourly", "daily", "monthly", "event"))) {
+    stop("'dur_code' can only be one of 'h/hourly', 'd/daily', 'm/monthly', 'e/event'",
          call. = FALSE)
+  }
+
+  if (dur_code %in% c("hourly", "daily", "monthly", "event")) {
+    dur_code <-
+      as.character(c("hourly"="h", "daily"="d", "monhtly"="m", "event"="e")[dur_code])
   }
 
 
@@ -100,7 +106,7 @@ cdec_query <- function(station, sensor_num, dur_code,
 
   if (is.null(d)) {
     stop(paste(station,
-               "prasing failed, but a file was returned from CDEC, please check the query, use 'cdec_datasets()' to confirm the dataset exists"), call. = FALSE)
+               "parsing failed, but a file was returned from CDEC, please check the query, use 'cdec_datasets()' to confirm the dataset exists"), call. = FALSE)
   }
 
   return(d)
