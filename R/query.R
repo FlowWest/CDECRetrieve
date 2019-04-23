@@ -30,7 +30,10 @@ cdec_query <- function(station, sensor_num, dur_code,
 
   if (dur_code %in% c("hourly", "daily", "monthly", "event")) {
     dur_code <-
-      as.character(c("hourly"="h", "daily"="d", "monhtly"="m", "event"="e")[dur_code])
+      as.character(c("hourly"="h",
+                     "daily"="d",
+                     "monhtly"="m",
+                     "event"="e")[dur_code])
   }
 
 
@@ -44,13 +47,6 @@ cdec_query <- function(station, sensor_num, dur_code,
     )}
 
   if (is.null(end_date)) {end_date <- Sys.Date() + 1}
-
-  # decision was made here not to use httr::GET, since downloading a file
-  # is much more reliable and faster from CDEC, it for some reason does not
-  # handle large queries very well unless they are downloads.
-  # I am still working on hopefully switching over to a combination
-  # of httr and purrr but for now this works well.
-  #                               -ergz
 
   query_url <- glue::glue(cdec_urls$download_shef,
                           STATION=station,
