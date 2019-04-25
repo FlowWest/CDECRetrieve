@@ -3,6 +3,8 @@
 #' display a data frame of available data for a station.
 #'
 #' @param station cdec station code
+#' @param keyword return sensors containing this keyword. NULL by default returns
+#' all available sensors.
 #' @return data frame with available data as rows.
 #' @examples
 #' # get a list of dataframes available for CCR
@@ -10,7 +12,7 @@
 #' cdec_datasets("ccr")
 #' }
 #' @export
-cdec_datasets <- function(station) {
+cdec_datasets <- function(station, keyword=NULL) {
 
   query <- list(station_id=station,
                 sensor_num=NULL)
@@ -20,7 +22,8 @@ cdec_datasets <- function(station) {
   resp <- tryCatch(
     httr::GET(cdec_urls$datasets, query=query),
     error = function(e) {
-      stop("CDEC could not be reached, it is most likekly down for maintenance.")
+      stop("Could not reach CDEC services",
+           call. = FALSE)
     }
   )
 
@@ -36,7 +39,19 @@ cdec_datasets <- function(station) {
 
   raw_data <- rvest::html_table(resp_at_node)[[1]]
 
-  clean_datasets_resp(raw_data)
+  d <- suppressWarnings(clean_datasets_resp(raw_data))
+
+  if (is.null(keyword)) {
+    return(d)
+  } else {
+    dd <- d %>% filter(stringr::str_detect(sensor_name, keyword))
+    if (nrow(dd) == 0) {
+      message("no sensors matching the keyword were found, returning full list")
+      return(d)
+    } else {
+      return(dd)
+    }
+  }
 }
 
 # INTERNAL -----

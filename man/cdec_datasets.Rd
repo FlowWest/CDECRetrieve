@@ -4,10 +4,13 @@
 \alias{cdec_datasets}
 \title{Show available data}
 \usage{
-cdec_datasets(station)
+cdec_datasets(station, keyword = NULL)
 }
 \arguments{
 \item{station}{cdec station code}
+
+\item{keyword}{return sensors containing this keyword. NULL by default returns
+all available sensors.}
 }
 \value{
 data frame with available data as rows.
