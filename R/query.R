@@ -57,10 +57,13 @@ cdec_query <- function(station, sensor_num, dur_code,
 
   temp_file <- tempfile(tmpdir = tempdir())
 
-  if(utils::download.file(query_url, destfile = temp_file, quiet = TRUE)) {
-    stop("call to cdec failed for uknown reason, check http://cdec.water.ca.gov for status",
-         call. = FALSE)
-  }
+  tryCatch(
+    utils::download.file(query_url, destfile = temp_file, quiet = TRUE),
+    warning = function(w) stop("call to cdec failed for uknown reason, check http://cdec.water.ca.gov for status",
+                               call. = FALSE),
+    error = function(e) stop("call to cdec failed for uknown reason, check http://cdec.water.ca.gov for status",
+                             call. = FALSE)
+  )
 
   # check if the file size downloaded has a size
   if (file.info(temp_file)$size == 0) {

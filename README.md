@@ -1,8 +1,9 @@
 ![cdec_retrieve_logo](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/cdecretrieve_logo.png)
 
-![travis_mater_status](https://travis-ci.org/FlowWest/CDECRetrieve.svg?branch=master)    [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/CDECRetrieve)](https://cran.r-project.org/package=CDECRetrieve)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/CDECRetrieve)](https://cran.r-project.org/package=CDECRetrieve)
 
 ![](https://cranlogs.r-pkg.org/badges/CDECRetrieve)
+
 
 # What is CDECRetrieve?
 
