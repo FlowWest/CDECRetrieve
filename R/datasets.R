@@ -44,7 +44,7 @@ cdec_datasets <- function(station, keyword=NULL) {
   if (is.null(keyword)) {
     return(d)
   } else {
-    dd <- d %>% filter(stringr::str_detect(sensor_name, keyword))
+    dd <- d %>% dplyr::filter(stringr::str_detect(sensor_name, keyword))
     if (nrow(dd) == 0) {
       message("no sensors matching the keyword were found, returning full list")
       return(d)
