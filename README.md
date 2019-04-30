@@ -64,7 +64,6 @@ The data returned,
 
 Visualize these flows,
 
-
 ```r 
 library(dplyr)
 library(ggplot2)

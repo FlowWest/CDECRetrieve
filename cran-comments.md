@@ -9,8 +9,8 @@
 
 * This is a new release.
 
-## Submission with corrected errors
+## Comply with CRAN policy
 
-This release fixes "Archived on 2019-03-02 as was resubmitted without correcting errors.
-Archived on 2019-02-13, unarchived on 2019-02-25" by implementing logic that 
-better handles web services being down. 
+This version wraps all functions that call CDEC services with a tryCatch statement
+to capture cases when the CDEC servers are down. It is the only way to implement a
+graceful error for such cases.
