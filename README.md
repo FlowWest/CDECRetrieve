@@ -26,11 +26,7 @@ inherited from the CDEC service.
 # Installation 
 
 ```r 
-# stable version 
-#package.install("CDECRetrieve")  # not available at the moment please use github
-
-# dev version
-devtools::install_github("flowwest/CDECRetrieve")
+remotes::install_github("flowwest/CDECRetrieve")
 ```
 
 # Basic Usage 
