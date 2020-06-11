@@ -3,7 +3,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
-^\images
+^\images$
 ^docs$
 ^_pkgdown\.yml$
 ^index\.Rmd$
