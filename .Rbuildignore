@@ -3,7 +3,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.travis\.yml$
-^\images
 ^docs$
 ^_pkgdown\.yml$
 ^index\.Rmd$
@@ -13,3 +12,4 @@
 ^pkgdown$
 ^cran-comments\.md$
 ^cdecretrieve_logo\.png$
+^images$
