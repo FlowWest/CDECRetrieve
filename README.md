@@ -2,8 +2,6 @@
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/CDECRetrieve)](https://cran.r-project.org/package=CDECRetrieve)
 
-![](https://cranlogs.r-pkg.org/badges/CDECRetrieve)
-
 
 # What is CDECRetrieve?
 
