@@ -1,8 +1,8 @@
-pandoc: 1.19.2.1
-pkgdown: 1.3.0.9000
-pkgdown_sha: 0b2c27d41b869ac31b6a46815940f55b12f6171f
+pandoc: 2.11.2
+pkgdown: 1.6.1
+pkgdown_sha: ~
 articles:
-  CDECRetrieve: CDECRetrieve.html
-  Introduction_to_CDECRetrieve: Introduction_to_CDECRetrieve.html
   advanced-queries: advanced-queries.html
+  CDECRetrieve: CDECRetrieve.html
+last_built: 2020-12-11T04:57Z
 
