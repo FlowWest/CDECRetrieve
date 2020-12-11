@@ -1,8 +1,5 @@
 ![cdec_retrieve_logo](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/cdecretrieve_logo.png)
 
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/CDECRetrieve)](https://cran.r-project.org/package=CDECRetrieve)
-
-
 # What is CDECRetrieve?
 
 CDECRetrieve uses the web services provided by the California Data Exchange Center
