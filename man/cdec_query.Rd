@@ -4,8 +4,14 @@
 \alias{cdec_query}
 \title{Query observation data}
 \usage{
-cdec_query(station, sensor_num, dur_code, start_date = NULL,
-  end_date = NULL, tzone = "America/Los_Angeles")
+cdec_query(
+  station,
+  sensor_num,
+  dur_code,
+  start_date = NULL,
+  end_date = NULL,
+  tzone = "America/Los_Angeles"
+)
 }
 \arguments{
 \item{station}{three letter identification for CDEC location (example "KWK", "SAC", "CCR")}

@@ -4,8 +4,13 @@
 \alias{cdec_stations}
 \title{Search CDEC Stations}
 \usage{
-cdec_stations(station_id = NULL, nearby_city = NULL,
-  river_basin = NULL, hydro_area = NULL, county = NULL)
+cdec_stations(
+  station_id = NULL,
+  nearby_city = NULL,
+  river_basin = NULL,
+  hydro_area = NULL,
+  county = NULL
+)
 }
 \arguments{
 \item{station_id}{string three letter station code}
