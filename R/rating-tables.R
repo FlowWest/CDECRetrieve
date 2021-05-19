@@ -33,16 +33,14 @@ cdec_rt <- function(station_id) {
 
   colnames_to_be <- paste0("rating_", as.character(raw_rating_table[2, ]))
   rating_table <- raw_rating_table[-c(1, 2), ]
-  # process all columns as numerics
+  # process all columns as numeric
   rt <- suppressWarnings(dplyr::bind_cols(lapply(rating_table, as.numeric)))
   colnames(rt) <- colnames_to_be
   rt <- rt[!is.na(rt$`rating_Stage (feet)` ), ] #ugh ill make pretty later
   rt_gathered <- tidyr::gather(rt, "dummy", "value", -"rating_Stage (feet)")
   rt_sep <- tidyr::separate(rt_gathered, "dummy", into=c("dummier", "precision"), sep="_")
 
-  # using mutate causes notes that I dont want.... so we use base R instead
-  # rt_mutate <- dplyr::mutate(rt_sep, "rating_stage" = `rating_Stage (feet)` + as.numeric(precision))
-  rt_mutate <- rt_sep # copy, i dont like overwritting
+  rt_mutate <- rt_sep # copy, to not overwrite
   rt_mutate$rating_stage <- rt_sep$`rating_Stage (feet)` + as.numeric(rt_sep$precision)
 
   return(dplyr::transmute(rt_mutate, rating_stage, flow=value, revised_on=rating_table_revised_on))
@@ -60,7 +58,7 @@ cdec_rt <- function(station_id) {
 cdec_rt_list <- function(station_id = NULL) {
   url <- "http://cdec.water.ca.gov/rtables/"
   html_page <- tryCatch(xml2::read_html(url),
-                        error = error = function(e){
+                        error = function(e){
                           stop("Could not reach CDEC services" , call. = FALSE)
                         })
   list_of_tables <- rvest::html_table(rvest::html_node(html_page, "table"))
