@@ -75,9 +75,3 @@ cdec_rt_list <- function(station_id = NULL) {
   return(rts)
 
 }
-
-
-# Internal
-rating_is_available <- function(station) {
-  tolower(station) %in% cdec_rt_list()$station_id
-}
