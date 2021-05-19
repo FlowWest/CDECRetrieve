@@ -10,26 +10,28 @@
 #' }
 #' @export
 cdec_rt <- function(station_id) {
-  if (!rating_is_available(station_id)) {
-    stop(paste0("rating table not found for: ", station_id), call. = FALSE)
-  }
 
   rating_table_url <- sprintf("http://cdec.water.ca.gov/rtables/%s.html",
                               toupper(station_id))
 
   rating_table_page <- tryCatch(xml2::read_html(rating_table_url),
                                 error = function(e){
-                                  stop("Could not reach CDEC services" , call. = FALSE)
+                                  if ( e$message == "HTTP error 404.") {
+                                    stop("Could not reach CDEC services, check station.", call. = FALSE)
+                                  } else {stop("Could not reach CDEC services", call. = FALSE)}
                                 })
   raw_rating_table <- rvest::html_table(rvest::html_node(rating_table_page, "table"),
                                         fill = TRUE, header = FALSE)
+
 
   rating_table_revised_on <-
     rating_table_page %>%
     rvest::html_nodes("h3") %>%
     rvest::html_text() %>%
     magrittr::extract(2) %>%
-    stringr::str_extract("[0-9]+/[0-9]+/[0-9]+")
+    stringr::str_extract("[0-9]+/[0-9]+/[0-9]+") %>%
+    as.Date("%m/%d/%Y")
+
 
   colnames_to_be <- paste0("rating_", as.character(raw_rating_table[2, ]))
   rating_table <- raw_rating_table[-c(1, 2), ]
@@ -43,7 +45,7 @@ cdec_rt <- function(station_id) {
   rt_mutate <- rt_sep # copy, to not overwrite
   rt_mutate$rating_stage <- rt_sep$`rating_Stage (feet)` + as.numeric(rt_sep$precision)
 
-  return(dplyr::transmute(rt_mutate, rating_stage, flow=value, revised_on=rating_table_revised_on))
+  return(dplyr::transmute(rt_mutate, revised_on = rating_table_revised_on, rating_stage, flow = value))
 }
 
 #' @title List Rating Tables

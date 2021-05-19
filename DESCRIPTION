@@ -31,7 +31,6 @@ Suggests:
     leaflet,
     knitr,
     rmarkdown,
-    ggplot2,
-    vcr
+    ggplot2
 License: MIT + file LICENSE
 VignetteBuilder: knitr
