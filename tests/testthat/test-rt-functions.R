@@ -1,7 +1,7 @@
 library(testthat)
 
 test_that("cdec_rt() errors when a station does not have a rating table", {
-  expect_error(cdec_rt("EMM"), "Could not reach CDEC services, check station.")
+  expect_error(cdec_rt("XXX"), "Could not reach CDEC services")
 })
 
 test_that("cdec_rt() returns a df when a station has a rating table", {

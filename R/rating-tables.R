@@ -11,14 +11,17 @@
 #' @export
 cdec_rt <- function(station_id) {
 
-  rating_table_url <- sprintf("http://cdec.water.ca.gov/rtables/%s.html",
-                              toupper(station_id))
+  rating_table_url <- url(sprintf("http://cdec.water.ca.gov/rtables/%s.html",
+                                  toupper(station_id)))
 
   rating_table_page <- tryCatch(xml2::read_html(rating_table_url),
                                 error = function(e){
-                                  if ( e$message == "HTTP error 404.") {
+                                  if (e$message == "HTTP error 404.") {
+                                    close(rating_table_url)
                                     stop("Could not reach CDEC services, check station.", call. = FALSE)
-                                  } else {stop("Could not reach CDEC services", call. = FALSE)}
+                                  } else {
+                                    close(rating_table_url)
+                                    stop("Could not reach CDEC services", call. = FALSE)}
                                 })
   raw_rating_table <- rvest::html_table(rvest::html_node(rating_table_page, "table"),
                                         fill = TRUE, header = FALSE)
@@ -58,9 +61,10 @@ cdec_rt <- function(station_id) {
 #' }
 #' @export
 cdec_rt_list <- function(station_id = NULL) {
-  url <- "http://cdec.water.ca.gov/rtables/"
+  url <- url("http://cdec.water.ca.gov/rtables/")
   html_page <- tryCatch(xml2::read_html(url),
                         error = function(e){
+                          close(url)
                           stop("Could not reach CDEC services" , call. = FALSE)
                         })
   list_of_tables <- rvest::html_table(rvest::html_node(html_page, "table"))
