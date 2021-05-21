@@ -31,11 +31,15 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
                                 county=county)
 
   resp <- tryCatch(
-    httr::GET("https://cdec.water.ca.gov/cgi-progs/staSearch", query = query),
+    httr::GET("https://cdec.water.ca.gov/dynamicapp/staSearch", query = query),
     error = function(e) {
       stop("Could not reach CDEC services", call. = FALSE)
     }
   )
+
+  if (resp$status_code == 404) {
+    stop("Could not reach CDEC services", call. = FALSE)
+  }
 
   html_page <- xml2::read_html(resp$url)
   html_table_node <- rvest::html_node(html_page, "table")
