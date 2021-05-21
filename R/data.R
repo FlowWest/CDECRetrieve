@@ -78,12 +78,12 @@
 #'
 #' @format A data frame with 227 rows and 7 variables:
 #' \describe{
-#' \item{WY}{October-September}
-#' \item{Oct_Mar}{Runoff (maf)}
-#' \item{Apr_Jul}{Runoff (maf)}
-#' \item{WYsum}{Year Total Runoff (maf)}
-#' \item{Index}{Water Year Type Index Score}
-#' \item{Yr_type}{Water Year Type}
+#' \item{wy}{October-September}
+#' \item{oct_mar}{Runoff (maf)}
+#' \item{apr_jul}{Runoff (maf)}
+#' \item{wy_sum}{Year Total Runoff (maf)}
+#' \item{index}{Water Year Type Index Score}
+#' \item{yr_type}{Water Year Type}
 #' \item{location}{Sacramento Valley or San Joaquin Valley}
 #' }
 #'
