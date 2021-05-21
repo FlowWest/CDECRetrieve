@@ -8,11 +8,11 @@ wy <- readr::read_table('data-raw/wy.txt', col_names = FALSE)
 sac <- dplyr::mutate(wy[ , 1:6], location = 'Sacramento Valley')
 san_joaquin <- dplyr::mutate(wy[ , c(1, 7:11)], location = 'San Joaquin Valley')
 
-names(sac) <- c('WY', 'Oct_Mar', 'Apr_Jul', 'WYsum', 'Index', 'Yr_type', 'location')
-names(san_joaquin) <- c('WY', 'Oct_Mar', 'Apr_Jul', 'WYsum', 'Index', 'Yr_type', 'location')
+names(sac) <- c('wy', 'oct_mar', 'apr_jul', 'wy_sum', 'index', 'yr_type', 'location')
+names(san_joaquin) <- c('wy', 'oct_mar', 'apr_jul', 'wy_sum', 'index', 'yr_type', 'location')
 
 water_year_indices <- dplyr::bind_rows(sac, san_joaquin) %>%
-  dplyr::mutate(Yr_type = factor(Yr_type, levels = c('C', 'D', 'BN', 'AN', 'W'),
+  dplyr::mutate(yr_type = factor(yr_type, levels = c('C', 'D', 'BN', 'AN', 'W'),
                                  labels = c('Critical', 'Dry', 'Below Normal', 'Above Normal', 'Wet')))
 
-devtools::use_data(water_year_indices, overwrite = TRUE)
+usethis::use_data(water_year_indices, overwrite = TRUE)
