@@ -4,7 +4,6 @@ cdec_urls <- list(
   wy_forecast = "http://cdec.water.ca.gov/cgi-progs/iodir/wsi",
   station_hydro_area = "http://cdec.water.ca.gov/cgi-progs/staMeta?station_id=STATION",
   station_metadata = "https://cdec.water.ca.gov/cgi-progs/staSearch?sta_chk=on&sta=STATION",
-  datasets = "https://cdec.water.ca.gov/cgi-progs/querySHEF",
   wy_index = "http://cdec.water.ca.gov/cgi-progs/iodir/wsi",
   stations = "http://cdec.water.ca.gov/dynamicapp/staMeta?station_id=STATION"
 )
