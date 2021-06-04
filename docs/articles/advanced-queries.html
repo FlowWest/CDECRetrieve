@@ -40,7 +40,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -73,14 +73,13 @@
 
       
 
-      </header><script src="advanced-queries_files/header-attrs-2.5/header-attrs.js"></script><link href="advanced-queries_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="advanced-queries_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="advanced-queries_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Advanced Queries with purrr</h1>
                         <h4 class="author">Emanuel Rodriguez</h4>
             
-            <h4 class="date">2020-12-10</h4>
+            <h4 class="date">2021-06-04</h4>
       
       
       <div class="hidden name"><code>advanced-queries.Rmd</code></div>
@@ -114,48 +113,48 @@
 <span class="co">#&gt; # A tibble: 73 x 5</span>
 <span class="co">#&gt;    agency_cd location_id datetime            parameter_cd parameter_value</span>
 <span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;                  &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 CDEC      KWK         2020-12-07 23:00:00 25                      52.9</span>
-<span class="co">#&gt;  2 CDEC      KWK         2020-12-08 00:00:00 25                      52.9</span>
-<span class="co">#&gt;  3 CDEC      KWK         2020-12-08 01:00:00 25                      52.9</span>
-<span class="co">#&gt;  4 CDEC      KWK         2020-12-08 02:00:00 25                      52.8</span>
-<span class="co">#&gt;  5 CDEC      KWK         2020-12-08 03:00:00 25                      52.8</span>
-<span class="co">#&gt;  6 CDEC      KWK         2020-12-08 04:00:00 25                      52.8</span>
-<span class="co">#&gt;  7 CDEC      KWK         2020-12-08 05:00:00 25                      52.8</span>
-<span class="co">#&gt;  8 CDEC      KWK         2020-12-08 06:00:00 25                      52.8</span>
-<span class="co">#&gt;  9 CDEC      KWK         2020-12-08 07:00:00 25                      52.8</span>
-<span class="co">#&gt; 10 CDEC      KWK         2020-12-08 08:00:00 25                      52.8</span>
+<span class="co">#&gt;  1 CDEC      KWK         2021-06-02 00:00:00 25                      55.4</span>
+<span class="co">#&gt;  2 CDEC      KWK         2021-06-02 01:00:00 25                      55.4</span>
+<span class="co">#&gt;  3 CDEC      KWK         2021-06-02 02:00:00 25                      55.4</span>
+<span class="co">#&gt;  4 CDEC      KWK         2021-06-02 03:00:00 25                      55.4</span>
+<span class="co">#&gt;  5 CDEC      KWK         2021-06-02 04:00:00 25                      55.4</span>
+<span class="co">#&gt;  6 CDEC      KWK         2021-06-02 05:00:00 25                      55.2</span>
+<span class="co">#&gt;  7 CDEC      KWK         2021-06-02 06:00:00 25                      55  </span>
+<span class="co">#&gt;  8 CDEC      KWK         2021-06-02 07:00:00 25                      54.7</span>
+<span class="co">#&gt;  9 CDEC      KWK         2021-06-02 08:00:00 25                      54.6</span>
+<span class="co">#&gt; 10 CDEC      KWK         2021-06-02 09:00:00 25                      54.5</span>
 <span class="co">#&gt; # ... with 63 more rows</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[2]]</span>
 <span class="co">#&gt; # A tibble: 73 x 5</span>
 <span class="co">#&gt;    agency_cd location_id datetime            parameter_cd parameter_value</span>
 <span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;                  &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 CDEC      CCR         2020-12-07 23:00:00 25                      52.4</span>
-<span class="co">#&gt;  2 CDEC      CCR         2020-12-08 00:00:00 25                      52.2</span>
-<span class="co">#&gt;  3 CDEC      CCR         2020-12-08 01:00:00 25                      52.1</span>
-<span class="co">#&gt;  4 CDEC      CCR         2020-12-08 02:00:00 25                      52  </span>
-<span class="co">#&gt;  5 CDEC      CCR         2020-12-08 03:00:00 25                      51.9</span>
-<span class="co">#&gt;  6 CDEC      CCR         2020-12-08 04:00:00 25                      51.9</span>
-<span class="co">#&gt;  7 CDEC      CCR         2020-12-08 05:00:00 25                      51.8</span>
-<span class="co">#&gt;  8 CDEC      CCR         2020-12-08 06:00:00 25                      51.7</span>
-<span class="co">#&gt;  9 CDEC      CCR         2020-12-08 07:00:00 25                      51.6</span>
-<span class="co">#&gt; 10 CDEC      CCR         2020-12-08 08:00:00 25                      51.6</span>
+<span class="co">#&gt;  1 CDEC      CCR         2021-06-02 00:00:00 25                      55.7</span>
+<span class="co">#&gt;  2 CDEC      CCR         2021-06-02 01:00:00 25                      55.6</span>
+<span class="co">#&gt;  3 CDEC      CCR         2021-06-02 02:00:00 25                      55.6</span>
+<span class="co">#&gt;  4 CDEC      CCR         2021-06-02 03:00:00 25                      55.6</span>
+<span class="co">#&gt;  5 CDEC      CCR         2021-06-02 04:00:00 25                      55.6</span>
+<span class="co">#&gt;  6 CDEC      CCR         2021-06-02 05:00:00 25                      55.6</span>
+<span class="co">#&gt;  7 CDEC      CCR         2021-06-02 06:00:00 25                      55.6</span>
+<span class="co">#&gt;  8 CDEC      CCR         2021-06-02 07:00:00 25                      55.7</span>
+<span class="co">#&gt;  9 CDEC      CCR         2021-06-02 08:00:00 25                      55.9</span>
+<span class="co">#&gt; 10 CDEC      CCR         2021-06-02 09:00:00 25                      56.3</span>
 <span class="co">#&gt; # ... with 63 more rows</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; [[3]]</span>
 <span class="co">#&gt; # A tibble: 73 x 5</span>
 <span class="co">#&gt;    agency_cd location_id datetime            parameter_cd parameter_value</span>
 <span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;                  &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 CDEC      BSF         2020-12-07 23:00:00 25                      52.4</span>
-<span class="co">#&gt;  2 CDEC      BSF         2020-12-08 00:00:00 25                      52.2</span>
-<span class="co">#&gt;  3 CDEC      BSF         2020-12-08 01:00:00 25                      52  </span>
-<span class="co">#&gt;  4 CDEC      BSF         2020-12-08 02:00:00 25                      51.9</span>
-<span class="co">#&gt;  5 CDEC      BSF         2020-12-08 03:00:00 25                      51.7</span>
-<span class="co">#&gt;  6 CDEC      BSF         2020-12-08 04:00:00 25                      51.5</span>
-<span class="co">#&gt;  7 CDEC      BSF         2020-12-08 05:00:00 25                      51.2</span>
-<span class="co">#&gt;  8 CDEC      BSF         2020-12-08 06:00:00 25                      50.9</span>
-<span class="co">#&gt;  9 CDEC      BSF         2020-12-08 07:00:00 25                      50.7</span>
-<span class="co">#&gt; 10 CDEC      BSF         2020-12-08 08:00:00 25                      50.5</span>
+<span class="co">#&gt;  1 CDEC      BSF         2021-06-02 00:00:00 25                      60.5</span>
+<span class="co">#&gt;  2 CDEC      BSF         2021-06-02 01:00:00 25                      59.8</span>
+<span class="co">#&gt;  3 CDEC      BSF         2021-06-02 02:00:00 25                      59.1</span>
+<span class="co">#&gt;  4 CDEC      BSF         2021-06-02 03:00:00 25                      58.4</span>
+<span class="co">#&gt;  5 CDEC      BSF         2021-06-02 04:00:00 25                      57.8</span>
+<span class="co">#&gt;  6 CDEC      BSF         2021-06-02 05:00:00 25                      57.3</span>
+<span class="co">#&gt;  7 CDEC      BSF         2021-06-02 06:00:00 25                      56.9</span>
+<span class="co">#&gt;  8 CDEC      BSF         2021-06-02 07:00:00 25                      56.7</span>
+<span class="co">#&gt;  9 CDEC      BSF         2021-06-02 08:00:00 25                      56.6</span>
+<span class="co">#&gt; 10 CDEC      BSF         2021-06-02 09:00:00 25                      56.8</span>
 <span class="co">#&gt; # ... with 63 more rows</span></code></pre></div>
 <p>Using <code>map</code> will return the call to <code>cdec_query</code>, returning each as an element of a list. This is ok, but we know that the query will return a data.frame with the same structure for each so we can combine these to get one dataframe.</p>
 <p>This can be done by using a variant of the <code>map</code> function, <code><a href="https://purrr.tidyverse.org/reference/map.html">map_df()</a></code></p>
@@ -168,15 +167,15 @@
 <span class="co">#&gt; # A tibble: 6 x 5</span>
 <span class="co">#&gt;   agency_cd location_id datetime            parameter_cd parameter_value</span>
 <span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;                  &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 CDEC      KWK         2020-12-07 23:00:00 25                      52.9</span>
-<span class="co">#&gt; 2 CDEC      KWK         2020-12-08 00:00:00 25                      52.9</span>
-<span class="co">#&gt; 3 CDEC      KWK         2020-12-08 01:00:00 25                      52.9</span>
-<span class="co">#&gt; 4 CDEC      KWK         2020-12-08 02:00:00 25                      52.8</span>
-<span class="co">#&gt; 5 CDEC      KWK         2020-12-08 03:00:00 25                      52.8</span>
-<span class="co">#&gt; 6 CDEC      KWK         2020-12-08 04:00:00 25                      52.8</span></code></pre></div>
+<span class="co">#&gt; 1 CDEC      KWK         2021-06-02 00:00:00 25                      55.4</span>
+<span class="co">#&gt; 2 CDEC      KWK         2021-06-02 01:00:00 25                      55.4</span>
+<span class="co">#&gt; 3 CDEC      KWK         2021-06-02 02:00:00 25                      55.4</span>
+<span class="co">#&gt; 4 CDEC      KWK         2021-06-02 03:00:00 25                      55.4</span>
+<span class="co">#&gt; 5 CDEC      KWK         2021-06-02 04:00:00 25                      55.4</span>
+<span class="co">#&gt; 6 CDEC      KWK         2021-06-02 05:00:00 25                      55.2</span></code></pre></div>
 <p>and now we can visualize these,</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 
 <span class="va">temp_data</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">datetime</span>, <span class="va">parameter_value</span>, color<span class="op">=</span><span class="va">location_id</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -190,16 +189,16 @@
 <span class="co">#&gt; # A tibble: 219 x 5</span>
 <span class="co">#&gt;    agency_cd location_id datetime            parameter_cd parameter_value</span>
 <span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;                  &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 CDEC      KWK         2020-12-07 23:00:00 25                      52.9</span>
-<span class="co">#&gt;  2 CDEC      KWK         2020-12-08 00:00:00 25                      52.9</span>
-<span class="co">#&gt;  3 CDEC      KWK         2020-12-08 01:00:00 25                      52.9</span>
-<span class="co">#&gt;  4 CDEC      KWK         2020-12-08 02:00:00 25                      52.8</span>
-<span class="co">#&gt;  5 CDEC      KWK         2020-12-08 03:00:00 25                      52.8</span>
-<span class="co">#&gt;  6 CDEC      KWK         2020-12-08 04:00:00 25                      52.8</span>
-<span class="co">#&gt;  7 CDEC      KWK         2020-12-08 05:00:00 25                      52.8</span>
-<span class="co">#&gt;  8 CDEC      KWK         2020-12-08 06:00:00 25                      52.8</span>
-<span class="co">#&gt;  9 CDEC      KWK         2020-12-08 07:00:00 25                      52.8</span>
-<span class="co">#&gt; 10 CDEC      KWK         2020-12-08 08:00:00 25                      52.8</span>
+<span class="co">#&gt;  1 CDEC      KWK         2021-06-02 00:00:00 25                      55.4</span>
+<span class="co">#&gt;  2 CDEC      KWK         2021-06-02 01:00:00 25                      55.4</span>
+<span class="co">#&gt;  3 CDEC      KWK         2021-06-02 02:00:00 25                      55.4</span>
+<span class="co">#&gt;  4 CDEC      KWK         2021-06-02 03:00:00 25                      55.4</span>
+<span class="co">#&gt;  5 CDEC      KWK         2021-06-02 04:00:00 25                      55.4</span>
+<span class="co">#&gt;  6 CDEC      KWK         2021-06-02 05:00:00 25                      55.2</span>
+<span class="co">#&gt;  7 CDEC      KWK         2021-06-02 06:00:00 25                      55  </span>
+<span class="co">#&gt;  8 CDEC      KWK         2021-06-02 07:00:00 25                      54.7</span>
+<span class="co">#&gt;  9 CDEC      KWK         2021-06-02 08:00:00 25                      54.6</span>
+<span class="co">#&gt; 10 CDEC      KWK         2021-06-02 09:00:00 25                      54.5</span>
 <span class="co">#&gt; # ... with 209 more rows</span></code></pre></div>
 </div>
 </div>
@@ -220,16 +219,16 @@
 <span class="co">#&gt; # A tibble: 146 x 5</span>
 <span class="co">#&gt;    agency_cd location_id datetime            parameter_cd parameter_value</span>
 <span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;                  &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 CDEC      CCR         2020-12-07 23:00:00 25                      52.4</span>
-<span class="co">#&gt;  2 CDEC      CCR         2020-12-08 00:00:00 25                      52.2</span>
-<span class="co">#&gt;  3 CDEC      CCR         2020-12-08 01:00:00 25                      52.1</span>
-<span class="co">#&gt;  4 CDEC      CCR         2020-12-08 02:00:00 25                      52  </span>
-<span class="co">#&gt;  5 CDEC      CCR         2020-12-08 03:00:00 25                      51.9</span>
-<span class="co">#&gt;  6 CDEC      CCR         2020-12-08 04:00:00 25                      51.9</span>
-<span class="co">#&gt;  7 CDEC      CCR         2020-12-08 05:00:00 25                      51.8</span>
-<span class="co">#&gt;  8 CDEC      CCR         2020-12-08 06:00:00 25                      51.7</span>
-<span class="co">#&gt;  9 CDEC      CCR         2020-12-08 07:00:00 25                      51.6</span>
-<span class="co">#&gt; 10 CDEC      CCR         2020-12-08 08:00:00 25                      51.6</span>
+<span class="co">#&gt;  1 CDEC      CCR         2021-06-02 00:00:00 25                      55.7</span>
+<span class="co">#&gt;  2 CDEC      CCR         2021-06-02 01:00:00 25                      55.6</span>
+<span class="co">#&gt;  3 CDEC      CCR         2021-06-02 02:00:00 25                      55.6</span>
+<span class="co">#&gt;  4 CDEC      CCR         2021-06-02 03:00:00 25                      55.6</span>
+<span class="co">#&gt;  5 CDEC      CCR         2021-06-02 04:00:00 25                      55.6</span>
+<span class="co">#&gt;  6 CDEC      CCR         2021-06-02 05:00:00 25                      55.6</span>
+<span class="co">#&gt;  7 CDEC      CCR         2021-06-02 06:00:00 25                      55.6</span>
+<span class="co">#&gt;  8 CDEC      CCR         2021-06-02 07:00:00 25                      55.7</span>
+<span class="co">#&gt;  9 CDEC      CCR         2021-06-02 08:00:00 25                      55.9</span>
+<span class="co">#&gt; 10 CDEC      CCR         2021-06-02 09:00:00 25                      56.3</span>
 <span class="co">#&gt; # ... with 136 more rows</span></code></pre></div>
 <p>Here we use <code>..1, ..2, ..3</code> to refer to the first, second and third elements of the list, we can grow this any number of arguments.</p>
 <div id="making-a-custom-function" class="section level4">
@@ -245,16 +244,16 @@
 <span class="co">#&gt; # A tibble: 146 x 5</span>
 <span class="co">#&gt;    agency_cd location_id datetime            parameter_cd parameter_value</span>
 <span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;                  &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 CDEC      CCR         2020-12-07 23:00:00 25                      52.4</span>
-<span class="co">#&gt;  2 CDEC      CCR         2020-12-08 00:00:00 25                      52.2</span>
-<span class="co">#&gt;  3 CDEC      CCR         2020-12-08 01:00:00 25                      52.1</span>
-<span class="co">#&gt;  4 CDEC      CCR         2020-12-08 02:00:00 25                      52  </span>
-<span class="co">#&gt;  5 CDEC      CCR         2020-12-08 03:00:00 25                      51.9</span>
-<span class="co">#&gt;  6 CDEC      CCR         2020-12-08 04:00:00 25                      51.9</span>
-<span class="co">#&gt;  7 CDEC      CCR         2020-12-08 05:00:00 25                      51.8</span>
-<span class="co">#&gt;  8 CDEC      CCR         2020-12-08 06:00:00 25                      51.7</span>
-<span class="co">#&gt;  9 CDEC      CCR         2020-12-08 07:00:00 25                      51.6</span>
-<span class="co">#&gt; 10 CDEC      CCR         2020-12-08 08:00:00 25                      51.6</span>
+<span class="co">#&gt;  1 CDEC      CCR         2021-06-02 00:00:00 25                      55.7</span>
+<span class="co">#&gt;  2 CDEC      CCR         2021-06-02 01:00:00 25                      55.6</span>
+<span class="co">#&gt;  3 CDEC      CCR         2021-06-02 02:00:00 25                      55.6</span>
+<span class="co">#&gt;  4 CDEC      CCR         2021-06-02 03:00:00 25                      55.6</span>
+<span class="co">#&gt;  5 CDEC      CCR         2021-06-02 04:00:00 25                      55.6</span>
+<span class="co">#&gt;  6 CDEC      CCR         2021-06-02 05:00:00 25                      55.6</span>
+<span class="co">#&gt;  7 CDEC      CCR         2021-06-02 06:00:00 25                      55.6</span>
+<span class="co">#&gt;  8 CDEC      CCR         2021-06-02 07:00:00 25                      55.7</span>
+<span class="co">#&gt;  9 CDEC      CCR         2021-06-02 08:00:00 25                      55.9</span>
+<span class="co">#&gt; 10 CDEC      CCR         2021-06-02 09:00:00 25                      56.3</span>
 <span class="co">#&gt; # ... with 136 more rows</span></code></pre></div>
 </div>
 <div id="all-combinations-of-arguments" class="section level3">
@@ -280,12 +279,12 @@
 <span class="co">#&gt; # A tibble: 6 x 5</span>
 <span class="co">#&gt;   agency_cd location_id datetime            parameter_cd parameter_value</span>
 <span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;dttm&gt;              &lt;chr&gt;                  &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 CDEC      BSF         2020-12-07 23:00:00 25                      52.4</span>
-<span class="co">#&gt; 2 CDEC      BSF         2020-12-08 00:00:00 25                      52.2</span>
-<span class="co">#&gt; 3 CDEC      BSF         2020-12-08 01:00:00 25                      52  </span>
-<span class="co">#&gt; 4 CDEC      BSF         2020-12-08 02:00:00 25                      51.9</span>
-<span class="co">#&gt; 5 CDEC      BSF         2020-12-08 03:00:00 25                      51.7</span>
-<span class="co">#&gt; 6 CDEC      BSF         2020-12-08 04:00:00 25                      51.5</span></code></pre></div>
+<span class="co">#&gt; 1 CDEC      BSF         2021-06-02 00:00:00 25                      60.5</span>
+<span class="co">#&gt; 2 CDEC      BSF         2021-06-02 01:00:00 25                      59.8</span>
+<span class="co">#&gt; 3 CDEC      BSF         2021-06-02 02:00:00 25                      59.1</span>
+<span class="co">#&gt; 4 CDEC      BSF         2021-06-02 03:00:00 25                      58.4</span>
+<span class="co">#&gt; 5 CDEC      BSF         2021-06-02 04:00:00 25                      57.8</span>
+<span class="co">#&gt; 6 CDEC      BSF         2021-06-02 05:00:00 25                      57.3</span></code></pre></div>
 <p>and now we can visualize these</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">param_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"25"</span> <span class="op">=</span> <span class="st">"Temperature (F)"</span>, <span class="st">"27"</span> <span class="op">=</span> <span class="st">"Turbidity (NTU)"</span><span class="op">)</span>

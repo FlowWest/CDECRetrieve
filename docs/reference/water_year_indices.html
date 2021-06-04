@@ -249,12 +249,12 @@ as implemented in SWRCB Decision 1641.</p>
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>A data frame with 227 rows and 7 variables:</p><dl>
-<dt>WY</dt><dd><p>October-September</p></dd>
-<dt>Oct_Mar</dt><dd><p>Runoff (maf)</p></dd>
-<dt>Apr_Jul</dt><dd><p>Runoff (maf)</p></dd>
-<dt>WYsum</dt><dd><p>Year Total Runoff (maf)</p></dd>
-<dt>Index</dt><dd><p>Water Year Type Index Score</p></dd>
-<dt>Yr_type</dt><dd><p>Water Year Type</p></dd>
+<dt>wy</dt><dd><p>October-September</p></dd>
+<dt>oct_mar</dt><dd><p>Runoff (maf)</p></dd>
+<dt>apr_jul</dt><dd><p>Runoff (maf)</p></dd>
+<dt>wy_sum</dt><dd><p>Year Total Runoff (maf)</p></dd>
+<dt>index</dt><dd><p>Water Year Type Index Score</p></dd>
+<dt>yr_type</dt><dd><p>Water Year Type</p></dd>
 <dt>location</dt><dd><p>Sacramento Valley or San Joaquin Valley</p></dd>
 
 </dl>
@@ -265,16 +265,16 @@ as implemented in SWRCB Decision 1641.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>water_year_indices</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 7</span><span>
-#&gt;      WY Oct_Mar Apr_Jul WYsum Index Yr_type      location         
-#&gt;   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #949494;font-style: italic;'>&lt;fct&gt;</span><span>        </span><span style='color: #949494;font-style: italic;'>&lt;chr&gt;</span><span>            
-#&gt; </span><span style='color: #BCBCBC;'>1</span><span>  </span><span style='text-decoration: underline;'>1</span><span>906   12.6    12.9   26.7 11.8  Wet          Sacramento Valley
-#&gt; </span><span style='color: #BCBCBC;'>2</span><span>  </span><span style='text-decoration: underline;'>1</span><span>907   19.0    13.4   33.7 14.1  Wet          Sacramento Valley
-#&gt; </span><span style='color: #BCBCBC;'>3</span><span>  </span><span style='text-decoration: underline;'>1</span><span>908    8.29    5.6   14.8  7.73 Below Normal Sacramento Valley
-#&gt; </span><span style='color: #BCBCBC;'>4</span><span>  </span><span style='text-decoration: underline;'>1</span><span>909   20.6     8.98  30.7 12.1  Wet          Sacramento Valley
-#&gt; </span><span style='color: #BCBCBC;'>5</span><span>  </span><span style='text-decoration: underline;'>1</span><span>910   13.1     6.11  20.1  9.38 Wet          Sacramento Valley
-#&gt; </span><span style='color: #BCBCBC;'>6</span><span>  </span><span style='text-decoration: underline;'>1</span><span>911   12.3    13.1   26.4 11.7  Wet          Sacramento Valley</div><div class='input'>
-</div></span></pre>
+</div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 6 x 7</span>
+#&gt;      wy oct_mar apr_jul wy_sum index yr_type location         
+#&gt;   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>  <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;fct&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>            
+#&gt; <span style='color: #BCBCBC;'>1</span>  <span style='text-decoration: underline;'>1</span>901    <span style='color: #BB0000;'>NA</span>      <span style='color: #BB0000;'>NA</span>     <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>   <span style='color: #BB0000;'>NA</span>      Sacramento Valley
+#&gt; <span style='color: #BCBCBC;'>2</span>  <span style='text-decoration: underline;'>1</span>902    <span style='color: #BB0000;'>NA</span>      <span style='color: #BB0000;'>NA</span>     <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>   <span style='color: #BB0000;'>NA</span>      Sacramento Valley
+#&gt; <span style='color: #BCBCBC;'>3</span>  <span style='text-decoration: underline;'>1</span>903    <span style='color: #BB0000;'>NA</span>      <span style='color: #BB0000;'>NA</span>     <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>   <span style='color: #BB0000;'>NA</span>      Sacramento Valley
+#&gt; <span style='color: #BCBCBC;'>4</span>  <span style='text-decoration: underline;'>1</span>904    <span style='color: #BB0000;'>NA</span>      <span style='color: #BB0000;'>NA</span>     <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>   <span style='color: #BB0000;'>NA</span>      Sacramento Valley
+#&gt; <span style='color: #BCBCBC;'>5</span>  <span style='text-decoration: underline;'>1</span>905    <span style='color: #BB0000;'>NA</span>      <span style='color: #BB0000;'>NA</span>     <span style='color: #BB0000;'>NA</span>    <span style='color: #BB0000;'>NA</span>   <span style='color: #BB0000;'>NA</span>      Sacramento Valley
+#&gt; <span style='color: #BCBCBC;'>6</span>  <span style='text-decoration: underline;'>1</span>906    12.6    12.9   26.7  11.8 Wet     Sacramento Valley</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

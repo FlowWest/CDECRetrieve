@@ -1,4 +1,4 @@
-![cdec_retrieve_logo](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/cdecretrieve_logo.png)
+# CDECRetrieve <a href='https://FlowWest.github.io/CDECRetrieve'><img src='man/figures/orange-cdec-hex.png' align ="right" height="200" /></a> 
 
 # What is CDECRetrieve?
 
@@ -12,7 +12,7 @@ The design of this package maps different CDEC url endpoints into "services" tha
 make sense. For example there is a **datasets** service that allows the user to 
 view all datasets available at a given location. There is **query/data** service
 that allows the user to bring observations into memory. The goal is to allow a
-workflow where a user can pipe reponses from one service into another, and eventually
+workflow where a user can pipe responses from one service into another, and eventually
 into the **data** service to get the data, and be able to automate this process.
 
 Please see the *Details* section below for limitations and possible annoyances 
