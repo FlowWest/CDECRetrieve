@@ -1,4 +1,4 @@
-# CDECRetrieve <a href='https://FlowWest.github.io/CDECRetrieve'><img src='man/figures/orange-cdec-hex.png' align ="right" height="200" /></a> 
+# CDECRetrieve <a href='https://FlowWest.github.io/CDECRetrieve'><img src='man/figures/logo.png' align ="right" height="225" /></a> 
 
 # What is CDECRetrieve?
 
@@ -18,7 +18,7 @@ into the **data** service to get the data, and be able to automate this process.
 Please see the *Details* section below for limitations and possible annoyances 
 inherited from the CDEC service.
 
-# Installation 
+# Installation se
 
 ```r 
 remotes::install_github("flowwest/CDECRetrieve")
