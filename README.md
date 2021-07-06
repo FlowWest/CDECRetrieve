@@ -18,7 +18,7 @@ into the **data** service to get the data, and be able to automate this process.
 Please see the *Details* section below for limitations and possible annoyances 
 inherited from the CDEC service.
 
-# Installation se
+# Installation
 
 ```r 
 remotes::install_github("flowwest/CDECRetrieve")
