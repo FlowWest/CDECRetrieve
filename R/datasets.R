@@ -13,7 +13,6 @@
 #' }
 #' @export
 cdec_datasets <- function(station, keyword=NULL) {
-
   query <- list(station_id=station,
                 sensor_num=NULL)
 
@@ -37,12 +36,13 @@ cdec_datasets <- function(station, keyword=NULL) {
 
   raw_data <- rvest::html_table(resp_at_node)[[1]]
 
+  sensor_name <- NULL # global variable workaround
   d <- suppressWarnings(clean_datasets_resp(raw_data))
 
   if (is.null(keyword)) {
     return(d)
   } else {
-    dd <- d %>% dplyr::filter(stringr::str_detect(sensor_name, keyword))
+    dd <- dplyr::filter(d, grepl(sensor_name, keyword))
     if (nrow(dd) == 0) {
       message("no sensors matching the keyword were found, returning full list")
       return(d)
