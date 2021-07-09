@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://FlowWest.github.io/CDECRetrieve//index.html</loc>
+  </url>
+  <url>
+    <loc>https://FlowWest.github.io/CDECRetrieve//reference/cdec_datasets.html</loc>
+  </url>
+  <url>
+    <loc>https://FlowWest.github.io/CDECRetrieve//reference/cdec_query.html</loc>
+  </url>
+  <url>
+    <loc>https://FlowWest.github.io/CDECRetrieve//reference/cdec_rt.html</loc>
+  </url>
+  <url>
+    <loc>https://FlowWest.github.io/CDECRetrieve//reference/cdec_rt_list.html</loc>
+  </url>
+  <url>
+    <loc>https://FlowWest.github.io/CDECRetrieve//reference/cdec_stations.html</loc>
+  </url>
+  <url>
+    <loc>https://FlowWest.github.io/CDECRetrieve//reference/map_stations.html</loc>
+  </url>
+  <url>
+    <loc>https://FlowWest.github.io/CDECRetrieve//articles/advanced-queries.html</loc>
+  </url>
+  <url>
+    <loc>https://FlowWest.github.io/CDECRetrieve//articles/CDECRetrieve.html</loc>
+  </url>
+</urlset>

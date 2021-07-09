@@ -10,39 +10,45 @@
 #' }
 #' @export
 cdec_rt <- function(station_id) {
-  if (!rating_is_available(station_id)) {
-    stop(paste0("rating table not found for: ", station_id), call. = FALSE)
-  }
 
-  rating_table_url <- glue::glue(cdec_urls$rating_tables,
-                                 STATION=toupper(station_id))
+  rating_table_url <- url(sprintf("http://cdec.water.ca.gov/rtables/%s.html",
+                                  toupper(station_id)))
 
-  rating_table_page <- xml2::read_html(rating_table_url)
+  rating_table_page <- tryCatch(xml2::read_html(rating_table_url),
+                                error = function(e){
+                                  if (e$message == "HTTP error 404.") {
+                                    close(rating_table_url)
+                                    stop("Could not reach CDEC services, check station.", call. = FALSE)
+                                  } else {
+                                    close(rating_table_url)
+                                    stop("Could not reach CDEC services", call. = FALSE)}
+                                })
   raw_rating_table <- rvest::html_table(rvest::html_node(rating_table_page, "table"),
                                         fill = TRUE, header = FALSE)
+
 
   rating_table_revised_on <-
     rating_table_page %>%
     rvest::html_nodes("h3") %>%
     rvest::html_text() %>%
     magrittr::extract(2) %>%
-    stringr::str_extract("[0-9]+/[0-9]+/[0-9]+")
+    stringr::str_extract("[0-9]+/[0-9]+/[0-9]+") %>%
+    as.Date("%m/%d/%Y")
+
 
   colnames_to_be <- paste0("rating_", as.character(raw_rating_table[2, ]))
   rating_table <- raw_rating_table[-c(1, 2), ]
-  # process all columns as numerics
+  # process all columns as numeric
   rt <- suppressWarnings(dplyr::bind_cols(lapply(rating_table, as.numeric)))
   colnames(rt) <- colnames_to_be
   rt <- rt[!is.na(rt$`rating_Stage (feet)` ), ] #ugh ill make pretty later
   rt_gathered <- tidyr::gather(rt, "dummy", "value", -"rating_Stage (feet)")
   rt_sep <- tidyr::separate(rt_gathered, "dummy", into=c("dummier", "precision"), sep="_")
 
-  # using mutate causes notes that I dont want.... so we use base R instead
-  # rt_mutate <- dplyr::mutate(rt_sep, "rating_stage" = `rating_Stage (feet)` + as.numeric(precision))
-  rt_mutate <- rt_sep # copy, i dont like overwritting
+  rt_mutate <- rt_sep # copy, to not overwrite
   rt_mutate$rating_stage <- rt_sep$`rating_Stage (feet)` + as.numeric(rt_sep$precision)
 
-  return(dplyr::transmute(rt_mutate, rating_stage, flow=value, revised_on=rating_table_revised_on))
+  return(dplyr::transmute(rt_mutate, revised_on = rating_table_revised_on, rating_stage, flow = value))
 }
 
 #' @title List Rating Tables
@@ -55,11 +61,13 @@ cdec_rt <- function(station_id) {
 #' }
 #' @export
 cdec_rt_list <- function(station_id = NULL) {
-  url <- "http://cdec.water.ca.gov/rtables/"
-  html_page <- xml2::read_html(url)
+  url <- url("http://cdec.water.ca.gov/rtables/")
+  html_page <- tryCatch(xml2::read_html(url),
+                        error = function(e){
+                          close(url)
+                          stop("Could not reach CDEC services" , call. = FALSE)
+                        })
   list_of_tables <- rvest::html_table(rvest::html_node(html_page, "table"))
-
-
 
   rts <- tibble::tibble(
     station_name = tolower(list_of_tables$Station),
@@ -68,12 +76,6 @@ cdec_rt_list <- function(station_id = NULL) {
     table_type = tolower(list_of_tables$`Table Type`)
   )
 
-    return(rts)
+  return(rts)
 
-}
-
-
-# Internal
-rating_is_available <- function(station) {
-  tolower(station) %in% cdec_rt_list()$station_id
 }

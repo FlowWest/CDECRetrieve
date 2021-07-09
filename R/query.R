@@ -48,12 +48,12 @@ cdec_query <- function(station, sensor_num, dur_code,
 
   if (is.null(end_date)) {end_date <- Sys.Date() + 1}
 
-  query_url <- glue::glue(cdec_urls$download_shef,
-                          STATION=station,
-                          SENSOR = as.character(sensor_num),
-                          DURCODE = as.character(dur_code),
-                          STARTDATE = as.character(start_date),
-                          ENDDATE = as.character(end_date))
+  query_url <- sprintf("http://cdec.water.ca.gov/cgi-progs/querySHEF?station_id=%s&sensor_num=%s&dur_code=%s&start_date=%s&end_date=%s&data_wish=Download+SHEF+Data+Now",
+                       station,
+                       as.character(sensor_num),
+                       as.character(dur_code),
+                       as.character(start_date),
+                       as.character(end_date))
 
   temp_file <- tempfile(tmpdir = tempdir())
 

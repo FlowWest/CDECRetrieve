@@ -13,14 +13,11 @@
 #' }
 #' @export
 cdec_datasets <- function(station, keyword=NULL) {
-
   query <- list(station_id=station,
                 sensor_num=NULL)
 
-  # resp <- httr::GET(cdec_urls$datasets, query=query)
-
   resp <- tryCatch(
-    httr::GET(cdec_urls$datasets, query=query),
+    httr::GET("https://cdec.water.ca.gov/cgi-progs/querySHEF", query=query),
     error = function(e) {
       stop("Could not reach CDEC services",
            call. = FALSE)
@@ -39,12 +36,13 @@ cdec_datasets <- function(station, keyword=NULL) {
 
   raw_data <- rvest::html_table(resp_at_node)[[1]]
 
+  sensor_name <- NULL # global variable workaround
   d <- suppressWarnings(clean_datasets_resp(raw_data))
 
   if (is.null(keyword)) {
     return(d)
   } else {
-    dd <- d %>% dplyr::filter(stringr::str_detect(sensor_name, keyword))
+    dd <- dplyr::filter(d, grepl(sensor_name, keyword))
     if (nrow(dd) == 0) {
       message("no sensors matching the keyword were found, returning full list")
       return(d)
@@ -57,8 +55,6 @@ cdec_datasets <- function(station, keyword=NULL) {
 # INTERNAL -----
 
 clean_datasets_resp <- function(df) {
-
-
   sensor_number <- df$X1
   sensor_desciption_raw <- tolower(df$X2)
 
@@ -80,10 +76,8 @@ clean_datasets_resp <- function(df) {
   end_range <- stringr::str_replace_all(
     stringr::str_extract(daterange_raw, "to(.*)"), "to |\\.", "")
 
-  # eh, not functional but its ok
   end <- lubridate::as_date(
     ifelse(end_range == "present", lubridate::today(), lubridate::mdy(end_range)))
-
 
   tibble::tibble(
     sensor_number,
