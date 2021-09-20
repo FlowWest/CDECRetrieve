@@ -123,7 +123,7 @@ library(ggplot2)
 temp_data %>% 
   ggplot(aes(datetime, parameter_value, color=location_id)) + geom_line()
 ```
-![](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/v1.0/images/advanced-queries-plot-1.png)
+![](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/advanced-queries-plot-1.png)
 
 Great! 
 
@@ -265,7 +265,7 @@ temp_and_turb %>%
   geom_line() + 
   facet_wrap(. ~ param_names[parameter_cd], scales = "free")
 ```
-![](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/v1.0/images/advanced-queries-plot-2.png)
+![](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/advanced-queries-plot-2.png)
 
 
 

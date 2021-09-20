@@ -44,7 +44,7 @@ through the CDEC site. A lot ideas in developing the package came from using
 We start by first exploring locations of interest. The CDEC site provides a web 
 form with a lot of options,
 
-![cdec station search](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/v1.0/images/cdec-station-search.png)
+![cdec station search](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/cdec-station-search.png)
 
 The pakcage exposes this functionallity through `cdec_stations()`. Although 
 it doesn't (currently) map all options in the web form it does so for the most
@@ -221,7 +221,7 @@ sha_storage_daily %>%
   ggplot(aes(datetime, parameter_value)) + geom_line()
 ```
 
-![](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/v1.0/images/Rplot.png)
+![](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/Rplot.png)
 
 
 
