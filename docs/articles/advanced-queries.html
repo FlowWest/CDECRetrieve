@@ -80,13 +80,13 @@
 
       
 
-      </header><script src="advanced-queries_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
+      </header><script src="advanced-queries_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Advanced Queries with purrr</h1>
                         <h4 class="author">Emanuel Rodriguez</h4>
             
-            <h4 class="date">2021-08-06</h4>
+            <h4 class="date">2021-09-20</h4>
       
       
       <div class="hidden name"><code>advanced-queries.Rmd</code></div>
@@ -184,11 +184,11 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 
-<span class="va">temp_data</span> <span class="op">%&gt;%</span> 
+<span class="va">temp_data</span> <span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">datetime</span>, <span class="va">parameter_value</span>, color<span class="op">=</span><span class="va">location_id</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="https://raw.githubusercontent.com/FlowWest/CDECRetrieve/v1.0/images/advanced-queries-plot-1.png"></p>
+<p><img src="https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/advanced-queries-plot-1.png"></p>
 <p>Great!</p>
-<p>We can still improve this by using some shortcut features in purrr. Namely we can shorten the <code>function</code> part of <code>map_df</code> using the <code><a href="https://rdrr.io/r/base/tilde.html">~</a></code> shortcut.</p>
+<p>We can still improve this by using some shortcut features in purrr. Namely we can shorten the <code>function</code> part of <code>map_df</code> using the <code>~</code> shortcut.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># here ~ tells map that this a function, and to interpret '.' as a value</span>
 <span class="co"># being passed from the `stations_of_interest`</span>
@@ -295,11 +295,11 @@
 <p>and now we can visualize these</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">param_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"25"</span> <span class="op">=</span> <span class="st">"Temperature (F)"</span>, <span class="st">"27"</span> <span class="op">=</span> <span class="st">"Turbidity (NTU)"</span><span class="op">)</span>
-<span class="va">temp_and_turb</span> <span class="op">%&gt;%</span> 
+<span class="va">temp_and_turb</span> <span class="op"><a href="https://purrr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">datetime</span>, <span class="va">parameter_value</span>, color<span class="op">=</span><span class="va">location_id</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="va">.</span> <span class="op">~</span> <span class="va">param_names</span><span class="op">[</span><span class="va">parameter_cd</span><span class="op">]</span>, scales <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span></code></pre></div>
-<p><img src="https://raw.githubusercontent.com/FlowWest/CDECRetrieve/v1.0/images/advanced-queries-plot-2.png"></p>
+<p><img src="https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/advanced-queries-plot-2.png"></p>
 </div>
 </div>
   </div>

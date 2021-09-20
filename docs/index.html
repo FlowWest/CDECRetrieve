@@ -93,7 +93,7 @@
 <div id="what-is-cdecretrieve" class="section level1">
 <h1 class="hasAnchor">
 <a href="#what-is-cdecretrieve" class="anchor"></a>What is CDECRetrieve?</h1>
-<p>CDECRetrieve uses the web services provided by the California Data Exchange Center <a href="http://cdec.water.ca.gov/">here</a> as a backend to allow users to download data with a single function call. CDECRetrieve specifically uses the SHEF download service due to the fact that it is the most robust of the services. You can learn more about the SHEF format <a href="http://www.nws.noaa.gov/om/water/resources/SHEF_CodeManual_5July2012.pdf">here</a>.</p>
+<p>CDECRetrieve uses the web services provided by the California Data Exchange Center <a href="http://cdec.water.ca.gov/">here</a> as a backend to allow users to download data with a single function call. CDECRetrieve specifically uses the SHEF download service due to the fact that it is the most robust of the services. You can learn more about the SHEF format <a href="https://www.weather.gov/media/mdl/SHEF_CodeManual_5July2012.pdf">here</a>.</p>
 <p>The design of this package maps different CDEC url endpoints into “services” that make sense. For example there is a <strong>datasets</strong> service that allows the user to view all datasets available at a given location. There is <strong>query/data</strong> service that allows the user to bring observations into memory. The goal is to allow a workflow where a user can pipe responses from one service into another, and eventually into the <strong>data</strong> service to get the data, and be able to automate this process.</p>
 <p>Please see the <em>Details</em> section below for limitations and possible annoyances inherited from the CDEC service.</p>
 </div>
@@ -130,8 +130,8 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 
-<span class="va">kwk_flow</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">parameter_value</span> <span class="op">&gt;=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># sentinel values -9998 and -9997 are present</span>
+<span class="va">kwk_flow</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">parameter_value</span> <span class="op">&gt;=</span> <span class="fl">0</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="co"># sentinel values -9998 and -9997 are present</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">datetime</span>, <span class="va">parameter_value</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/kwk_flow_ts.png" alt="kwk"></p>
