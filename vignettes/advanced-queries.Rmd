@@ -12,6 +12,7 @@ vignette: >
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  eval = FALSE,
   comment = "#>"
 )
 ```
@@ -42,6 +43,53 @@ stations_of_interest <- c("kwk", "ccr", "bsf")
 map(stations_of_interest, function(s) {
   cdec_query(station = s, sensor_num = "25", dur_code = "h")
 })
+#> [[1]]
+#> # A tibble: 73 x 5
+#>    agency_cd location_id datetime            parameter_cd parameter_value
+#>    <chr>     <chr>       <dttm>              <chr>                  <dbl>
+#>  1 CDEC      KWK         2020-12-07 23:00:00 25                      52.9
+#>  2 CDEC      KWK         2020-12-08 00:00:00 25                      52.9
+#>  3 CDEC      KWK         2020-12-08 01:00:00 25                      52.9
+#>  4 CDEC      KWK         2020-12-08 02:00:00 25                      52.8
+#>  5 CDEC      KWK         2020-12-08 03:00:00 25                      52.8
+#>  6 CDEC      KWK         2020-12-08 04:00:00 25                      52.8
+#>  7 CDEC      KWK         2020-12-08 05:00:00 25                      52.8
+#>  8 CDEC      KWK         2020-12-08 06:00:00 25                      52.8
+#>  9 CDEC      KWK         2020-12-08 07:00:00 25                      52.8
+#> 10 CDEC      KWK         2020-12-08 08:00:00 25                      52.8
+#> # ... with 63 more rows
+#> 
+#> [[2]]
+#> # A tibble: 73 x 5
+#>    agency_cd location_id datetime            parameter_cd parameter_value
+#>    <chr>     <chr>       <dttm>              <chr>                  <dbl>
+#>  1 CDEC      CCR         2020-12-07 23:00:00 25                      52.4
+#>  2 CDEC      CCR         2020-12-08 00:00:00 25                      52.2
+#>  3 CDEC      CCR         2020-12-08 01:00:00 25                      52.1
+#>  4 CDEC      CCR         2020-12-08 02:00:00 25                      52  
+#>  5 CDEC      CCR         2020-12-08 03:00:00 25                      51.9
+#>  6 CDEC      CCR         2020-12-08 04:00:00 25                      51.9
+#>  7 CDEC      CCR         2020-12-08 05:00:00 25                      51.8
+#>  8 CDEC      CCR         2020-12-08 06:00:00 25                      51.7
+#>  9 CDEC      CCR         2020-12-08 07:00:00 25                      51.6
+#> 10 CDEC      CCR         2020-12-08 08:00:00 25                      51.6
+#> # ... with 63 more rows
+#> 
+#> [[3]]
+#> # A tibble: 73 x 5
+#>    agency_cd location_id datetime            parameter_cd parameter_value
+#>    <chr>     <chr>       <dttm>              <chr>                  <dbl>
+#>  1 CDEC      BSF         2020-12-07 23:00:00 25                      52.4
+#>  2 CDEC      BSF         2020-12-08 00:00:00 25                      52.2
+#>  3 CDEC      BSF         2020-12-08 01:00:00 25                      52  
+#>  4 CDEC      BSF         2020-12-08 02:00:00 25                      51.9
+#>  5 CDEC      BSF         2020-12-08 03:00:00 25                      51.7
+#>  6 CDEC      BSF         2020-12-08 04:00:00 25                      51.5
+#>  7 CDEC      BSF         2020-12-08 05:00:00 25                      51.2
+#>  8 CDEC      BSF         2020-12-08 06:00:00 25                      50.9
+#>  9 CDEC      BSF         2020-12-08 07:00:00 25                      50.7
+#> 10 CDEC      BSF         2020-12-08 08:00:00 25                      50.5
+#> # ... with 63 more rows
 ```
 
 Using `map` will return the call to `cdec_query`, returning each as an element of a list.
@@ -56,6 +104,15 @@ temp_data <- map_df(stations_of_interest, function(s) {
 })
 
 head(temp_data)
+#> # A tibble: 6 x 5
+#>   agency_cd location_id datetime            parameter_cd parameter_value
+#>   <chr>     <chr>       <dttm>              <chr>                  <dbl>
+#> 1 CDEC      KWK         2020-12-07 23:00:00 25                      52.9
+#> 2 CDEC      KWK         2020-12-08 00:00:00 25                      52.9
+#> 3 CDEC      KWK         2020-12-08 01:00:00 25                      52.9
+#> 4 CDEC      KWK         2020-12-08 02:00:00 25                      52.8
+#> 5 CDEC      KWK         2020-12-08 03:00:00 25                      52.8
+#> 6 CDEC      KWK         2020-12-08 04:00:00 25                      52.8
 ```
 
 and now we can visualize these, 
@@ -66,6 +123,7 @@ library(ggplot2)
 temp_data %>% 
   ggplot(aes(datetime, parameter_value, color=location_id)) + geom_line()
 ```
+![](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/advanced-queries-plot-1.png)
 
 Great! 
 
@@ -76,6 +134,20 @@ shorten the `function` part of `map_df` using the `~` shortcut.
 # here ~ tells map that this a function, and to interpret '.' as a value
 # being passed from the `stations_of_interest`
 map_df(stations_of_interest, ~cdec_query(., "25", "h"))
+#> # A tibble: 219 x 5
+#>    agency_cd location_id datetime            parameter_cd parameter_value
+#>    <chr>     <chr>       <dttm>              <chr>                  <dbl>
+#>  1 CDEC      KWK         2020-12-07 23:00:00 25                      52.9
+#>  2 CDEC      KWK         2020-12-08 00:00:00 25                      52.9
+#>  3 CDEC      KWK         2020-12-08 01:00:00 25                      52.9
+#>  4 CDEC      KWK         2020-12-08 02:00:00 25                      52.8
+#>  5 CDEC      KWK         2020-12-08 03:00:00 25                      52.8
+#>  6 CDEC      KWK         2020-12-08 04:00:00 25                      52.8
+#>  7 CDEC      KWK         2020-12-08 05:00:00 25                      52.8
+#>  8 CDEC      KWK         2020-12-08 06:00:00 25                      52.8
+#>  9 CDEC      KWK         2020-12-08 07:00:00 25                      52.8
+#> 10 CDEC      KWK         2020-12-08 08:00:00 25                      52.8
+#> # ... with 209 more rows
 ```
 
 
@@ -101,6 +173,20 @@ arbitrary number of arguments,
 pmap_df(list(stations_of_interest, 
              sensors_of_interest, 
              dur_code), ~cdec_query(station = ..1, sensor_num = ..2, dur_code = ..3))
+#> # A tibble: 146 x 5
+#>    agency_cd location_id datetime            parameter_cd parameter_value
+#>    <chr>     <chr>       <dttm>              <chr>                  <dbl>
+#>  1 CDEC      CCR         2020-12-07 23:00:00 25                      52.4
+#>  2 CDEC      CCR         2020-12-08 00:00:00 25                      52.2
+#>  3 CDEC      CCR         2020-12-08 01:00:00 25                      52.1
+#>  4 CDEC      CCR         2020-12-08 02:00:00 25                      52  
+#>  5 CDEC      CCR         2020-12-08 03:00:00 25                      51.9
+#>  6 CDEC      CCR         2020-12-08 04:00:00 25                      51.9
+#>  7 CDEC      CCR         2020-12-08 05:00:00 25                      51.8
+#>  8 CDEC      CCR         2020-12-08 06:00:00 25                      51.7
+#>  9 CDEC      CCR         2020-12-08 07:00:00 25                      51.6
+#> 10 CDEC      CCR         2020-12-08 08:00:00 25                      51.6
+#> # ... with 136 more rows
 ```
 
 Here we use `..1, ..2, ..3` to refer to the first, second and third elements of the list,
@@ -120,6 +206,20 @@ cdec_query_hourly <- purrr::partial(cdec_query, dur_code="h")
 # we only have to supply two arguments
 map2_df(stations_of_interest, sensors_of_interest, 
         ~cdec_query_hourly(station=.x, sensor_num=.y))
+#> # A tibble: 146 x 5
+#>    agency_cd location_id datetime            parameter_cd parameter_value
+#>    <chr>     <chr>       <dttm>              <chr>                  <dbl>
+#>  1 CDEC      CCR         2020-12-07 23:00:00 25                      52.4
+#>  2 CDEC      CCR         2020-12-08 00:00:00 25                      52.2
+#>  3 CDEC      CCR         2020-12-08 01:00:00 25                      52.1
+#>  4 CDEC      CCR         2020-12-08 02:00:00 25                      52  
+#>  5 CDEC      CCR         2020-12-08 03:00:00 25                      51.9
+#>  6 CDEC      CCR         2020-12-08 04:00:00 25                      51.9
+#>  7 CDEC      CCR         2020-12-08 05:00:00 25                      51.8
+#>  8 CDEC      CCR         2020-12-08 06:00:00 25                      51.7
+#>  9 CDEC      CCR         2020-12-08 07:00:00 25                      51.6
+#> 10 CDEC      CCR         2020-12-08 08:00:00 25                      51.6
+#> # ... with 136 more rows
 ```
 
 
@@ -145,6 +245,15 @@ temp_and_turb <-
   pmap_df(list(ins$x, ins$y, ins$z), ~cdec_query(..1, ..2, ..3))
 
 head(temp_and_turb)
+#> # A tibble: 6 x 5
+#>   agency_cd location_id datetime            parameter_cd parameter_value
+#>   <chr>     <chr>       <dttm>              <chr>                  <dbl>
+#> 1 CDEC      BSF         2020-12-07 23:00:00 25                      52.4
+#> 2 CDEC      BSF         2020-12-08 00:00:00 25                      52.2
+#> 3 CDEC      BSF         2020-12-08 01:00:00 25                      52  
+#> 4 CDEC      BSF         2020-12-08 02:00:00 25                      51.9
+#> 5 CDEC      BSF         2020-12-08 03:00:00 25                      51.7
+#> 6 CDEC      BSF         2020-12-08 04:00:00 25                      51.5
 ```
 
 and now we can visualize these
@@ -154,9 +263,9 @@ param_names <- c("25" = "Temperature (F)", "27" = "Turbidity (NTU)")
 temp_and_turb %>% 
   ggplot(aes(datetime, parameter_value, color=location_id)) + 
   geom_line() + 
-  facet_grid(. ~ param_names[parameter_cd], scales = "free")
+  facet_wrap(. ~ param_names[parameter_cd], scales = "free")
 ```
-
+![](https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/advanced-queries-plot-2.png)
 
 
 

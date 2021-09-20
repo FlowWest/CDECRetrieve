@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Retrieve Historical and Near Realtime Data from CDEC • CDECRetrieve</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -16,6 +22,7 @@
 <meta property="og:description" content="CDEC maintains a set of web services at &lt;http://cdec.water.ca.gov/queryTools.html&gt;.
       In order to better interact and analyze the data this R packages allows
       users to quickly and easily retrieve data.">
+<meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -42,7 +49,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -78,12 +85,16 @@
       </header><div class="row">
   <div class="contents col-md-9">
 
-<p><img src="https://raw.githubusercontent.com/FlowWest/CDECRetrieve/master/images/cdecretrieve_logo.png" alt="cdec_retrieve_logo"></p>
-<div id="what-is-cdecretrieve" class="section level1">
+<div id="cdecretrieve-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#what-is-cdecretrieve" class="anchor"></a>What is CDECRetrieve?</h1></div>
+<a href="#cdecretrieve-" class="anchor"></a>CDECRetrieve <a href="https://FlowWest.github.io/CDECRetrieve"><img src="reference/figures/logo.png" align="right" height="225"></a>
+</h1></div>
+</div>
+<div id="what-is-cdecretrieve" class="section level1">
+<h1 class="hasAnchor">
+<a href="#what-is-cdecretrieve" class="anchor"></a>What is CDECRetrieve?</h1>
 <p>CDECRetrieve uses the web services provided by the California Data Exchange Center <a href="http://cdec.water.ca.gov/">here</a> as a backend to allow users to download data with a single function call. CDECRetrieve specifically uses the SHEF download service due to the fact that it is the most robust of the services. You can learn more about the SHEF format <a href="http://www.nws.noaa.gov/om/water/resources/SHEF_CodeManual_5July2012.pdf">here</a>.</p>
-<p>The design of this package maps different CDEC url endpoints into “services” that make sense. For example there is a <strong>datasets</strong> service that allows the user to view all datasets available at a given location. There is <strong>query/data</strong> service that allows the user to bring observations into memory. The goal is to allow a workflow where a user can pipe reponses from one service into another, and eventually into the <strong>data</strong> service to get the data, and be able to automate this process.</p>
+<p>The design of this package maps different CDEC url endpoints into “services” that make sense. For example there is a <strong>datasets</strong> service that allows the user to view all datasets available at a given location. There is <strong>query/data</strong> service that allows the user to bring observations into memory. The goal is to allow a workflow where a user can pipe responses from one service into another, and eventually into the <strong>data</strong> service to get the data, and be able to automate this process.</p>
 <p>Please see the <em>Details</em> section below for limitations and possible annoyances inherited from the CDEC service.</p>
 </div>
 <div id="installation" class="section level1">
@@ -117,7 +128,7 @@
 <p>Visualize these flows,</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 
 <span class="va">kwk_flow</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">parameter_value</span> <span class="op">&gt;=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># sentinel values -9998 and -9997 are present</span>
