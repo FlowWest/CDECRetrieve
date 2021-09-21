@@ -2,7 +2,8 @@ Package: CDECRetrieve
 Type: Package
 Title: Retrieve Historical and Near Realtime Data from CDEC
 Version: 0.1.5
-Authors@R: person("Emanuel", "Rodriguez", email = "erodriguez@flowwest.com", role = c("aut", "cre"))
+Authors@R: c(person("Emanuel", "Rodriguez", email = "erodriguez@flowwest.com", role = c("aut", "cre")),
+      person("Erin", "Cain", email = "ecain@flowwest.com", role = "aut"))
 Description: CDEC maintains a set of web services at <http://cdec.water.ca.gov/queryTools.html>.
       In order to better interact and analyze the data this R packages allows
       users to quickly and easily retrieve data.
