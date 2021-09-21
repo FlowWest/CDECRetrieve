@@ -3,6 +3,5 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   advanced-queries: advanced-queries.html
-  CDECRetrieve: CDECRetrieve.html
-last_built: 2021-09-20T19:29Z
+last_built: 2021-09-21T23:10Z
 
