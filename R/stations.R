@@ -69,10 +69,12 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
 #' }
 #' @export
 map_stations <- function(.data, ...) {
-  if (!inherits(.data, "cdec_stations")) {
+  if (!inherits(.data, "tbl_df")) {
     stop(".data does not appear to be a call from cdec_stations()", call. = FALSE)
   }
-
+  if (nrow(.data) == 0) {
+    stop(".data appears to be an empty table, check cdec_station() call")
+  }
   if (!requireNamespace("leaflet", quietly = TRUE)) {
     stop("map_stations() requires leaflet to be installed (map_stations)")
   }
