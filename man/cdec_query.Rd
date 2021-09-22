@@ -33,7 +33,7 @@ dataframe
 \description{
 Function queries the CDEC site to obtain desired station data
 based on station, sensor number, duration code and start/end date.
-Use cdec_datasets() to view an updated list of all available data at a station.
+Use `cdec_datasets()` to view an updated list of all available data at a station.
 }
 \examples{
 \dontrun{

@@ -31,7 +31,11 @@ one must be supplied.
 }
 \examples{
 # cdec_stations() can be used to find locations within an area of interest
+\dontrun{
 cdec_stations(county = "alameda")
+}
 # or it can be used to get metadata attributes for a location
+\dontrun{
 cdec_stations(station_id = "ccr")
+}
 }

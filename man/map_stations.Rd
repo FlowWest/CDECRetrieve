@@ -18,7 +18,9 @@ This function is bundled simply for exploration purposes, it is highly suggested
 to make use of leaflet for production maps.
 }
 \examples{
+\dontrun{
 if (interactive()) {
     cdec_stations(county = "alameda") \%>\% map_stations(label=~name, popup=~station_id)
+}
 }
 }

@@ -2,7 +2,7 @@
 #'
 #' Function queries the CDEC site to obtain desired station data
 #' based on station, sensor number, duration code and start/end date.
-#' Use cdec_datasets() to view an updated list of all available data at a station.
+#' Use `cdec_datasets()` to view an updated list of all available data at a station.
 #'
 #' @param station three letter identification for CDEC location (example "KWK", "SAC", "CCR")
 #' @param sensor_num sensor number for the measure of interest. (example "20", "01", "25")

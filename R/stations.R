@@ -12,9 +12,13 @@
 #' @param county string search stations in supplied county
 #' @examples
 #' # cdec_stations() can be used to find locations within an area of interest
+#' \dontrun{
 #' cdec_stations(county = "alameda")
+#' }
 #' # or it can be used to get metadata attributes for a location
+#' \dontrun{
 #' cdec_stations(station_id = "ccr")
+#' }
 #' @export
 cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
                           hydro_area=NULL, county=NULL) {
@@ -64,8 +68,10 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
 #' @param .data result of a cdec_stations() call
 #' @param ... named arguments passed into leaflet::addCircleMarkers
 #' @examples
+#' \dontrun{
 #' if (interactive()) {
 #'     cdec_stations(county = "alameda") %>% map_stations(label=~name, popup=~station_id)
+#' }
 #' }
 #' @export
 map_stations <- function(.data, ...) {
