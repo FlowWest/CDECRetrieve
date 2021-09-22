@@ -1,7 +1,7 @@
 #' Search CDEC Stations
 #'
 #' Search the stations in the CDEC system using the CDEC Station Search
-#' service \href{https://cdec.water.ca.gov/cgi-progs/staSearch}{here}. Combinations
+#' service \href{https://cdec.water.ca.gov/dynamicapp/staSearch}{here}. Combinations
 #' of these parameters can be supplied to refine or be left out to generalize, at least
 #' one must be supplied.
 #'

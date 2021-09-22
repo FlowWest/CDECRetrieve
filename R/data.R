@@ -3,7 +3,7 @@
 #' @description
 #' \strong{Department of Water Resources}
 #'
-#' \url{http://cdec.water.ca.gov/cgi-progs/iodir/WSIHIST}
+#' \url{http://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST}
 #'
 #' California Cooperative Snow Surveys / Chronological Reconstructed Sacramento and San Joaquin Valley
 #'

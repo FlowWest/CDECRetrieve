@@ -1,5 +1,5 @@
 # copied text without headers starting at 1906 from
-# http://cdec.water.ca.gov/cgi-progs/iodir/WSIHIST and saved file as wy.text
+# http://cdec.water.ca.gov/reportapp/javareports?name=WSIHIST and saved file as wy.text
 # 6/14/2017, updated 02/13/19
 library(readr)
 library(dplyr)
