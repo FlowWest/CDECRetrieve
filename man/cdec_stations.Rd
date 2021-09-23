@@ -23,6 +23,11 @@ cdec_stations(
 
 \item{county}{string search stations in supplied county}
 }
+\value{
+data frame with queried stations as rows and
+columns describing the \code{station_id}, \code{name}, \code{river_basin}, \code{county}, \code{longitude},
+\code{latitude}, \code{elevation}, \code{operator}, and \code{state}
+}
 \description{
 Search the stations in the CDEC system using the CDEC Station Search
 service \href{https://cdec.water.ca.gov/dynamicapp/staSearch}{here}. Combinations

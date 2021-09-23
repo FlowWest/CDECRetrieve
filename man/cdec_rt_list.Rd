@@ -9,6 +9,10 @@ cdec_rt_list(station_id = NULL)
 \arguments{
 \item{station_id}{station for the location to get rating description for.}
 }
+\value{
+data frame with available rating tables as rows and columns describing
+the \code{station_name}, \code{station_id}, data that data was \code{last_revised}, and \code{table_type.}
+}
 \description{
 Get a list of all rating tables available through CDEC
 }

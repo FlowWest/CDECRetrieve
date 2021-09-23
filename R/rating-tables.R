@@ -54,6 +54,8 @@ cdec_rt <- function(station_id) {
 #' @title List Rating Tables
 #' @description Get a list of all rating tables available through CDEC
 #' @param station_id station for the location to get rating description for.
+#' @return data frame with available rating tables as rows and columns describing
+#' the \code{station_name}, \code{station_id}, data that data was \code{last_revised}, and \code{table_type.}
 #' @examples
 #' # list all rating tables in CDEC, you can use filter to search
 #' \dontrun{

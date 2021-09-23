@@ -28,7 +28,7 @@ cdec_query(
 for daylight saving.}
 }
 \value{
-dataframe
+data frame containing queried data from CDEC for a specific station, sensor, and date range
 }
 \description{
 Function queries the CDEC site to obtain desired station data

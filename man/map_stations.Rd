@@ -11,6 +11,9 @@ map_stations(.data, ...)
 
 \item{...}{named arguments passed into leaflet::addCircleMarkers}
 }
+\value{
+a leaflet map widget with circle markers at the locations of CDEC stations
+}
 \description{
 Populate a leaflet map with the results of cdec_stations() call. The function
 makes use of leaflet, and so will work only if this is installed on the system.

@@ -10,6 +10,9 @@
 #' @param river_basin string search stations in supplied basin
 #' @param hydro_area string search stations in supplied hydrological area
 #' @param county string search stations in supplied county
+#' @return data frame with queried stations as rows and
+#' columns describing the \code{station_id}, \code{name}, \code{river_basin}, \code{county}, \code{longitude},
+#' \code{latitude}, \code{elevation}, \code{operator}, and \code{state}
 #' @examples
 #' # cdec_stations() can be used to find locations within an area of interest
 #' \dontrun{
@@ -67,6 +70,7 @@ cdec_stations <- function(station_id=NULL, nearby_city=NULL, river_basin=NULL,
 #'
 #' @param .data result of a cdec_stations() call
 #' @param ... named arguments passed into leaflet::addCircleMarkers
+#' @return a leaflet map widget with circle markers at the locations of CDEC stations
 #' @examples
 #' \dontrun{
 #' if (interactive()) {

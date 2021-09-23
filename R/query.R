@@ -11,7 +11,7 @@
 #' @param end_date an optional date to end query on, defaults to current date.
 #' @param tzone a time zone used. By default this is America/Los_Angeles, this accounts
 #' for daylight saving.
-#' @return dataframe
+#' @return data frame containing queried data from CDEC for a specific station, sensor, and date range
 #' @examples
 #' \dontrun{
 #' kwk_hourly_flows <- CDECRetrieve::cdec_query("KWK", "20", "H", "2017-01-01")
