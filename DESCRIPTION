@@ -1,6 +1,6 @@
 Package: CDECRetrieve
 Type: Package
-Title: Retrieve Historical and Near Real Time Data from the California Data Exchange Center
+Title: Retrieve Data from the California Data Exchange Center
 Version: 0.1.5
 Authors@R: c(person("Emanuel", "Rodriguez", email = "erodriguez@flowwest.com", role = c("aut", "cre")),
       person("Erin", "Cain", email = "ecain@flowwest.com", role = "aut"))
