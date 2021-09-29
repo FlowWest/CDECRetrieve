@@ -2,6 +2,7 @@ context("CDEC Query")
 library(CDECRetrieve)
 
 test_that("a response from CDEC happens", {
+  skip_on_cran()
   d <- cdec_query("kwk", "20", "h", "2020-03-01")
   expect_gt(nrow(d), 0)
 })
