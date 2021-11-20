@@ -89,7 +89,7 @@ cdec_query <- function(station, sensor_num, dur_code,
     cdec_code <- ifelse(is.null(shef_code_lookup[[shef_code]]),
                         NA, shef_code_lookup[[shef_code]])
     cdec_code_col <- rep(cdec_code, nrow(raw))
-    parameter_value_col <- as.numeric(raw$X7)
+    parameter_value_col <- readr::parse_number(raw$X7)
 
     tibble::tibble(
       "agency_cd" = "CDEC",
