@@ -89,7 +89,11 @@ cdec_query <- function(station, sensor_num, dur_code,
     cdec_code <- ifelse(is.null(shef_code_lookup[[shef_code]]),
                         NA, shef_code_lookup[[shef_code]])
     cdec_code_col <- rep(cdec_code, nrow(raw))
-    parameter_value_col <- readr::parse_number(raw$X7)
+
+    # TODO!!! the as.character cast here is just a patch, what needs
+    # to happen is that we need to be able to call parse_number only
+    # when the column is not already all numeric types.
+    parameter_value_col <- readr::parse_number(as.character(raw$X7))
 
     tibble::tibble(
       "agency_cd" = "CDEC",
