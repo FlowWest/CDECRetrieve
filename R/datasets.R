@@ -25,7 +25,7 @@ cdec_datasets <- function(station, keyword=NULL) {
   )
 
   resp_html <- xml2::read_html(resp)
-  resp_at_node <- rvest::html_nodes(resp_html, "div#main_content table")
+  resp_at_node <- rvest::html_elements(resp_html, "section")
 
   # cdec does not return any error code when a faulty query is submitted
   # here I check when the returned response is of length zero instead
