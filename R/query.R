@@ -48,8 +48,8 @@ cdec_query <- function(station, sensor_num, dur_code,
 
   if (is.null(end_date)) {end_date <- Sys.Date() + 1}
 
-  query_url <- sprintf("http://cdec.water.ca.gov/cgi-progs/querySHEF?station_id=%s&sensor_num=%s&dur_code=%s&start_date=%s&end_date=%s&data_wish=Download+SHEF+Data+Now",
-                       station,
+  query_url <- sprintf("https://cdec.water.ca.gov/dynamicapp/req/CSVDataServlet?Stations=%s&SensorNums=%s&dur_code=%s&Start=%sT00:00&End=%s",
+                       toupper(station),
                        as.character(sensor_num),
                        as.character(dur_code),
                        as.character(start_date),
@@ -70,42 +70,38 @@ cdec_query <- function(station, sensor_num, dur_code,
     stop("call to cdec failed, please visit https://cdec.water.ca.gov/ for status on their services", call. = FALSE)
   }
 
-  shef_to_tidy <- function(file, tzone) {
+  parse_csv <- function(file, tzone) {
 
     #keep these columns which are: location_id, date, time, sensor_code, value
 
-    raw <- suppressMessages(readr::read_delim(file, skip = 8, col_names = FALSE, delim = " "))
+    raw <- suppressMessages(
+      readr::read_csv(
+        file,
+        col_types = readr::cols(.default = readr::col_character())))
 
     # exit out when the dataframe is not the right width
-    if (ncol(raw) < 5) {
+    if (nrow(raw) == 0 || ncol(raw) < 7) {
       return(NULL)
     }
 
     raw <- raw[, c(2, 3, 5, 6, 7)]
 
-    # parse required cols
-    datetime_col <- lubridate::ymd_hm(paste0(raw$X3, raw$X5), tz=tzone)
-    shef_code <- raw$X6[1]
-    cdec_code <- ifelse(is.null(shef_code_lookup[[shef_code]]),
-                        NA, shef_code_lookup[[shef_code]])
-    cdec_code_col <- rep(cdec_code, nrow(raw))
-
-    # TODO!!! the as.character cast here is just a patch, what needs
-    # to happen is that we need to be able to call parse_number only
-    # when the column is not already all numeric types.
-    parameter_value_col <- readr::parse_number(as.character(raw$X7))
-
-    tibble::tibble(
-      "agency_cd" = "CDEC",
-      "location_id" = as.character(raw$X2),
-      "datetime" = datetime_col,
-      "parameter_cd" = as.character(cdec_code_col),
-      "parameter_value" = parameter_value_col
-    )
+    # DATE TIME column is formatted as "20200616 0500"
+   clean <- raw %>%
+     mutate(date_time = lubridate::parse_date_time(`DATE TIME`,
+                                                   orders = "Ymd HM",
+                                                   tz = tzone),
+            agency_cd = "CDEC",
+            location_id = as.character(`STATION_ID`),
+            parameter_cd = as.character(`PARAMETER_ID`),
+            parameter_value = readr::parse_number(`VALUE`,
+              na = c("", "NA", "---", "m", "ART")
+            ))
+    return(clean)
   }
 
 
-  d <- suppressWarnings(shef_to_tidy(temp_file, tzone))
+  d <- suppressWarnings(parse_csv(temp_file, tzone))
 
   if (is.null(d)) {
     stop(paste(station,
