@@ -13,11 +13,11 @@
 #' }
 #' @export
 cdec_datasets <- function(station, keyword=NULL) {
-  query <- list(station_id=station,
-                sensor_num=NULL)
+
+  query_url <- paste0("https://cdec.water.ca.gov/dynamicapp/staMeta?station_id=", toupper(station))
 
   resp <- tryCatch(
-    httr::GET("https://cdec.water.ca.gov/cgi-progs/querySHEF", query=query),
+    httr::GET(query_url),
     error = function(e) {
       stop("Could not reach CDEC services",
            call. = FALSE)
@@ -25,7 +25,7 @@ cdec_datasets <- function(station, keyword=NULL) {
   )
 
   resp_html <- xml2::read_html(resp)
-  resp_at_node <- rvest::html_elements(resp_html, "section")
+  resp_at_node <- rvest::html_elements(resp_html, "table")
 
   # cdec does not return any error code when a faulty query is submitted
   # here I check when the returned response is of length zero instead
@@ -33,8 +33,11 @@ cdec_datasets <- function(station, keyword=NULL) {
     stop(paste0("CDEC datasets service returned no data for '", station, "'. (cdec_datasets_service)"),
          call. = FALSE)
   }
+  # The sensor table has 6 columns; other tables on the page are narrower or empty
+  parsed_tables <- lapply(resp_at_node, rvest::html_table)
 
-  raw_data <- rvest::html_table(resp_at_node)[[1]]
+  # The sensor is in table #3
+  raw_data <- parsed_tables[[3]]
 
   sensor_name <- NULL # global variable workaround
   d <- suppressWarnings(clean_datasets_resp(raw_data))
@@ -55,20 +58,16 @@ cdec_datasets <- function(station, keyword=NULL) {
 # INTERNAL -----
 
 clean_datasets_resp <- function(df) {
-  sensor_number <- df$X1
-  sensor_desciption_raw <- tolower(df$X2)
+  # columns: X1=Sensor Description, X2=Sensor Number, X3=Duration,
+  #          X4=Plot, X5=Data Collection, X6=Data Available
+  sensor_number <- df$X2
+  sensor_name <- tolower(df$X1)
 
-  sensor_name <- trimws(stringr::str_replace_all(stringr::str_extract(
-    sensor_desciption_raw, ".*\\("
-  ), "\\(|,", ""))
-
-  sensor_units <- trimws(stringr::str_replace_all(
-    stringr::str_extract(sensor_desciption_raw, "\\(.*\\)"),
-    "\\(|\\)", ""))
+  sensor_units <- trimws(stringr::str_extract(sensor_desciption_raw, "[^,]+$"))
 
   duration <- stringr::str_replace_all(df$X3, "\\(|\\)", "")
 
-  daterange_raw <- df$X4
+  daterange_raw <- df$X6
 
   start_range <- lubridate::mdy(stringr::str_replace_all(
     stringr::str_extract(daterange_raw, "(.*)to"), "From | to", ""))
